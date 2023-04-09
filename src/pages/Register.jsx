@@ -12,6 +12,7 @@ export default function Register() {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  //push 수정
   const checkPassword = () => {
     if (registerPwInput.current.value !== passwordConfirmInput.current.value) {
       alert('비밀번호가 일치하지 않습니다.');
