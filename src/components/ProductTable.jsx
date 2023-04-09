@@ -41,6 +41,7 @@ export default function ProductTable() {
           height: '65vh',
           position: 'relative',
           left: '15vw',
+          top: '10vh',
         }}
       >
         <Table>
