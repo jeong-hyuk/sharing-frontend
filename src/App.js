@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Main from './pages/Main';
 import Register from './pages/Register';
 import KakaoRedirectHandler from './components/KakaoRedirectHandler';
+import UserMain from './pages/UserMain';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -14,12 +15,13 @@ function App() {
     <>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={isLogin ? <Main /> : <Login />} />
+        {/*<Route path="/" element={isLogin ? <Main /> : <Login />} />
         <Route path="/register" element={isLogin ? <Login /> : <Register />} />
         <Route
           path="/oauth/callback/kakao"
           element={<KakaoRedirectHandler />}
-        />
+        /> */}
+        <Route path="/" element={<UserMain />} />
       </Routes>
     </>
   );
