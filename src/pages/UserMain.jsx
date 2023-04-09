@@ -10,7 +10,7 @@ import companyLogo from './images/userIcon.png';
 /*reset
 *{margin:0; padding:0;}
 li{list-style:none;}
-img{border:0; vertical-align:top;}*/
+img{border:0; vertical-align:top;}-*/
 
 /*a link
 a{text-decoration:none;}
