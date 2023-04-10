@@ -244,7 +244,7 @@ export default function UserMain() {
         <Rent>
           <ul>
             <li>
-              <a href=""></a>
+              <a href="./UserRent"></a>
             </li>
             <li>
               <a href=""></a>
