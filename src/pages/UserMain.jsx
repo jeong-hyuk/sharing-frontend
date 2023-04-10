@@ -7,10 +7,9 @@ import { faLaptop } from '@fortawesome/free-solid-svg-icons';
 import { faComputerMouse } from '@fortawesome/free-solid-svg-icons';
 import { faPlug } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-
 import Header from '../components/Header';
-
-
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 const Menu = styled.div`
   position: fixed;
   top: 11vh;
@@ -187,16 +186,6 @@ export default function UserMain({ page }) {
     const isNotMobile = useMediaQuery({ minWidth: 768 });
     return isNotMobile ? children : null;
   };
-  const userId = useSelector((state) => state.user.userID);
-  const [userName, setUserName] = useState();
-  const showMain = async () => {
-    const resMain = await axios.get('http://localhost:4000/main', {});
-    setUserName(userId);
-  };
-  useEffect(() => {
-    showMain();
-    console.log(userName);
-  }, []);
 
   // Session으로부터 name 값 가져오기
   // const getNameFromSession = async () => {
@@ -209,7 +198,6 @@ export default function UserMain({ page }) {
   return (
     <>
       <Desktop>
-
         <Header />
 
         <Menu>

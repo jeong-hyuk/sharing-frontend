@@ -2,7 +2,6 @@ import React, { useReducer, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/modules/user';
 import { Link, useNavigate } from 'react-router-dom';
-import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function Register() {
   const registerIdInput = useRef();
@@ -15,6 +14,10 @@ export default function Register() {
 
   //push 수정
   const checkPassword = () => {
+    if (registerPwInput.current.value.length < 8) {
+      alert('비밀번호는 8글자 이상이어야 합니다.');
+      return false;
+    }
     if (registerPwInput.current.value !== passwordConfirmInput.current.value) {
       alert('비밀번호가 일치하지 않습니다.');
       return false;
@@ -22,14 +25,22 @@ export default function Register() {
     return true;
   };
 
-  // 숫자가 아니라면
-  // const checkName = () => {
-  //   if (Number(userName.current.value)) {
-  //     alert('이름에는 숫자가 들어갈 수 없습니다.');
-  //     return false;
-  //   }
-  //   return true;
-  // };
+  const checkName = () => {
+    if (/\d/.test(userName.current.value)) {
+      alert('이름에는 숫자가 들어갈 수 없습니다.');
+      return false;
+    }
+    return true;
+  };
+
+  const checkPhoneNumber = () => {
+    const phoneValue = phoneNumber.current.value;
+    if (!/^\d{11}$/.test(phoneValue)) {
+      alert('전화번호는 11자리 숫자여야 합니다.');
+      return false;
+    }
+    return true;
+  };
 
   const registerUser = async () => {
     if (
@@ -44,9 +55,13 @@ export default function Register() {
       return;
     }
 
-    // if (checkName()) {
-    //   return;
-    // }
+    if (!checkName()) {
+      return;
+    }
+
+    if (!checkPhoneNumber()) {
+      return;
+    }
     const resRegister = await fetch('http://localhost:4000/register', {
       method: 'POST',
       headers: {

@@ -2,7 +2,7 @@
 const initState = {
   userID: '',
   userPW: '',
-  userName: '',
+  userNAME: '',
   isLogin: false,
 };
 
@@ -32,7 +32,7 @@ export default function user(state = initState, action) {
         ...state,
         userID: action.payload.id,
         userPW: action.payload.password,
-        userName: action.payload.name,
+        userNAME: action.payload.name,
         isLogin: true,
       };
     case LOGOUT:
@@ -40,7 +40,7 @@ export default function user(state = initState, action) {
         ...state,
         userID: '',
         userPW: '',
-        userName: '',
+        userNAME: '',
         isLogin: false,
       };
     default:
