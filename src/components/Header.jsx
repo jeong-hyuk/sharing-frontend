@@ -69,15 +69,17 @@ const CommonHeader = styled.div`
 `;
 
 export default function Header() {
-  const userN = useSelector((state) => state.user.userNAME);
-  const [userName, setUserName] = useState();
+  const userId = useSelector((state) => state.user.userID);
+  const [main, setMain] = useState([]);
+  const [user, setUser] = useState();
+
   const showMain = async () => {
-    const resMain = await axios.get('http://localhost:4000/main', {});
-    setUserName(userN);
+    const resShowMain = await axios.get(`http://localhost:4000/main/${userId}`);
+    console.log(resShowMain);
+    setUser(resShowMain.data.NAME.USER_NAME);
   };
   useEffect(() => {
     showMain();
-    console.log(userName);
   }, []);
   return (
     <>
@@ -91,13 +93,13 @@ export default function Header() {
             <div className="user_NameEmail">
               <div className="user_logout_name">
                 <span>
-                  <strong>{userName}</strong>&nbsp;님
+                  <strong>{user}</strong>&nbsp;님
                 </span>
                 <span>
                   <a href="">로그아웃</a>
                 </span>
               </div>
-              <p className="">ggolla@gmail.com</p>
+              <p className="">{userId}</p>
             </div>
             <a href="" className="user_info_img">
               <img src={companyLogo} alt="프로필" />
