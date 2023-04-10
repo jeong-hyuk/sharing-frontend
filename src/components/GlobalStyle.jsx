@@ -32,22 +32,9 @@ const GlobalStyle = createGlobalStyle`
   ul, ol {
     list-style: none;
     padding-left: 0px;
-<<<<<<< Updated upstream
-  } *///reset
-  *{margin:0; padding:0;}
-  li{list-style:none;}
-  img{border:0; vertical-align:top;}
 
-  //a link
-  a{text-decoration:none;}
-  a:link, a:visited, a:hover, a:active{color:#333;}
-
-  *{
-    font-size: 62.5%;
-  }
-=======
   } */
->>>>>>> Stashed changes
+
 `;
 
 export default GlobalStyle;
