@@ -26,9 +26,10 @@ function App() {
         {/* <Route path="/userrent" element={<UserRent />} /> */}
 
         <Route path="/usermain" element={<UserMain />} />
+
         {/* <Route path="/" element={<UserMain />} /> */}
         {/* <Route path="/main" element={<UserMain />} /> */}
-        {/* <Route path="/notebook" element={<UserRent />} /> */}
+        <Route path="/UserRent" element={<UserRent />} />
       </Routes>
     </>
   );
