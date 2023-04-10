@@ -7,25 +7,17 @@ import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import companyLogo from './images/userIcon.png';
 
-/*reset
-*{margin:0; padding:0;}
-li{list-style:none;}
-img{border:0; vertical-align:top;}-*/
-
-/*a link
-a{text-decoration:none;}
-a:link, a:visited, a:hover, a:active{color:#333;}*/
-
 const Header = styled.div`
-  background-color: #fff;
   position: fixed;
   width: 100%;
-  height: 120px;
-  background-color: #fff;
+  height: 11vh;
+  background-color: rgba(68, 106, 114, 0.9);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
   .UserHeader {
-    width: 80%;
-    height: 120px;
-    margin: 20px auto 20px;
+    width: 70%;
+    height: 11vh;
+    margin: 0px auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,31 +27,30 @@ const Header = styled.div`
   .user_info_header {
     display: flex;
     align-items: center;
-    background-color: #fff;
     .header_alram {
-      /* margin-top: 20px; */
-      width: 30px;
-      height: 30px;
-      color: #888;
+      height: 3vh;
+      color: #fff;
     }
     .user_NameEmail {
-      margin: 20px;
+      margin: 0px 20px;
       p {
         text-align: right;
         margin: 0;
-        font-size: 18px;
+        font-size: 1.6rem;
+        color: #fff;
         :last-child {
-          color: #888;
-          font-size: 16px;
+          font-size: 1.5rem;
+          color: #f5f5f5;
+        }
+        strong {
+          font-size: 1.6rem;
         }
       }
     }
     .user_info_img {
-      /* margin: 20px 0px 0px 10px; */
-      margin-left: 10px;
+      color: #fff;
       img {
-        width: 50px;
-        height: 50px;
+        height: 5vh;
       }
     }
   }
@@ -67,15 +58,15 @@ const Header = styled.div`
 
 const Menu = styled.div`
   position: fixed;
-  top: 120px;
+  top: 11vh;
   background-color: #fff;
   width: 30vw;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 11vh);
   ul {
-    width: 60%;
+    width: 50%;
     position: absolute;
     right: 2vw;
-    padding: 0;
+    top: 5vh;
     li {
       list-style: none;
       width: 100%;
@@ -91,7 +82,7 @@ const Menu = styled.div`
         height: 100%;
         text-decoration: none;
         text-align: center;
-        font-size: 20px;
+        font-size: 1.7rem;
         transition: all 0.1s;
         :link,
         :visited,
@@ -127,11 +118,11 @@ const Menu = styled.div`
     }
 
     .menu_prev_button {
-      bottom: 7vh;
-      left: 10vw;
+      bottom: 4vh;
+      left: 13vw;
     }
     .menu_next_button {
-      bottom: 7vh;
+      bottom: 4vh;
       right: 2vw;
     }
   }
@@ -139,23 +130,22 @@ const Menu = styled.div`
 
 const Rent = styled.div`
   position: fixed;
-  top: 120px;
-  right: 0;
-  background-color: #fff;
+  top: 11vh;
+  right: 0px;
+  background-color: rgb(255, 255, 255);
   width: 70vw;
-  height: calc(100vh - 120px);
+  height: 89vh;
   ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    height: 100%;
-    padding-left: 4vw;
+    padding: 5vh 0 0 4vw;
     li {
       list-style: none;
-      width: 26vw;
-      height: 35vh;
-      background-color: #fff;
-      margin-right: 4vw;
+      width: 25vw;
+      height: 37vh;
+      background-color: rgb(255, 255, 255);
+      margin: 0 3vw 3vw 0;
       :last-child {
         background-color: rgba(68, 106, 114, 0.2);
         border: none;
