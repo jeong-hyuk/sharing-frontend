@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
@@ -6,6 +6,8 @@ import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import companyLogo from './images/userIcon.png';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 /*reset
 *{margin:0; padding:0;}
@@ -202,6 +204,21 @@ export default function UserMain() {
     const isNotMobile = useMediaQuery({ minWidth: 768 });
     return isNotMobile ? children : null;
   };
+  // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
+  const userId = useSelector((state) => state.user.userID);
+
+  const [main, setMain] = useState([]);
+  const [user, setUser] = useState();
+
+  const showMain = async () => {
+    const resShowMain = await axios.get(`http://localhost:4000/main/${userId}`);
+    console.log(resShowMain);
+    setUser(resShowMain.data.NAME.USER_NAME);
+  };
+  useEffect(() => {
+    showMain();
+  }, []);
+
   return (
     <>
       <Desktop>
@@ -214,9 +231,9 @@ export default function UserMain() {
               </a>
               <div className="user_NameEmail">
                 <p>
-                  <strong>찡꼴라</strong>&nbsp;님
+                  <strong>{user}</strong>&nbsp;님
                 </p>
-                <p className="">ggolla@gmail.com</p>
+                <p className="">{userId}</p>
               </div>
               <a href="" className="user_info_img">
                 <img src={companyLogo} alt="프로필" />

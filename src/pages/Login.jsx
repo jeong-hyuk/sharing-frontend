@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { json, Link, useNavigate } from 'react-router-dom';
 import { login } from '../store/modules/user';
 
 export default function Login() {
@@ -38,7 +38,7 @@ export default function Login() {
       loginIdInput.current.value = '';
       loginPwInput.current.value = '';
 
-      alert(await resLogin.json());
+      alert(await resLogin.json()); // 로그인 성공 하였습니다 라는 값 받아왔음.
       navigate('/');
     } else {
       alert(await resLogin.json());
