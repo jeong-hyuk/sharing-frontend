@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
@@ -6,6 +6,8 @@ import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import companyLogo from './images/userIcon.png';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 /*reset
 *{margin:0; padding:0;}
@@ -185,7 +187,7 @@ const Rent = styled.div`
   }
 `;
 
-export default function UserMain() {
+export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
     return isDesktop ? children : null;
@@ -202,6 +204,25 @@ export default function UserMain() {
     const isNotMobile = useMediaQuery({ minWidth: 768 });
     return isNotMobile ? children : null;
   };
+  const userId = useSelector((state) => state.user.userID);
+  const [userName, setUserName] = useState();
+  const showMain = async () => {
+    const resMain = await axios.get('http://localhost:4000/main', {});
+    setUserName(userId);
+  };
+  useEffect(() => {
+    showMain();
+    console.log(userName);
+  }, []);
+
+  // Session으로부터 name 값 가져오기
+  // const getNameFromSession = async () => {
+  //   const resSession = await axios.get('http://localhost:4000/session', {
+  //     withCredentials: true,
+  //   });
+  //   setUserName(resSession.data.name);
+  // };
+
   return (
     <>
       <Desktop>
@@ -214,7 +235,7 @@ export default function UserMain() {
               </a>
               <div className="user_NameEmail">
                 <p>
-                  <strong>찡꼴라</strong>&nbsp;님
+                  <strong>{userName}</strong>&nbsp;님
                 </p>
                 <p className="">ggolla@gmail.com</p>
               </div>

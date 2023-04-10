@@ -22,10 +22,11 @@ function App() {
           path="/oauth/callback/kakao"
           element={<KakaoRedirectHandler />}
         />
-        <Route path="/userrent" element={<UserRent />} />
+
+        {/* <Route path="/userrent" element={<UserRent />} /> */}
 
         {/* <Route path="/" element={<UserMain />} /> */}
-        <Route path="/main" element={<UserMain />} />
+        {/* <Route path="/main" element={<UserMain />} /> */}
         {/* <Route path="/notebook" element={<UserRent />} /> */}
       </Routes>
     </>
