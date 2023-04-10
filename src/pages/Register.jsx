@@ -25,7 +25,6 @@ export default function Register() {
     return true;
   };
 
-
   const checkName = () => {
     if (/\d/.test(userName.current.value)) {
       alert('이름에는 숫자가 들어갈 수 없습니다.');
@@ -42,7 +41,6 @@ export default function Register() {
     }
     return true;
   };
-
 
   const registerUser = async () => {
     if (
@@ -72,8 +70,8 @@ export default function Register() {
       body: JSON.stringify({
         id: registerIdInput.current.value,
         password: registerPwInput.current.value,
-        phone: phoneNumber.current.value,
         name: userName.current.value,
+        phone: phoneNumber.current.value,
       }),
     });
     if (resRegister.status === 200) {
@@ -82,14 +80,14 @@ export default function Register() {
         login({
           id: registerIdInput.current.value,
           password: registerPwInput.current.value,
-          phone: phoneNumber.current.value,
           name: userName.current.value,
+          phone: phoneNumber.current.value,
         }),
       );
       registerIdInput.current.value = '';
       registerPwInput.current.value = '';
-      phoneNumber.current.value = '';
       userName.current.value = '';
+      phoneNumber.current.value = '';
       window.location.href = '/';
       // navigate('/');
       return alert(await resRegister.json());
