@@ -3,12 +3,16 @@ import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faLaptop } from '@fortawesome/free-solid-svg-icons';
+import { faLaptop, faBell } from '@fortawesome/free-solid-svg-icons';
 import { faComputerMouse } from '@fortawesome/free-solid-svg-icons';
 import { faPlug } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import companyLogo from './images/userIcon.png';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+
 import Header from '../components/Header';
+import { Link } from 'react-router-dom';
 
 const Menu = styled.div`
   position: fixed;
@@ -187,7 +191,6 @@ export default function UserMain({ page }) {
     return isNotMobile ? children : null;
   };
 
-
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
   const userId = useSelector((state) => state.user.userID);
 
@@ -203,12 +206,10 @@ export default function UserMain({ page }) {
     showMain();
   }, []);
 
-
   return (
     <>
       <Desktop>
         <Header />
-
 
         <Menu>
           <ul>
@@ -240,7 +241,7 @@ export default function UserMain({ page }) {
         <Rent>
           <ul>
             <li>
-              <a href="./UserRent">
+              <Link to="/UserRent">
                 <div>
                   <FontAwesomeIcon
                     icon={faLaptop}
@@ -248,7 +249,7 @@ export default function UserMain({ page }) {
                   />
                   <p>LAPTOP</p>
                 </div>
-              </a>
+              </Link>
             </li>
             <li>
               <a href="">
