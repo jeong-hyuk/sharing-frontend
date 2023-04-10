@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faLaptop } from '@fortawesome/free-solid-svg-icons';
+import { faComputerMouse } from '@fortawesome/free-solid-svg-icons';
+import { faPlug } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import companyLogo from './images/userIcon.png';
 
@@ -33,18 +36,31 @@ const Header = styled.div`
     }
     .user_NameEmail {
       margin: 0px 20px;
-      p {
-        text-align: right;
+      .user_logout_name {
+        text-align: left;
         margin: 0;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         color: #fff;
-        :last-child {
+      }
+      span {
+        strong {
           font-size: 1.5rem;
+        }
+        :last-child {
+          font-size: 0.5rem;
+          color: #333;
+          margin-left: 10px;
+        }
+        :first-child {
+          font-size: 1.4rem;
           color: #f5f5f5;
         }
-        strong {
-          font-size: 1.6rem;
-        }
+      }
+      p {
+        text-align: left;
+        margin: 0;
+        font-size: 1.4rem;
+        color: #fff;
       }
     }
     .user_info_img {
@@ -82,7 +98,7 @@ const Menu = styled.div`
         height: 100%;
         text-decoration: none;
         text-align: center;
-        font-size: 1.7rem;
+        font-size: 1.5rem;
         transition: all 0.1s;
         :link,
         :visited,
@@ -116,7 +132,6 @@ const Menu = styled.div`
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
       }
     }
-
     .menu_prev_button {
       bottom: 4vh;
       left: 13vw;
@@ -159,13 +174,54 @@ const Rent = styled.div`
         border: 2px solid #446a72;
         box-sizing: border-box;
         border-radius: 5px;
+        position: relative;
         :hover {
           box-sizing: border-box;
           border-radius: 5px;
           border: 7px solid #446a72;
           box-shadow: 7px 7px 7px rgba(0, 0, 0, 25%);
           transition: all 0.1s;
+          div {
+            background-color: #446a72;
+            .rent_laptop_icon,
+            .rent_mouse_icon,
+            .rent_plug_icon {
+              transition: all 0.1s;
+              color: #fff;
+            }
+            P {
+              color: #fff;
+              transition: all 0.1s;
+            }
+          }
         }
+        div {
+          width: 100%;
+          height: 100%;
+          .rent_laptop_icon,
+          .rent_mouse_icon,
+          .rent_plug_icon {
+            width: 100px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(68, 106, 114, 1);
+            transition: all 0.1s;
+          }
+          P {
+            color: #446a72;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 27%;
+            transition: all 0.1s;
+          }
+        }
+
         :nth-child(3),
         :nth-child(4) {
           padding-top: 40px;
@@ -203,9 +259,14 @@ export default function UserMain() {
                 <FontAwesomeIcon icon={faBell} className="header_alram" />
               </a>
               <div className="user_NameEmail">
-                <p>
-                  <strong>찡꼴라</strong>&nbsp;님
-                </p>
+                <div className="user_logout_name">
+                  <span>
+                    <strong>찡꼴라</strong>&nbsp;님
+                  </span>
+                  <span>
+                    <a href="">로그아웃</a>
+                  </span>
+                </div>
                 <p className="">ggolla@gmail.com</p>
               </div>
               <a href="" className="user_info_img">
@@ -244,13 +305,34 @@ export default function UserMain() {
         <Rent>
           <ul>
             <li>
-              <a href="./UserRent"></a>
+              <a href="./UserRent">
+                <div>
+                  <FontAwesomeIcon
+                    icon={faLaptop}
+                    className="rent_laptop_icon"
+                  />
+                  <p>LAPTOP</p>
+                </div>
+              </a>
             </li>
             <li>
-              <a href=""></a>
+              <a href="">
+                <div>
+                  <FontAwesomeIcon
+                    icon={faComputerMouse}
+                    className="rent_mouse_icon"
+                  />
+                  <p>MOUSE</p>
+                </div>
+              </a>
             </li>
             <li>
-              <a href=""></a>
+              <a href="">
+                <div>
+                  <FontAwesomeIcon icon={faPlug} className="rent_plug_icon" />
+                  <p>CHARGER</p>
+                </div>
+              </a>
             </li>
             <li></li>
           </ul>
