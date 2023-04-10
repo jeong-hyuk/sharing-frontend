@@ -14,7 +14,7 @@ function App() {
 
   return (
     <>
-      {/* <GlobalStyle /> */}
+      <GlobalStyle />
       <Routes>
         <Route path="/" element={isLogin ? <UserMain /> : <Login />} />
         <Route path="/register" element={isLogin ? <Login /> : <Register />} />
