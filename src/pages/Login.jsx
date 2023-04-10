@@ -1,7 +1,9 @@
+
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, register } from '../store/modules/user';
+
 
 export default function Login() {
   const loginIdInput = useRef();
@@ -38,7 +40,7 @@ export default function Login() {
       loginIdInput.current.value = '';
       loginPwInput.current.value = '';
 
-      alert(await resLogin.json());
+      alert(await resLogin.json()); // 로그인 성공 하였습니다 라는 값 받아왔음.
       navigate('/');
     } else {
       alert(await resLogin.json());

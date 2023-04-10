@@ -7,9 +7,9 @@ import { faLaptop } from '@fortawesome/free-solid-svg-icons';
 import { faComputerMouse } from '@fortawesome/free-solid-svg-icons';
 import { faPlug } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import companyLogo from './images/userIcon.png';
 import Header from '../components/Header';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+
 const Menu = styled.div`
   position: fixed;
   top: 11vh;
@@ -187,18 +187,28 @@ export default function UserMain({ page }) {
     return isNotMobile ? children : null;
   };
 
-  // Session으로부터 name 값 가져오기
-  // const getNameFromSession = async () => {
-  //   const resSession = await axios.get('http://localhost:4000/session', {
-  //     withCredentials: true,
-  //   });
-  //   setUserName(resSession.data.name);
-  // };
+
+  // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
+  const userId = useSelector((state) => state.user.userID);
+
+  const [main, setMain] = useState([]);
+  const [user, setUser] = useState();
+
+  const showMain = async () => {
+    const resShowMain = await axios.get(`http://localhost:4000/main/${userId}`);
+    console.log(resShowMain);
+    setUser(resShowMain.data.NAME.USER_NAME);
+  };
+  useEffect(() => {
+    showMain();
+  }, []);
+
 
   return (
     <>
       <Desktop>
         <Header />
+
 
         <Menu>
           <ul>

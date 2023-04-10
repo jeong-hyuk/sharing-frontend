@@ -15,11 +15,11 @@ const GlobalStyle = createGlobalStyle`
     white-space: pre-wrap;
     text-align: center;
   }
-
+*/
   ul, ol {
     list-style: none;
     padding-left: 0px;
-  } */
+
 
   //reset
   *{margin:0; padding:0;}

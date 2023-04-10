@@ -1,82 +1,78 @@
+import { borderRadius } from '@mui/system';
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import styled from 'styled-components';
 
-// 미리 3개의 데이터를 넣어둠
-const arr = [
-  {
-    code: '001',
-    product_name: '노트북',
-    status: '대여가능',
-    btn: '대여',
-  },
-  {
-    code: '002',
-    product_name: '노트북',
-    status: '대여가능',
-    btn: '대여',
-  },
-  {
-    code: '003',
-    product_name: '노트북',
-    status: '대여가능',
-    btn: '대여',
-  },
-];
+const Producttable = styled.div`
+  position: relative;
+  top: 10vh;
+  left: 12vw;
+  width: 75vw;
+  height: 70vh;
+  text-align: center;
+  background-color: #ffffff2b;
+  table {
+    border-collapse: collapse;
+    width: 75vw;
+    height: 70vh;
+    th {
+      border-right: 1px solid black;
+      background-color: #446a72;
+      height: 10vh;
+    }
+    td {
+      border-right: 1px solid black;
+      div {
+        cursor: pointer;
+        background-color: #446a72a1;
+        transform: translateX(7vw);
+        width: 5vw;
+        height: 5vh;
+        color: #fff;
+        border-radius: 3rem;
+      }
+    }
+  }
+`;
+
+const Sharebtn = styled.div``;
 
 export default function ProductTable() {
   return (
     <>
-      {/* sx를 사용하여 table의 style지정 */}
-      <TableContainer
-        component={Paper}
-        sx={{
-          width: '70vw',
-          height: '65vh',
-          position: 'relative',
-          left: '15vw',
-          top: '10vh',
-        }}
-      >
-        <Table>
-          <TableHead
-            sx={{
-              '& th': {
-                color: 'white',
-                backgroundColor: '#446A72',
-                fontWeight: 'bold',
-              },
-            }}
-          >
-            {/* table에 제목 부분 */}
-            <TableRow>
-              <TableCell align="center">코드</TableCell>
-              <TableCell align="center">기자재명</TableCell>
-              <TableCell align="center">상태</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          {/* table에 들어갈 데이터 */}
-          <TableBody>
-            {arr.map((arr) => (
-              <TableRow key={arr.code}>
-                <TableCell align="center">{arr.code}</TableCell>
-                <TableCell align="center">{arr.product_name}</TableCell>
-                <TableCell align="center">{arr.status}</TableCell>
-                <TableCell align="center">
-                  <div onClick={() => console.log('대여')}>{arr.btn}</div>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Producttable>
+        <table>
+          <tr className="enter1">
+            <th>코드</th>
+            <th>이름</th>
+            <th>상태</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>001</td>
+            <td>컴퓨터</td>
+            <td>대여가능</td>
+            <td>
+              <div>대여</div>
+            </td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>마우스</td>
+            <td>대여가능</td>
+            <td>
+              <div>대여</div>
+            </td>
+          </tr>
+          <tr>
+            <td>003</td>
+            <td>멀티탭</td>
+            <td>대여가능</td>
+            <td>
+              <div>대여</div>
+            </td>
+          </tr>
+        </table>
+      </Producttable>
     </>
   );
 }

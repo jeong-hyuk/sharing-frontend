@@ -25,6 +25,7 @@ export default function Register() {
     return true;
   };
 
+
   const checkName = () => {
     if (/\d/.test(userName.current.value)) {
       alert('이름에는 숫자가 들어갈 수 없습니다.');
@@ -41,6 +42,7 @@ export default function Register() {
     }
     return true;
   };
+
 
   const registerUser = async () => {
     if (
@@ -75,6 +77,7 @@ export default function Register() {
       }),
     });
     if (resRegister.status === 200) {
+      // 성공 했따. 라는 의미입니다.
       dispatch(
         login({
           id: registerIdInput.current.value,
