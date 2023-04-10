@@ -23,12 +23,14 @@ export default function Register() {
   };
 
   // 숫자가 아니라면
+
   const checkName = () => {
     if (Number(userName.current.value)) {
       alert('이름에는 숫자가 들어갈 수 없습니다.');
       userName.current.value = '';
     }
   };
+
 
   const registerUser = async () => {
     if (
@@ -43,9 +45,9 @@ export default function Register() {
       return;
     }
 
-    if (checkName()) {
-      return;
-    }
+    // if (checkName()) {
+    //   return;
+    // }
     const resRegister = await fetch('http://localhost:4000/register', {
       method: 'POST',
       headers: {

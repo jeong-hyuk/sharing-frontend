@@ -1,83 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faLaptop } from '@fortawesome/free-solid-svg-icons';
+import { faComputerMouse } from '@fortawesome/free-solid-svg-icons';
+import { faPlug } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+
 import companyLogo from './images/userIcon.png';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-/*reset
-*{margin:0; padding:0;}
-li{list-style:none;}
-img{border:0; vertical-align:top;}-*/
 
-/*a link
-a{text-decoration:none;}
-a:link, a:visited, a:hover, a:active{color:#333;}*/
+import Header from '../components/Header';
 
-const Header = styled.div`
-  background-color: #fff;
-  position: fixed;
-  width: 100%;
-  height: 120px;
-  background-color: #fff;
-  .UserHeader {
-    width: 80%;
-    height: 120px;
-    margin: 20px auto 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .header_logo {
-  }
-  .user_info_header {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    .header_alram {
-      /* margin-top: 20px; */
-      width: 30px;
-      height: 30px;
-      color: #888;
-    }
-    .user_NameEmail {
-      margin: 20px;
-      p {
-        text-align: right;
-        margin: 0;
-        font-size: 18px;
-        :last-child {
-          color: #888;
-          font-size: 16px;
-        }
-      }
-    }
-    .user_info_img {
-      /* margin: 20px 0px 0px 10px; */
-      margin-left: 10px;
-      img {
-        width: 50px;
-        height: 50px;
-      }
-    }
-  }
-`;
 
 const Menu = styled.div`
   position: fixed;
-  top: 120px;
+  top: 11vh;
   background-color: #fff;
   width: 30vw;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 11vh);
   ul {
-    width: 60%;
+    width: 50%;
     position: absolute;
     right: 2vw;
-    padding: 0;
+    top: 5vh;
     li {
       list-style: none;
       width: 100%;
@@ -93,7 +42,7 @@ const Menu = styled.div`
         height: 100%;
         text-decoration: none;
         text-align: center;
-        font-size: 20px;
+        font-size: 1.5rem;
         transition: all 0.1s;
         :link,
         :visited,
@@ -127,13 +76,12 @@ const Menu = styled.div`
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
       }
     }
-
     .menu_prev_button {
-      bottom: 7vh;
-      left: 10vw;
+      bottom: 4vh;
+      left: 13vw;
     }
     .menu_next_button {
-      bottom: 7vh;
+      bottom: 4vh;
       right: 2vw;
     }
   }
@@ -141,23 +89,22 @@ const Menu = styled.div`
 
 const Rent = styled.div`
   position: fixed;
-  top: 120px;
-  right: 0;
-  background-color: #fff;
+  top: 11vh;
+  right: 0px;
+  background-color: rgb(255, 255, 255);
   width: 70vw;
-  height: calc(100vh - 120px);
+  height: 89vh;
   ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    height: 100%;
-    padding-left: 4vw;
+    padding: 5vh 0 0 4vw;
     li {
       list-style: none;
-      width: 26vw;
-      height: 35vh;
-      background-color: #fff;
-      margin-right: 4vw;
+      width: 25vw;
+      height: 37vh;
+      background-color: rgb(255, 255, 255);
+      margin: 0 3vw 3vw 0;
       :last-child {
         background-color: rgba(68, 106, 114, 0.2);
         border: none;
@@ -171,13 +118,54 @@ const Rent = styled.div`
         border: 2px solid #446a72;
         box-sizing: border-box;
         border-radius: 5px;
+        position: relative;
         :hover {
           box-sizing: border-box;
           border-radius: 5px;
           border: 7px solid #446a72;
           box-shadow: 7px 7px 7px rgba(0, 0, 0, 25%);
           transition: all 0.1s;
+          div {
+            background-color: #446a72;
+            .rent_laptop_icon,
+            .rent_mouse_icon,
+            .rent_plug_icon {
+              transition: all 0.1s;
+              color: #fff;
+            }
+            P {
+              color: #fff;
+              transition: all 0.1s;
+            }
+          }
         }
+        div {
+          width: 100%;
+          height: 100%;
+          .rent_laptop_icon,
+          .rent_mouse_icon,
+          .rent_plug_icon {
+            width: 100px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(68, 106, 114, 1);
+            transition: all 0.1s;
+          }
+          P {
+            color: #446a72;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 27%;
+            transition: all 0.1s;
+          }
+        }
+
         :nth-child(3),
         :nth-child(4) {
           padding-top: 40px;
@@ -187,7 +175,7 @@ const Rent = styled.div`
   }
 `;
 
-export default function UserMain() {
+export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
     return isDesktop ? children : null;
@@ -204,6 +192,7 @@ export default function UserMain() {
     const isNotMobile = useMediaQuery({ minWidth: 768 });
     return isNotMobile ? children : null;
   };
+
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
   const userId = useSelector((state) => state.user.userID);
 
@@ -241,6 +230,7 @@ export default function UserMain() {
             </div>
           </div>
         </Header>
+
         <Menu>
           <ul>
             <li>
@@ -271,13 +261,34 @@ export default function UserMain() {
         <Rent>
           <ul>
             <li>
-              <a href="./UserRent"></a>
+              <a href="./UserRent">
+                <div>
+                  <FontAwesomeIcon
+                    icon={faLaptop}
+                    className="rent_laptop_icon"
+                  />
+                  <p>LAPTOP</p>
+                </div>
+              </a>
             </li>
             <li>
-              <a href=""></a>
+              <a href="">
+                <div>
+                  <FontAwesomeIcon
+                    icon={faComputerMouse}
+                    className="rent_mouse_icon"
+                  />
+                  <p>MOUSE</p>
+                </div>
+              </a>
             </li>
             <li>
-              <a href=""></a>
+              <a href="">
+                <div>
+                  <FontAwesomeIcon icon={faPlug} className="rent_plug_icon" />
+                  <p>CHARGER</p>
+                </div>
+              </a>
             </li>
             <li></li>
           </ul>
