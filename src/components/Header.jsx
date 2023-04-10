@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Headstyle = styled.div`
-  height: 12vh;
+  height: 11vh;
   background-color: #446a72;
 `;
 
