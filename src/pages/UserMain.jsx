@@ -7,14 +7,8 @@ import { faLaptop } from '@fortawesome/free-solid-svg-icons';
 import { faComputerMouse } from '@fortawesome/free-solid-svg-icons';
 import { faPlug } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-
 import companyLogo from './images/userIcon.png';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-
-
 import Header from '../components/Header';
-
 
 const Menu = styled.div`
   position: fixed;
@@ -193,6 +187,7 @@ export default function UserMain({ page }) {
     return isNotMobile ? children : null;
   };
 
+
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
   const userId = useSelector((state) => state.user.userID);
 
@@ -208,28 +203,12 @@ export default function UserMain({ page }) {
     showMain();
   }, []);
 
+
   return (
     <>
       <Desktop>
-        <Header>
-          <div className="UserHeader">
-            <img src="" alt="로고" className="header_logo" />
-            <div className="user_info_header">
-              <a href="">
-                <FontAwesomeIcon icon={faBell} className="header_alram" />
-              </a>
-              <div className="user_NameEmail">
-                <p>
-                  <strong>{user}</strong>&nbsp;님
-                </p>
-                <p className="">{userId}</p>
-              </div>
-              <a href="" className="user_info_img">
-                <img src={companyLogo} alt="프로필" />
-              </a>
-            </div>
-          </div>
-        </Header>
+        <Header />
+
 
         <Menu>
           <ul>

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import companyLogo from '../pages/images/userIcon.png';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const CommonHeader = styled.div`
   position: fixed;
@@ -67,6 +69,16 @@ const CommonHeader = styled.div`
 `;
 
 export default function Header() {
+  const userN = useSelector((state) => state.user.userNAME);
+  const [userName, setUserName] = useState();
+  const showMain = async () => {
+    const resMain = await axios.get('http://localhost:4000/main', {});
+    setUserName(userN);
+  };
+  useEffect(() => {
+    showMain();
+    console.log(userName);
+  }, []);
   return (
     <>
       <CommonHeader>
@@ -79,7 +91,7 @@ export default function Header() {
             <div className="user_NameEmail">
               <div className="user_logout_name">
                 <span>
-                  <strong>찡꼴라</strong>&nbsp;님
+                  <strong>{userName}</strong>&nbsp;님
                 </span>
                 <span>
                   <a href="">로그아웃</a>

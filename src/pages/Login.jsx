@@ -1,7 +1,9 @@
-import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { json, Link, useNavigate } from 'react-router-dom';
-import { login } from '../store/modules/user';
+
+import React, { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { login, register } from '../store/modules/user';
+
 
 export default function Login() {
   const loginIdInput = useRef();
