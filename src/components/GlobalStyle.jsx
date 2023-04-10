@@ -19,7 +19,9 @@ const GlobalStyle = createGlobalStyle`
   ul, ol {
     list-style: none;
     padding-left: 0px;
-  } //reset
+
+
+  //reset
   *{margin:0; padding:0;}
   li{list-style:none;}
   img{border:0; vertical-align:top;}

@@ -2,6 +2,7 @@ import React, { useReducer, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/modules/user';
 import { Link, useNavigate } from 'react-router-dom';
+import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function Register() {
   const registerIdInput = useRef();
@@ -21,6 +22,15 @@ export default function Register() {
     return true;
   };
 
+  // 숫자가 아니라면
+  // const checkName = () => {
+  //   if (Number(userName.current.value)) {
+  //     alert('이름에는 숫자가 들어갈 수 없습니다.');
+  //     return false;
+  //   }
+  //   return true;
+  // };
+
   const registerUser = async () => {
     if (
       !registerIdInput.current.value ||
@@ -34,7 +44,10 @@ export default function Register() {
       return;
     }
 
-    const resRegister = await fetch('http://localhost:4000/user/register', {
+    // if (checkName()) {
+    //   return;
+    // }
+    const resRegister = await fetch('http://localhost:4000/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
