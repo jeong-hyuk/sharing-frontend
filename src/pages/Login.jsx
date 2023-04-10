@@ -18,7 +18,7 @@ export default function Login() {
   const loginUser = async () => {
     if (!loginIdInput.current.value || !loginPwInput.current.value)
       return alert('값을 입력 하세요');
-    const resLogin = await fetch('http://localhost:4000/user/login', {
+    const resLogin = await fetch('http://localhost:4000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
