@@ -8,6 +8,11 @@ import { faComputerMouse } from '@fortawesome/free-solid-svg-icons';
 import { faPlug } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
+import companyLogo from './images/userIcon.png';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+
+
 import Header from '../components/Header';
 
 
@@ -187,30 +192,44 @@ export default function UserMain({ page }) {
     const isNotMobile = useMediaQuery({ minWidth: 768 });
     return isNotMobile ? children : null;
   };
+
+  // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
   const userId = useSelector((state) => state.user.userID);
-  const [userName, setUserName] = useState();
+
+  const [main, setMain] = useState([]);
+  const [user, setUser] = useState();
+
   const showMain = async () => {
-    const resMain = await axios.get('http://localhost:4000/main', {});
-    setUserName(userId);
+    const resShowMain = await axios.get(`http://localhost:4000/main/${userId}`);
+    console.log(resShowMain);
+    setUser(resShowMain.data.NAME.USER_NAME);
   };
   useEffect(() => {
     showMain();
-    console.log(userName);
   }, []);
-
-  // Session으로부터 name 값 가져오기
-  // const getNameFromSession = async () => {
-  //   const resSession = await axios.get('http://localhost:4000/session', {
-  //     withCredentials: true,
-  //   });
-  //   setUserName(resSession.data.name);
-  // };
 
   return (
     <>
       <Desktop>
-
-        <Header />
+        <Header>
+          <div className="UserHeader">
+            <img src="" alt="로고" className="header_logo" />
+            <div className="user_info_header">
+              <a href="">
+                <FontAwesomeIcon icon={faBell} className="header_alram" />
+              </a>
+              <div className="user_NameEmail">
+                <p>
+                  <strong>{user}</strong>&nbsp;님
+                </p>
+                <p className="">{userId}</p>
+              </div>
+              <a href="" className="user_info_img">
+                <img src={companyLogo} alt="프로필" />
+              </a>
+            </div>
+          </div>
+        </Header>
 
         <Menu>
           <ul>
