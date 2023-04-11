@@ -69,15 +69,36 @@ const CommonHeader = styled.div`
 `;
 
 export default function Header() {
+  // const userId = useSelector((state) => state.user.userID);
+  // const [main, setMain] = useState([]);
+  // const [user, setUser] = useState();
+
+  // const showMain = async () => {
+  //   const resShowMain = await axios.get(`http://localhost:4000/main/${userId}`);
+  //   console.log(resShowMain);
+  //   setUser(resShowMain.data.NAME.USER_NAME);
+  // };
+  // useEffect(() => {
+  //   showMain();
+  // }, []);
+
   const userId = useSelector((state) => state.user.userID);
   const [main, setMain] = useState([]);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState('');
 
   const showMain = async () => {
-    const resShowMain = await axios.get(`http://localhost:4000/main/${userId}`);
-    console.log(resShowMain);
-    setUser(resShowMain.data.NAME.USER_NAME);
+    try {
+      const resShowMain = await axios.get(
+        `http://localhost:4000/main/${userId}`,
+      );
+      setMain(resShowMain.data.ARTICLE); // 배열 담아줘
+      setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
+      console.log(user);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   useEffect(() => {
     showMain();
   }, []);

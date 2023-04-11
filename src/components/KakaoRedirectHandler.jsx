@@ -48,14 +48,15 @@ const KakaoRedirectHandler = () => {
           const userLoginInfo = {
             id: userKaKaoInfo.kakao_account.email,
             password: 'kakao-user',
-            name: userKaKaoInfo.kakao_account.profile.nickname,
             phone: '000000',
+            name: userKaKaoInfo.kakao_account.profile.nickname,
+
             // profile_img: userKaKaoInfo.kakao_account.profile.profile_imgage_url,
           };
           console.log(userLoginInfo);
 
           const resKakaoLogin = await fetch(
-            'http://localhost:4000/user/kakaoRegister',
+            'http://localhost:4000/kakaoRegister',
             {
               method: 'POST',
               headers: {
@@ -71,19 +72,16 @@ const KakaoRedirectHandler = () => {
             return navigate('/');
           }
 
-          const resRegister = await fetch(
-            'http://localhost:4000/user/register',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                id: userKaKaoInfo.kakao_account.email,
-                password: 'kakao-user',
-              }),
+          const resRegister = await fetch('http://localhost:4000/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
             },
-          );
+            body: JSON.stringify({
+              id: userKaKaoInfo.kakao_account.email,
+              password: 'kakao-user',
+            }),
+          });
 
           if (resRegister.status === 200) {
             console.log('4');

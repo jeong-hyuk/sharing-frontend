@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useReducer, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/modules/user';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ export default function Register() {
   const passwordConfirmInput = useRef();
   const phoneNumber = useRef();
   const userName = useRef();
+
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -25,6 +26,16 @@ export default function Register() {
     return true;
   };
 
+  const checkEmail = () => {
+    const emailValue = registerIdInput.current.value;
+    if (
+      !/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(emailValue)
+    ) {
+      alert('이메일 형식이 올바르지 않습니다.');
+      return false;
+    }
+    return true;
+  };
 
   const checkName = () => {
     if (/\d/.test(userName.current.value)) {
@@ -42,7 +53,6 @@ export default function Register() {
     }
     return true;
   };
-
 
   const registerUser = async () => {
     if (
@@ -64,6 +74,10 @@ export default function Register() {
     if (!checkPhoneNumber()) {
       return;
     }
+
+    if (!checkEmail()) {
+      return;
+    }
     const resRegister = await fetch('http://localhost:4000/register', {
       method: 'POST',
       headers: {
@@ -72,8 +86,8 @@ export default function Register() {
       body: JSON.stringify({
         id: registerIdInput.current.value,
         password: registerPwInput.current.value,
-        phone: phoneNumber.current.value,
         name: userName.current.value,
+        phone: phoneNumber.current.value,
       }),
     });
     if (resRegister.status === 200) {
@@ -82,14 +96,14 @@ export default function Register() {
         login({
           id: registerIdInput.current.value,
           password: registerPwInput.current.value,
-          phone: phoneNumber.current.value,
           name: userName.current.value,
+          phone: phoneNumber.current.value,
         }),
       );
       registerIdInput.current.value = '';
       registerPwInput.current.value = '';
-      phoneNumber.current.value = '';
       userName.current.value = '';
+      phoneNumber.current.value = '';
       window.location.href = '/';
       // navigate('/');
       return alert(await resRegister.json());
