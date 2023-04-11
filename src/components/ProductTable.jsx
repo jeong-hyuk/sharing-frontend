@@ -37,31 +37,35 @@ import styled from 'styled-components';
 const Productstyle = styled.div`
   position: relative;
   top: 20vh;
-  left: 18.5vw;
+  left: 14vw;
   width: 72vw;
   height: 70vh;
   text-align: center;
   .allcontroller {
     display: flex;
     height: 70vh;
+    /* background-color: #021d2379; */
     .leftcontroller {
-      width: 55vw;
+      width: 70vw;
       .title {
-        border: 1px solid #446a72;
-        background-color: #446a7279;
+        /* border: 1px solid #446a72; */
+        background-color: #446a72;
+        color: #fff;
         border-radius: 5px;
         height: 7vh;
-        margin-bottom: 5.5vh;
+        margin-bottom: 2vh;
         ol {
           display: flex;
           justify-content: space-around;
           li {
             font-size: 1.6rem;
-            font-weight: bold;
             width: 20vw;
             height: 7vh;
             line-height: 7vh;
-            border: 1px solid #446a72;
+            border-right: 1px solid #fff;
+            :last-child {
+              border-right: none;
+            }
           }
         }
       }
@@ -73,35 +77,40 @@ const Productstyle = styled.div`
           justify-content: space-around;
           li {
             font-size: 1.6rem;
-            border: 1px solid black;
+            border-right: 1px solid #446a72;
             width: 20vw;
-            line-height: 10vh;
+            line-height: 7vh;
             height: 54.5vh;
+            :last-child {
+              border-right: none;
+            }
           }
         }
       }
     }
     .rightcontroller {
-      width: 15vw;
+      width: 5vw;
       height: 70vh;
-      margin-left: 2vw;
+      margin-left: 1vw;
       .blank {
         width: 5vw;
         height: 7vh;
-        background-color: #446a7279;
-        margin-bottom: 5.5vh;
-        border: 1px solid #446a72;
+        background-color: #446a72;
+        margin-bottom: 2vh;
+        /* border: 1px solid #446a72; */
         border-radius: 5px;
       }
       .okbtn {
         font-size: 1.6rem;
         width: 5vw;
         height: 54.5vh;
-        line-height: 10vh;
+        /* line-height: 7vh; */
         border: 1px solid #446a72;
         border-radius: 5px;
         div {
           cursor: pointer;
+          top: 10vh;
+          left: 68vw;
           position: absolute;
           background-color: #446a72bb;
           border-radius: 5px;
