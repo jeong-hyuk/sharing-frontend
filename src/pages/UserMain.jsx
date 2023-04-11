@@ -193,15 +193,22 @@ export default function UserMain({ page }) {
 
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
   const userId = useSelector((state) => state.user.userID);
-
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
 
   const showMain = async () => {
-    const resShowMain = await axios.get(`http://localhost:4000/main/${userId}`);
-    console.log(resShowMain);
-    setUser(resShowMain.data.NAME.USER_NAME);
+    try {
+      const resShowMain = await axios.get(
+        `http://localhost:4000/main/${userId}`,
+      );
+      setMain(resShowMain.data.ARTICLE); // 배열 담아줘
+      setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
+      console.log(user);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   useEffect(() => {
     showMain();
   }, []);
@@ -240,18 +247,22 @@ export default function UserMain({ page }) {
         </Menu>
         <Rent>
           <ul>
-            <li>
-              <Link to="/UserRent">
-                <div>
-                  <FontAwesomeIcon
-                    icon={faLaptop}
-                    className="rent_laptop_icon"
-                  />
-                  <p>LAPTOP</p>
-                </div>
-              </Link>
-            </li>
-            <li>
+            {main.map((el, index) => (
+              <li key={index}>
+                <Link to={`/UserRent/${el.OBJECT_TYPE}`}>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faLaptop}
+                      className="rent_laptop_icon"
+                    />
+                    <p>{el.OBJECT_NAME}</p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* <li>
               <a href="">
                 <div>
                   <FontAwesomeIcon
@@ -271,7 +282,7 @@ export default function UserMain({ page }) {
               </a>
             </li>
             <li></li>
-          </ul>
+          </ul> */}
         </Rent>
       </Desktop>
       <Tablet>Tablet</Tablet>

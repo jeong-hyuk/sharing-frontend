@@ -1,9 +1,7 @@
-
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, register } from '../store/modules/user';
-
 
 export default function Login() {
   const loginIdInput = useRef();
@@ -47,6 +45,17 @@ export default function Login() {
     }
   };
 
+  // Caps Lock 표시를 위한 state 설정
+  const [capsLockOn, setCapsLockOn] = useState(false);
+
+  // Caps Lock 상태 변화 처리
+  const handleCapsLockChange = (event) => {
+    setCapsLockOn(event.getModifierState('CapsLock'));
+  };
+
+  // 비밀번호 표시를 위한 state 설정
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <>
       {/* 로그인 파트 */}
@@ -54,16 +63,40 @@ export default function Login() {
       아이디 <input type="text" ref={loginIdInput} />
       <br />
       <br />
-      비밀번호 <input type="password" ref={loginPwInput} />
+      비밀번호{' '}
+      <input
+        type={showPassword ? 'text' : 'password'}
+        ref={loginPwInput}
+        onKeyUp={handleCapsLockChange}
+      />
+      {capsLockOn && <div>Caps Lock이 켜져 있습니다.</div>}
+      <button onClick={() => setShowPassword(!showPassword)}>
+        {showPassword ? '숨기기' : '보기'}
+      </button>
       <br />
-      <br />
-      <button onClick={loginUser}>로그인</button>
       <Link to="/register">회원가입</Link>
       <br />
-      <br />
       <Link to={KAKAO_AUTH_URL}>카카오 로그인</Link>
+      <button onClick={loginUser}>로그인</button>
     </>
   );
+
+  // return (
+  //   <>
+  //     {/* 로그인 파트 */}
+  //     <h1>로그인 파트</h1>
+  //     아이디 <input type="text" ref={loginIdInput} />
+  //     <br />
+  //     <br />
+  //     비밀번호 <input type="password" ref={loginPwInput} />
+  //     <br />
+  //     <br />
+  //     <Link to="/register">회원가입</Link>
+  //     <br />
+  //     <Link to={KAKAO_AUTH_URL}>카카오 로그인</Link>
+  //     <button onClick={loginUser}>로그인</button>
+  //   </>
+  // );
 }
 
 // const resRegister = await fetch('http://localhost:4000/user/register', {
