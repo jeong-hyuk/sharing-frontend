@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useReducer, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/modules/user';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ export default function Register() {
   const passwordConfirmInput = useRef();
   const phoneNumber = useRef();
   const userName = useRef();
+
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,6 +21,17 @@ export default function Register() {
     }
     if (registerPwInput.current.value !== passwordConfirmInput.current.value) {
       alert('비밀번호가 일치하지 않습니다.');
+      return false;
+    }
+    return true;
+  };
+
+  const checkEmail = () => {
+    const emailValue = registerIdInput.current.value;
+    if (
+      !/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(emailValue)
+    ) {
+      alert('이메일 형식이 올바르지 않습니다.');
       return false;
     }
     return true;
@@ -60,6 +72,10 @@ export default function Register() {
     }
 
     if (!checkPhoneNumber()) {
+      return;
+    }
+
+    if (!checkEmail()) {
       return;
     }
     const resRegister = await fetch('http://localhost:4000/register', {

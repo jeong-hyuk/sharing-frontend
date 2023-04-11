@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
   *{
     font-size: 62.5%;
   }
+}
 `;
 
 export default GlobalStyle;
