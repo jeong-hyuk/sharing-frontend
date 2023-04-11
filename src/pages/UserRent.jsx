@@ -22,7 +22,7 @@ export default function UserRent() {
   }, []);
 
   const Allstyle = createGlobalStyle`
-    *{font-size: 16px;}
+    /* *{font-size: 16px;} */
   `;
   return (
     <>
