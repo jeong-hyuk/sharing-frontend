@@ -1,40 +1,17 @@
-import { borderRadius, style } from '@mui/system';
 import * as React from 'react';
 import styled from 'styled-components';
+import { useMediaQuery } from 'react-responsive';
+import Sidebar from './Sidebar';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+// import styled from 'styled-components';
 
-// const Producttable = styled.div`
-//   position: relative;
-//   top: 10vh;
-//   left: 12vw;
-//   width: 75vw;
-//   height: 70vh;
-//   text-align: center;
-//   background-color: #ffffff2b;
-//   table {
-//     border-collapse: collapse;
-//     width: 75vw;
-//     height: 70vh;
-//     th {
-//       border-right: 1px solid black;
-//       background-color: #446a72;
-//       height: 10vh;
-//     }
-//     td {
-//       border-right: 1px solid black;
-//       div {
-//         cursor: pointer;
-//         background-color: #446a72a1;
-//         transform: translateX(7vw);
-//         width: 5vw;
-//         height: 5vh;
-//         color: #fff;
-//         border-radius: 3rem;
-//       }
-//     }
-//   }
-// `;
-
-const Productstyle = styled.div`
+const Desktopstyle = styled.div`
   position: relative;
   top: 20vh;
   left: 14vw;
@@ -44,11 +21,9 @@ const Productstyle = styled.div`
   .allcontroller {
     display: flex;
     height: 70vh;
-    /* background-color: #021d2379; */
     .leftcontroller {
       width: 70vw;
       .title {
-        /* border: 1px solid #446a72; */
         background-color: #446a72;
         color: #fff;
         border-radius: 5px;
@@ -59,10 +34,9 @@ const Productstyle = styled.div`
           justify-content: space-around;
           li {
             font-size: 1.6rem;
-            width: 20vw;
+            width: 33.3333%;
             height: 7vh;
             line-height: 7vh;
-            border-right: 1px solid #fff;
             :last-child {
               border-right: none;
             }
@@ -71,20 +45,44 @@ const Productstyle = styled.div`
       }
       .content {
         border: 1px solid #446a72;
+        height: 60vh;
         border-radius: 5px;
         ol {
-          display: flex;
-          justify-content: space-around;
           li {
-            font-size: 1.6rem;
-            border-right: 1px solid #446a72;
-            width: 20vw;
+            display: flex;
+            justify-content: space-around;
+            height: 7vh;
             line-height: 7vh;
-            height: 54.5vh;
-            :last-child {
-              border-right: none;
+            border-bottom: 1px solid gray;
+            p {
+              width: 33.333%;
+              text-align: center;
+              font-size: 1.6rem;
+              height: 5vh;
+              :first-child {
+                transform: translateX(0.3vw);
+              }
+              :nth-child(2) {
+                transform: translateX(1.3vw);
+              }
+              :nth-child(3) {
+                transform: translateX(2.5vw);
+              }
+              :last-child {
+                cursor: pointer;
+                margin-top: 1vh;
+                transform: translateX(5vw);
+                color: #fff;
+                background-color: #446a72;
+                border-radius: 5px;
+                font-size: 1.3rem;
+                width: 3vw;
+                height: 5vh;
+                line-height: 5vh;
+              }
             }
           }
+          border-bottom: none;
         }
       }
     }
@@ -97,61 +95,320 @@ const Productstyle = styled.div`
         height: 7vh;
         background-color: #446a72;
         margin-bottom: 2vh;
-        /* border: 1px solid #446a72; */
         border-radius: 5px;
       }
-      .okbtn {
-        font-size: 1.6rem;
+      .okbg {
         width: 5vw;
-        height: 54.5vh;
-        /* line-height: 7vh; */
+        height: 60vh;
         border: 1px solid #446a72;
         border-radius: 5px;
-        div {
-          cursor: pointer;
-          top: 10vh;
-          left: 68vw;
-          position: absolute;
-          background-color: #446a72bb;
-          border-radius: 5px;
-          font-size: 1.6rem;
-          width: 3vw;
-          height: 5vh;
-        }
       }
     }
   }
 `;
 
-export default function ProductTable() {
+const Tabletstyle = styled.div`
+  position: relative;
+  top: 20vh;
+  left: 14vw;
+  width: 72vw;
+  height: 70vh;
+  text-align: center;
+  .allcontroller {
+    display: flex;
+    height: 70vh;
+    .leftcontroller {
+      width: 65vw;
+      .title {
+        background-color: #446a72;
+        color: #fff;
+        border-radius: 5px;
+        height: 7vh;
+        margin-bottom: 2vh;
+        ol {
+          display: flex;
+          justify-content: space-around;
+          li {
+            font-size: 1.6rem;
+            width: 33.3333%;
+            height: 7vh;
+            line-height: 7vh;
+            :last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+      .content {
+        border: 1px solid #446a72;
+        height: 60vh;
+        border-radius: 5px;
+        ol {
+          li {
+            display: flex;
+            justify-content: space-around;
+            height: 7vh;
+            line-height: 7vh;
+            border-bottom: 1px solid gray;
+            p {
+              width: 33.333%;
+              text-align: center;
+              font-size: 1.6rem;
+              height: 5vh;
+              :first-child {
+                transform: translateX(0.3vw);
+              }
+              :nth-child(2) {
+                transform: translateX(1.7vw);
+              }
+              :nth-child(3) {
+                transform: translateX(3vw);
+              }
+              :last-child {
+                cursor: pointer;
+                margin-top: 1vh;
+                transform: translateX(6vw);
+                color: #fff;
+                background-color: #446a72;
+                border-radius: 5px;
+                font-size: 1.3rem;
+                width: 4vw;
+                height: 5vh;
+                line-height: 5vh;
+              }
+            }
+          }
+          border-bottom: none;
+        }
+      }
+    }
+    .rightcontroller {
+      width: 5vw;
+      height: 70vh;
+      margin-left: 1vw;
+      .blank {
+        width: 6vw;
+        height: 7vh;
+        background-color: #446a72;
+        margin-bottom: 2vh;
+        border-radius: 5px;
+      }
+      .okbg {
+        width: 6vw;
+        height: 60vh;
+        border: 1px solid #446a72;
+        border-radius: 5px;
+      }
+    }
+  }
+`;
+const Mobilestyle = styled.div`
+  ol {
+    display: flex;
+    justify-content: space-between;
+    width: 45vw;
+    transform: translate(28vw, 15vh);
+    li {
+      font-size: 1.3rem;
+      cursor: pointer;
+      text-decoration: underline;
+      :hover {
+        color: #e2e2e2;
+      }
+    }
+  }
+  .okbtn {
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #446a72;
+    transform: translateX(2vw);
+    font-size: 1rem;
+    width: 6vw;
+    height: 5vh;
+    line-height: 5vh;
+  }
+`;
+
+export default function ProductTable({ page }) {
+  const Desktop = ({ children }) => {
+    const isDesktop = useMediaQuery({ minWidth: 992 });
+    return isDesktop ? children : null;
+  };
+  const Tablet = ({ children }) => {
+    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
+    return isTablet ? children : null;
+  };
+  const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+    return isMobile ? children : null;
+  };
+  const Default = ({ children }) => {
+    const isNotMobile = useMediaQuery({ minWidth: 768 });
+    return isNotMobile ? children : null;
+  };
+  const arr = [
+    {
+      code: '001',
+      product_name: '노트북',
+      status: '대여가능',
+      btn: '대여',
+    },
+    {
+      code: '002',
+      product_name: '노트북',
+      status: '대여가능',
+      btn: '대여',
+    },
+    {
+      code: '003',
+      product_name: '노트북',
+      status: '대여가능',
+      btn: '대여',
+    },
+  ];
+
   return (
     <>
-      <Productstyle>
-        <div className="allcontroller">
-          <div className="leftcontroller">
-            <div className="title">
-              <ol>
-                <li>코드</li>
-                <li>상품명</li>
-                <li>상태</li>
-              </ol>
+      <Desktop>
+        <Sidebar />
+        <Desktopstyle>
+          <div className="allcontroller">
+            <div className="leftcontroller">
+              <div className="title">
+                <ol>
+                  <li>코드</li>
+                  <li>상품명</li>
+                  <li>상태</li>
+                </ol>
+              </div>
+              <div className="content">
+                <ol>
+                  <li>
+                    <p>001</p>
+                    <p>컴퓨터</p>
+                    <p>대여가능</p>
+                    <p>대여</p>
+                  </li>
+                  <li>
+                    <p>002</p>
+                    <p>컴퓨터</p>
+                    <p>대여가능</p>
+                    <p>대여</p>
+                  </li>
+                  <li>
+                    <p>003</p>
+                    <p>컴퓨터</p>
+                    <p>대여가능</p>
+                    <p>대여</p>
+                  </li>
+                </ol>
+              </div>
             </div>
-            <div className="content">
-              <ol>
-                <li>001</li>
-                <li>컴퓨터</li>
-                <li>대여가능</li>
-              </ol>
+            <div className="rightcontroller">
+              <div className="blank"></div>
+              <div className="okbg"></div>
             </div>
           </div>
-          <div className="rightcontroller">
-            <div className="blank"></div>
-            <div className="okbtn">
-              <div>대여</div>
+        </Desktopstyle>
+      </Desktop>
+      <Tablet>
+        <Sidebar />
+        tablet
+        <Tabletstyle>
+          <div className="allcontroller">
+            <div className="leftcontroller">
+              <div className="title">
+                <ol>
+                  <li>코드</li>
+                  <li>상품명</li>
+                  <li>상태</li>
+                </ol>
+              </div>
+              <div className="content">
+                <ol>
+                  <li>
+                    <p>001</p>
+                    <p>컴퓨터</p>
+                    <p>대여가능</p>
+                    <p>대여</p>
+                  </li>
+                  <li>
+                    <p>002</p>
+                    <p>컴퓨터</p>
+                    <p>대여가능</p>
+                    <p>대여</p>
+                  </li>
+                  <li>
+                    <p>003</p>
+                    <p>컴퓨터</p>
+                    <p>대여가능</p>
+                    <p>대여</p>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <div className="rightcontroller">
+              <div className="blank"></div>
+              <div className="okbg"></div>
             </div>
           </div>
-        </div>
-      </Productstyle>
+        </Tabletstyle>
+      </Tablet>
+      <Mobile>
+        Mobile
+        <Mobilestyle>
+          <ol>
+            <li>노트북</li>
+            <li>마우스</li>
+            <li>멀티탭</li>
+          </ol>
+          {/* sx를 사용하여 table의 style지정 */}
+          <TableContainer
+            component={Paper}
+            sx={{
+              width: '70vw',
+              height: '65vh',
+              position: 'relative',
+              left: '15vw',
+              top: '20vh',
+            }}
+          >
+            <Table>
+              <TableHead
+                sx={{
+                  '& th': {
+                    color: 'white',
+                    backgroundColor: '#446A72',
+                  },
+                }}
+              >
+                {/* table에 제목 부분 */}
+                <TableRow>
+                  <TableCell align="center">코드</TableCell>
+                  <TableCell align="center">기자재명</TableCell>
+                  <TableCell align="center">상태</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              {/* table에 들어갈 데이터 */}
+              <TableBody>
+                {arr.map((arr) => (
+                  <TableRow key={arr.code}>
+                    <TableCell align="center">{arr.code}</TableCell>
+                    <TableCell align="center">{arr.product_name}</TableCell>
+                    <TableCell align="center">{arr.status}</TableCell>
+                    <TableCell align="center">
+                      <div className="okbtn">{arr.btn}</div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Mobilestyle>
+      </Mobile>
+      <Default></Default>
     </>
   );
 }

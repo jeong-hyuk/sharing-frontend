@@ -28,7 +28,6 @@ export default function UserRent() {
     <>
       <Allstyle />
       <Header />
-      <Sidebar />
       <ProductTable />
     </>
   );
