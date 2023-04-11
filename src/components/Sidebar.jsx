@@ -22,20 +22,22 @@ const SidebarBtn = styled.button`
   transition: 0.8s ease;
   border-radius: 0 5px 5px 0;
   border: 0px solid;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: transparent;
   overflow: hidden;
   cursor: pointer;
 `;
 
 const Sidelist = styled.div`
   position: relative;
-  left: 2vw;
+  left: 15%;
   text-align: center;
   ul {
     li {
-      width: 14vw;
+      width: 70%;
       height: 6vh;
-      margin-bottom: 8vh;
+      line-height: 6vh;
+      margin-bottom: 5vh;
+      font-size: 1.6rem;
       background-color: white;
       border-radius: 5px;
       cursor: pointer;
