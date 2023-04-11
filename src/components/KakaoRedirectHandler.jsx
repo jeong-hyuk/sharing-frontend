@@ -70,27 +70,29 @@ const KakaoRedirectHandler = () => {
             console.log('3');
             dispatch(login(userLoginInfo));
             return navigate('/');
-          }
-
-          const resRegister = await fetch('http://localhost:4000/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              id: userKaKaoInfo.kakao_account.email,
-              password: 'kakao-user',
-            }),
-          });
-
-          if (resRegister.status === 200) {
-            console.log('4');
-            dispatch(login(userLoginInfo));
-            return navigate('/');
           } else {
-            alert(await resRegister.json());
-            return navigate('/');
+            return alert(await resKakaoLogin.json());
           }
+
+          // const resRegister = await fetch('http://localhost:4000/register', {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json',
+          //   },
+          //   body: JSON.stringify({
+          //     id: userKaKaoInfo.kakao_account.email,
+          //     password: 'kakao-user',
+          //   }),
+          // });
+
+          // if (resRegister.status === 200) {
+          //   console.log('4');
+          //   dispatch(login(userLoginInfo));
+          //   return navigate('/');
+          // } else {
+          //   alert(await resRegister.json());
+          //   return navigate('/');
+          // }
         } else {
           alert('카카오 로그인 회원 정보 획득 실패');
           return navigate('/');

@@ -48,11 +48,6 @@ export default function Login() {
   // Caps Lock 표시를 위한 state 설정
   const [capsLockOn, setCapsLockOn] = useState(false);
 
-  // Caps Lock 상태 변화 처리
-  const handleCapsLockChange = (event) => {
-    setCapsLockOn(event.getModifierState('CapsLock'));
-  };
-
   // 비밀번호 표시를 위한 state 설정
   const [showPassword, setShowPassword] = useState(false);
 
@@ -64,11 +59,7 @@ export default function Login() {
       <br />
       <br />
       비밀번호{' '}
-      <input
-        type={showPassword ? 'text' : 'password'}
-        ref={loginPwInput}
-        onKeyUp={handleCapsLockChange}
-      />
+      <input type={showPassword ? 'text' : 'password'} ref={loginPwInput} />
       {capsLockOn && <div>Caps Lock이 켜져 있습니다.</div>}
       <button onClick={() => setShowPassword(!showPassword)}>
         {showPassword ? '숨기기' : '보기'}
