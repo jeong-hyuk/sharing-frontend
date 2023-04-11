@@ -24,16 +24,18 @@ const Menu = styled.div`
     width: 50%;
     position: absolute;
     right: 2vw;
-    top: 5vh;
+    top: 7vh;
     li {
       list-style: none;
       width: 100%;
       height: 7vh;
       line-height: 7vh;
-      background-color: rgba(68, 106, 114, 0.2);
-      border-radius: 5px;
-      margin-bottom: 20px;
+      /* background-color: rgba(68, 106, 114, 0.01); */
+      background-color: #fbfeff;
+      /* border-radius: 5px; */
+      margin-bottom: 25px;
       padding: 0;
+      display: flex;
       a {
         display: inline-block;
         width: 100%;
@@ -42,6 +44,9 @@ const Menu = styled.div`
         text-align: center;
         font-size: 1.5rem;
         transition: all 0.1s;
+        border-right: 7px solid #446a72;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 25%);
+        border-radius: 5px;
         :link,
         :visited,
         :active {
@@ -113,10 +118,11 @@ const Rent = styled.div`
         width: 100%;
         height: 100%;
         transition: all 0.1s;
-        border: 2px solid #446a72;
+        border: 2px solid rgba(68, 106, 114, 0.7);
         box-sizing: border-box;
         border-radius: 5px;
         position: relative;
+        /* background: linear-gradient(145deg, transparent 50%, whitesmoke 70%); */
         :hover {
           box-sizing: border-box;
           border-radius: 5px;
@@ -124,15 +130,14 @@ const Rent = styled.div`
           box-shadow: 7px 7px 7px rgba(0, 0, 0, 25%);
           transition: all 0.1s;
           div {
-            background-color: #446a72;
             .rent_laptop_icon,
             .rent_mouse_icon,
             .rent_plug_icon {
               transition: all 0.1s;
-              color: #fff;
+              color: #446a72;
             }
             P {
-              color: #fff;
+              color: #446a72;
               transition: all 0.1s;
             }
           }
@@ -140,6 +145,7 @@ const Rent = styled.div`
         div {
           width: 100%;
           height: 100%;
+          background-image: url('/images/laptop_img.jpg');
           .rent_laptop_icon,
           .rent_mouse_icon,
           .rent_plug_icon {
@@ -149,11 +155,11 @@ const Rent = styled.div`
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: rgba(68, 106, 114, 1);
+            color: rgba(68, 106, 114, 0.7);
             transition: all 0.1s;
           }
           P {
-            color: #446a72;
+            color: rgba(68, 106, 114, 0.7);
             font-weight: 700;
             font-size: 1.5rem;
             position: absolute;
@@ -191,26 +197,10 @@ export default function UserMain({ page }) {
     return isNotMobile ? children : null;
   };
 
-  // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
-  const userId = useSelector((state) => state.user.userID);
-
-  const [main, setMain] = useState([]);
-  const [user, setUser] = useState();
-
-  const showMain = async () => {
-    const resShowMain = await axios.get(`http://localhost:4000/main/${userId}`);
-    console.log(resShowMain);
-    setUser(resShowMain.data.NAME.USER_NAME);
-  };
-  useEffect(() => {
-    showMain();
-  }, []);
-
   return (
     <>
       <Desktop>
         <Header />
-
         <Menu>
           <ul>
             <li>
