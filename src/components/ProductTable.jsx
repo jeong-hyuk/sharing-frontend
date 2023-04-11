@@ -1,78 +1,157 @@
-import { borderRadius } from '@mui/system';
+import { borderRadius, style } from '@mui/system';
 import * as React from 'react';
 import styled from 'styled-components';
 
-const Producttable = styled.div`
+// const Producttable = styled.div`
+//   position: relative;
+//   top: 10vh;
+//   left: 12vw;
+//   width: 75vw;
+//   height: 70vh;
+//   text-align: center;
+//   background-color: #ffffff2b;
+//   table {
+//     border-collapse: collapse;
+//     width: 75vw;
+//     height: 70vh;
+//     th {
+//       border-right: 1px solid black;
+//       background-color: #446a72;
+//       height: 10vh;
+//     }
+//     td {
+//       border-right: 1px solid black;
+//       div {
+//         cursor: pointer;
+//         background-color: #446a72a1;
+//         transform: translateX(7vw);
+//         width: 5vw;
+//         height: 5vh;
+//         color: #fff;
+//         border-radius: 3rem;
+//       }
+//     }
+//   }
+// `;
+
+const Productstyle = styled.div`
   position: relative;
-  top: 10vh;
-  left: 12vw;
-  width: 75vw;
+  top: 20vh;
+  left: 14vw;
+  width: 72vw;
   height: 70vh;
   text-align: center;
-  background-color: #ffffff2b;
-  table {
-    border-collapse: collapse;
-    width: 75vw;
+  .allcontroller {
+    display: flex;
     height: 70vh;
-    th {
-      border-right: 1px solid black;
-      background-color: #446a72;
-      height: 10vh;
-    }
-    td {
-      border-right: 1px solid black;
-      div {
-        cursor: pointer;
-        background-color: #446a72a1;
-        transform: translateX(7vw);
-        width: 5vw;
-        height: 5vh;
+    /* background-color: #021d2379; */
+    .leftcontroller {
+      width: 70vw;
+      .title {
+        /* border: 1px solid #446a72; */
+        background-color: #446a72;
         color: #fff;
-        border-radius: 3rem;
+        border-radius: 5px;
+        height: 7vh;
+        margin-bottom: 2vh;
+        ol {
+          display: flex;
+          justify-content: space-around;
+          li {
+            font-size: 1.6rem;
+            width: 20vw;
+            height: 7vh;
+            line-height: 7vh;
+            border-right: 1px solid #fff;
+            :last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+      .content {
+        border: 1px solid #446a72;
+        border-radius: 5px;
+        ol {
+          display: flex;
+          justify-content: space-around;
+          li {
+            font-size: 1.6rem;
+            border-right: 1px solid #446a72;
+            width: 20vw;
+            line-height: 7vh;
+            height: 54.5vh;
+            :last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+    .rightcontroller {
+      width: 5vw;
+      height: 70vh;
+      margin-left: 1vw;
+      .blank {
+        width: 5vw;
+        height: 7vh;
+        background-color: #446a72;
+        margin-bottom: 2vh;
+        /* border: 1px solid #446a72; */
+        border-radius: 5px;
+      }
+      .okbtn {
+        font-size: 1.6rem;
+        width: 5vw;
+        height: 54.5vh;
+        /* line-height: 7vh; */
+        border: 1px solid #446a72;
+        border-radius: 5px;
+        div {
+          cursor: pointer;
+          top: 10vh;
+          left: 68vw;
+          position: absolute;
+          background-color: #446a72bb;
+          border-radius: 5px;
+          font-size: 1.6rem;
+          width: 3vw;
+          height: 5vh;
+        }
       }
     }
   }
 `;
 
-const Sharebtn = styled.div``;
-
 export default function ProductTable() {
   return (
     <>
-      <Producttable>
-        <table>
-          <tr className="enter1">
-            <th>코드</th>
-            <th>이름</th>
-            <th>상태</th>
-            <th></th>
-          </tr>
-          <tr>
-            <td>001</td>
-            <td>컴퓨터</td>
-            <td>대여가능</td>
-            <td>
+      <Productstyle>
+        <div className="allcontroller">
+          <div className="leftcontroller">
+            <div className="title">
+              <ol>
+                <li>코드</li>
+                <li>상품명</li>
+                <li>상태</li>
+              </ol>
+            </div>
+            <div className="content">
+              <ol>
+                <li>001</li>
+                <li>컴퓨터</li>
+                <li>대여가능</li>
+              </ol>
+            </div>
+          </div>
+          <div className="rightcontroller">
+            <div className="blank"></div>
+            <div className="okbtn">
               <div>대여</div>
-            </td>
-          </tr>
-          <tr>
-            <td>002</td>
-            <td>마우스</td>
-            <td>대여가능</td>
-            <td>
-              <div>대여</div>
-            </td>
-          </tr>
-          <tr>
-            <td>003</td>
-            <td>멀티탭</td>
-            <td>대여가능</td>
-            <td>
-              <div>대여</div>
-            </td>
-          </tr>
-        </table>
-      </Producttable>
+            </div>
+          </div>
+        </div>
+      </Productstyle>
     </>
   );
 }
