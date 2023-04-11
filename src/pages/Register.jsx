@@ -26,16 +26,16 @@ export default function Register() {
     return true;
   };
 
-  const checkEmail = () => {
-    const emailValue = registerIdInput.current.value;
-    if (
-      !/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(emailValue)
-    ) {
-      alert('이메일 형식이 올바르지 않습니다.');
-      return false;
-    }
-    return true;
-  };
+  // const checkEmail = () => {
+  //   const emailValue = registerIdInput.current.value;
+  //   if (
+  //     !/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(emailValue)
+  //   ) {
+  //     alert('이메일 형식이 올바르지 않습니다.');
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
   const checkName = () => {
     if (/\d/.test(userName.current.value)) {
@@ -75,9 +75,9 @@ export default function Register() {
       return;
     }
 
-    if (!checkEmail()) {
-      return;
-    }
+    // if (!checkEmail()) {
+    //   return;
+    // }
     const resRegister = await fetch('http://localhost:4000/register', {
       method: 'POST',
       headers: {
