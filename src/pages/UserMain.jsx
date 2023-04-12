@@ -209,7 +209,6 @@ export default function UserMain({ page }) {
       );
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
       setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
-      console.log(user);
     } catch (error) {
       console.error(error);
     }
@@ -226,35 +225,42 @@ export default function UserMain({ page }) {
         <Menu>
           <ul>
             <li>
-              <a href="">기자재대여</a>
+              <Link to="/">기자재대여</Link>
             </li>
             <li>
-              <a href="">마이페이지</a>
+              <Link to="">마이페이지</Link>
             </li>
             <li>
-              <a href="">공지사항</a>
+              <Link to="">공지사항</Link>
             </li>
           </ul>
           <div className="menu_button">
-            <a href="" className="menu_prev_button">
+            <Link to="/" className="menu_prev_button">
               <FontAwesomeIcon
                 icon={faCircleArrowLeft}
                 className="menu_prev_button_icon"
               />
-            </a>
-            <a href="" className="menu_next_button">
+            </Link>
+            {/* <a href="" className="menu_next_button">
               <FontAwesomeIcon
                 icon={faCircleArrowRight}
                 className="menu_next_button_icon"
               />
-            </a>
+            </a> */}
+
+            <Link to="/" className="menu_next_button">
+              <FontAwesomeIcon
+                icon={faCircleArrowRight}
+                className="menu_next_button_icon"
+              />
+            </Link>
           </div>
         </Menu>
         <Rent>
           <ul>
             {main.map((el, index) => (
               <li key={index}>
-                <Link to={`/UserRent/${el.OBJECT_TYPE}`}>
+                <Link to={`/subMain/${el.OBJECT_TYPE}`}>
                   <div>
                     <FontAwesomeIcon
                       icon={faLaptop}
@@ -266,28 +272,6 @@ export default function UserMain({ page }) {
               </li>
             ))}
           </ul>
-
-          {/* <li>
-              <a href="">
-                <div>
-                  <FontAwesomeIcon
-                    icon={faComputerMouse}
-                    className="rent_mouse_icon"
-                  />
-                  <p>MOUSE</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div>
-                  <FontAwesomeIcon icon={faPlug} className="rent_plug_icon" />
-                  <p>CHARGER</p>
-                </div>
-              </a>
-            </li>
-            <li></li>
-          </ul> */}
         </Rent>
       </Desktop>
       <Tablet>Tablet</Tablet>

@@ -14,8 +14,6 @@ const KakaoRedirectHandler = () => {
     const KAKAO_CLIENT_ID = '48194ee06abc88e308d72719bbd68805';
     const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
 
-    console.log(CODE);
-
     async function loginFetch() {
       const tokenResponse = await fetch(
         `https://kauth.kakao.com/oauth/token?grant_type=${GRANT_TYPE}&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&code=${CODE}`,
@@ -30,8 +28,6 @@ const KakaoRedirectHandler = () => {
       if (tokenResponse.status === 200) {
         const tokenData = await tokenResponse.json();
 
-        console.log('1', tokenData);
-
         const userResponese = await fetch(`https://kapi.kakao.com/v2/user/me`, {
           method: 'POST',
           headers: {
@@ -43,8 +39,6 @@ const KakaoRedirectHandler = () => {
         if (userResponese.status === 200) {
           const userKaKaoInfo = await userResponese.json();
 
-          console.log('2', userKaKaoInfo);
-
           const userLoginInfo = {
             id: userKaKaoInfo.kakao_account.email,
             password: 'kakao-user',
@@ -53,7 +47,6 @@ const KakaoRedirectHandler = () => {
 
             // profile_img: userKaKaoInfo.kakao_account.profile.profile_imgage_url,
           };
-          console.log(userLoginInfo);
 
           const resKakaoLogin = await fetch(
             'http://localhost:4000/kakaoRegister',
@@ -67,7 +60,6 @@ const KakaoRedirectHandler = () => {
           );
 
           if (resKakaoLogin.status == 200) {
-            console.log('3');
             dispatch(login(userLoginInfo));
             return navigate('/');
           } else {

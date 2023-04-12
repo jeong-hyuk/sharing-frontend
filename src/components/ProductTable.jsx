@@ -9,7 +9,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-// import styled from 'styled-components';
 
 const Desktopstyle = styled.div`
   position: relative;
@@ -44,16 +43,17 @@ const Desktopstyle = styled.div`
         }
       }
       .content {
-        border: 1px solid #446a72;
+        border: 1px solid #e2e2e2;
         height: 60vh;
         border-radius: 5px;
+        box-shadow: 0 2px 0 0 gray;
         ol {
           li {
             display: flex;
             justify-content: space-around;
-            height: 7vh;
-            line-height: 7vh;
-            border-bottom: 1px solid gray;
+            height: 8vh;
+            line-height: 8vh;
+            border-bottom: 1px solid #e2e2e2;
             p {
               width: 33.333%;
               text-align: center;
@@ -70,38 +70,21 @@ const Desktopstyle = styled.div`
               }
               :last-child {
                 cursor: pointer;
-                margin-top: 1vh;
-                transform: translateX(5vw);
+                margin-top: 2vh;
+                margin-bottom: 2vh;
+                transform: translate(6vw, -1vh);
                 color: #fff;
                 background-color: #446a72;
                 border-radius: 5px;
                 font-size: 1.3rem;
-                width: 3vw;
-                height: 5vh;
-                line-height: 5vh;
+                width: 5.5vw;
+                height: 7vh;
+                line-height: 7vh;
               }
             }
           }
           border-bottom: none;
         }
-      }
-    }
-    .rightcontroller {
-      width: 5vw;
-      height: 70vh;
-      margin-left: 1vw;
-      .blank {
-        width: 5vw;
-        height: 7vh;
-        background-color: #446a72;
-        margin-bottom: 2vh;
-        border-radius: 5px;
-      }
-      .okbg {
-        width: 5vw;
-        height: 60vh;
-        border: 1px solid #446a72;
-        border-radius: 5px;
       }
     }
   }
@@ -230,6 +213,10 @@ const Mobilestyle = styled.div`
   }
 `;
 
+
+export default function ProductTable({ page, subMainData }) {
+  // console.log(subMainData[0].OBJECT_TYPE);
+
 export default function ProductTable({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -247,6 +234,23 @@ export default function ProductTable({ page }) {
     const isNotMobile = useMediaQuery({ minWidth: 768 });
     return isNotMobile ? children : null;
   };
+
+  const userId = useSelector((state) => state.user.userID);
+
+  const findRent = async () => {
+    try {
+      // store 에서 가져온 나의 user_id
+      const type = subMainData[0].OBJECT_TYPE;
+      const findRentObj = await axios.get(
+        `http://localhost:4000/subMain/find/${userId}/${type}`,
+      );
+      console.log(findRentObj);
+    } catch (error) {
+      console.log('여기로왔다~~~~~~~~~~~~~~~~~');
+      console.error(error);
+    }
+  };
+
   const arr = [
     {
       code: '001',
@@ -284,6 +288,24 @@ export default function ProductTable({ page }) {
               </div>
               <div className="content">
                 <ol>
+
+                  {subMainData.map((el, idx) => {
+                    return (
+                      <li key={idx}>
+                        <p>{el.CODE}</p>
+                        <p>{el.NAME}</p>
+                        <p>{el.STATUS === 0 ? '대여가능' : '대여불가'}</p>
+                        <p
+                          onClick={() => {
+                            findRent();
+                          }}
+                        >
+                          {el.STATUS === 0 ? '대여' : 'X'}
+                        </p>
+                      </li>
+                    );
+                  })}
+
                   <li>
                     <p>001</p>
                     <p>컴퓨터</p>
@@ -302,6 +324,7 @@ export default function ProductTable({ page }) {
                     <p>대여가능</p>
                     <p>대여</p>
                   </li>
+
                 </ol>
               </div>
             </div>
