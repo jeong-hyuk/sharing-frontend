@@ -9,6 +9,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const Desktopstyle = styled.div`
   position: relative;
@@ -213,11 +215,9 @@ const Mobilestyle = styled.div`
   }
 `;
 
-
 export default function ProductTable({ page, subMainData }) {
   // console.log(subMainData[0].OBJECT_TYPE);
 
-export default function ProductTable({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
     return isDesktop ? children : null;
@@ -288,7 +288,6 @@ export default function ProductTable({ page }) {
               </div>
               <div className="content">
                 <ol>
-
                   {subMainData.map((el, idx) => {
                     return (
                       <li key={idx}>
@@ -324,7 +323,6 @@ export default function ProductTable({ page }) {
                     <p>대여가능</p>
                     <p>대여</p>
                   </li>
-
                 </ol>
               </div>
             </div>

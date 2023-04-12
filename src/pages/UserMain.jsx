@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
+import UserMyPage from '../components/UserMyPage';
 
 const Menu = styled.div`
   position: fixed;
@@ -224,15 +225,14 @@ export default function UserMain({ page }) {
         <Header />
         <Menu>
           <ul>
-
+            <li>
               <a href="">Sharing</a>
             </li>
             <li>
               <a href="">MyPage</a>
-
             </li>
             <li>
-              <Link to="">공지사항</Link>
+              <Link to="">Notice</Link>
             </li>
           </ul>
           <div className="menu_button">
@@ -257,7 +257,7 @@ export default function UserMain({ page }) {
             </Link>
           </div>
         </Menu>
-        <Rent>
+        {/* <Rent>
           <ul>
             {main.map((el, index) => (
               <li key={index}>
@@ -273,7 +273,8 @@ export default function UserMain({ page }) {
               </li>
             ))}
           </ul>
-        </Rent>
+        </Rent> */}
+        <UserMyPage />
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
