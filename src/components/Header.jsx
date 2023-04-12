@@ -93,7 +93,6 @@ export default function Header() {
       );
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
       setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
-      console.log(user);
     } catch (error) {
       console.error(error);
     }

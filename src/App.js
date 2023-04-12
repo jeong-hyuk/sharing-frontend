@@ -11,7 +11,6 @@ import UserRent from './pages/UserRent';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
-
   return (
     <>
       <GlobalStyle />
@@ -29,7 +28,7 @@ function App() {
 
         {/* <Route path="/" element={<UserMain />} /> */}
         {/* <Route path="/main" element={<UserMain />} /> */}
-        <Route path="/UserRent/:id" element={<UserRent />} />
+        <Route path="/subMain/:id" element={<UserRent />} />
       </Routes>
     </>
   );
