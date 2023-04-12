@@ -312,10 +312,6 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                 </ol>
               </div>
             </div>
-            <div className="rightcontroller">
-              <div className="blank"></div>
-              <div className="okbg"></div>
-            </div>
           </div>
         </Desktopstyle>
       </Desktop>
