@@ -209,7 +209,6 @@ export default function UserMain({ page }) {
       );
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
       setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
-      console.log(user);
     } catch (error) {
       console.error(error);
     }
@@ -226,10 +225,10 @@ export default function UserMain({ page }) {
         <Menu>
           <ul>
             <li>
-              <a href="">기자재대여</a>
+              <a href="">Sharing</a>
             </li>
             <li>
-              <a href="">마이페이지</a>
+              <a href="">MyPage</a>
             </li>
             <li>
               <a href="">공지사항</a>
@@ -254,7 +253,7 @@ export default function UserMain({ page }) {
           <ul>
             {main.map((el, index) => (
               <li key={index}>
-                <Link to={`/UserRent/${el.OBJECT_TYPE}`}>
+                <Link to={`/subMain/${el.OBJECT_TYPE}`}>
                   <div>
                     <FontAwesomeIcon
                       icon={faLaptop}
@@ -266,28 +265,6 @@ export default function UserMain({ page }) {
               </li>
             ))}
           </ul>
-
-          {/* <li>
-              <a href="">
-                <div>
-                  <FontAwesomeIcon
-                    icon={faComputerMouse}
-                    className="rent_mouse_icon"
-                  />
-                  <p>MOUSE</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div>
-                  <FontAwesomeIcon icon={faPlug} className="rent_plug_icon" />
-                  <p>CHARGER</p>
-                </div>
-              </a>
-            </li>
-            <li></li>
-          </ul> */}
         </Rent>
       </Desktop>
       <Tablet>Tablet</Tablet>
