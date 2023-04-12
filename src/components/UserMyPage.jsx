@@ -106,16 +106,19 @@ export default function UserMyPage() {
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
   const userId = useSelector((state) => state.user.userID);
   const [main, setMain] = useState([]);
+  const [myPage, setMyPage] = useState([]);
   const [user, setUser] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNum, setPhoneNum] = useState();
 
   const showMain = async () => {
     try {
       const resShowMain = await axios.get(
-        `http://localhost:4000/main/${userId}`,
+        `http://localhost:4000/main/myPage/${userId}`,
       );
-      setMain(resShowMain.data.ARTICLE); // 배열 담아줘
-      setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
+      setUser(resShowMain.data.ARTICLE[0].USER_NAME);
+      setPhoneNum(resShowMain.data.ARTICLE[0].PHONE_NUMBER);
+      setMain(resShowMain.data.ARTICLE);
+      setMyPage(resShowMain.data.ARTICLE2);
     } catch (error) {
       console.error(error);
     }
@@ -125,11 +128,18 @@ export default function UserMyPage() {
     showMain();
   }, []);
 
+  if (!main || !myPage) return null;
+
   return (
     <MyPage>
       <div className="user_ImgInfo">
         <div className="user_profile">
-          <img src={userProfile} alt="마이페이지 기본 이미지" />
+          {main.length >= 1 && main[0].PROFILE_IMG !== undefined ? (
+            <img src={'http://localhost:4000/uploads/' + main[0].PROFILE_IMG} />
+          ) : (
+            <img src={userProfile} alt="마이페이지 기본 이미지" />
+          )}
+
           <button>기본이미지</button>
           <p>
             <FontAwesomeIcon icon={faPen} className="profile_edit" />
@@ -140,24 +150,27 @@ export default function UserMyPage() {
             <p>{user}</p>
           </li>
           <li>
-            <p>{/*userId*/}songmy99@daum.net</p>
+            <p>{userId}</p>
           </li>
           <li>
-            <p>{/*전화번호*/}010-1234-5678</p>
+            <p>{phoneNum}</p>
           </li>
         </ul>
       </div>
       <div className="current_situation">
         <p>대여 현황</p>
         <ul>
-          <li className="current_situation_header">
-            <p>No</p>
-            <p>물품명</p>
-            <p>상태</p>
-            <p>반납일</p>
-          </li>
           <li>
-            <div></div>
+            <div>
+              {myPage.map((el, index) => (
+                <li key={index} className="current_situation_header">
+                  <p>{el.CODE}</p>
+                  <p>{el.NAME}</p>
+                  <p>{el.STATUS}</p>
+                  <p>{el.END_DATE}</p>
+                </li>
+              ))}
+            </div>
           </li>
         </ul>
       </div>
