@@ -31,7 +31,6 @@ export default function UserMain({ page }) {
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
 
-
   const showMain = async () => {
     try {
       const resShowMain = await axios.get(
@@ -53,8 +52,8 @@ export default function UserMain({ page }) {
       <Desktop>
         <Header />
         <UserMainMenu />
-        {/* <UserRent /> */}
-        <UserMyPage />
+        <UserRent />
+        {/* <UserMyPage /> */}
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>

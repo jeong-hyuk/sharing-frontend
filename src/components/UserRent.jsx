@@ -123,7 +123,7 @@ export default function UserRent() {
       <ul>
         {main.map((el, index) => (
           <li key={index}>
-            <Link to={`/UserRent/${el.OBJECT_TYPE}`}>
+            <Link to={`/subMain/${el.OBJECT_TYPE}`}>
               <div>
                 <FontAwesomeIcon icon={faLaptop} className="rent_laptop_icon" />
                 <p>{el.OBJECT_NAME}</p>
