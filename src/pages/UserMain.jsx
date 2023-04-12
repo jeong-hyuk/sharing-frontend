@@ -224,29 +224,37 @@ export default function UserMain({ page }) {
         <Header />
         <Menu>
           <ul>
-            <li>
+
               <a href="">Sharing</a>
             </li>
             <li>
               <a href="">MyPage</a>
+
             </li>
             <li>
-              <a href="">공지사항</a>
+              <Link to="">공지사항</Link>
             </li>
           </ul>
           <div className="menu_button">
-            <a href="" className="menu_prev_button">
+            <Link to="/" className="menu_prev_button">
               <FontAwesomeIcon
                 icon={faCircleArrowLeft}
                 className="menu_prev_button_icon"
               />
-            </a>
-            <a href="" className="menu_next_button">
+            </Link>
+            {/* <a href="" className="menu_next_button">
               <FontAwesomeIcon
                 icon={faCircleArrowRight}
                 className="menu_next_button_icon"
               />
-            </a>
+            </a> */}
+
+            <Link to="/" className="menu_next_button">
+              <FontAwesomeIcon
+                icon={faCircleArrowRight}
+                className="menu_next_button_icon"
+              />
+            </Link>
           </div>
         </Menu>
         <Rent>
