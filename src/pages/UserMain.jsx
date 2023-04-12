@@ -224,11 +224,12 @@ export default function UserMain({ page }) {
         <Header />
         <Menu>
           <ul>
-            <li>
-              <Link to="/">기자재대여</Link>
+
+              <a href="">Sharing</a>
             </li>
             <li>
-              <Link to="">마이페이지</Link>
+              <a href="">MyPage</a>
+
             </li>
             <li>
               <Link to="">공지사항</Link>
