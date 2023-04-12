@@ -69,19 +69,6 @@ const CommonHeader = styled.div`
 `;
 
 export default function Header() {
-  // const userId = useSelector((state) => state.user.userID);
-  // const [main, setMain] = useState([]);
-  // const [user, setUser] = useState();
-
-  // const showMain = async () => {
-  //   const resShowMain = await axios.get(`http://localhost:4000/main/${userId}`);
-  //   console.log(resShowMain);
-  //   setUser(resShowMain.data.NAME.USER_NAME);
-  // };
-  // useEffect(() => {
-  //   showMain();
-  // }, []);
-
   const userId = useSelector((state) => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState('');
