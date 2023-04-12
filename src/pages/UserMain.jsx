@@ -201,7 +201,6 @@ export default function UserMain({ page }) {
   const userId = useSelector((state) => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
-  console.log('나는 : ', userId);
 
   const showMain = async () => {
     try {
