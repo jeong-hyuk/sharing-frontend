@@ -8,12 +8,14 @@ import Register from './pages/Register';
 import KakaoRedirectHandler from './components/KakaoRedirectHandler';
 import UserMain from './pages/UserMain';
 import UserRent from './pages/UserRent';
+import Chatbotcontroller from './components/Chatbotcontroller';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
   return (
     <>
       <GlobalStyle />
+      <Chatbotcontroller />
       <Routes>
         <Route path="/" element={isLogin ? <UserMain /> : <Login />} />
         <Route path="/register" element={isLogin ? <Login /> : <Register />} />
