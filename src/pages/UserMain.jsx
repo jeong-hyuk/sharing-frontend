@@ -225,12 +225,11 @@ export default function UserMain({ page }) {
         <Header />
         <Menu>
           <ul>
-
+            <li>
               <a href="">Sharing</a>
             </li>
             <li>
               <a href="">MyPage</a>
-
             </li>
             <li>
               <Link to="">공지사항</Link>
