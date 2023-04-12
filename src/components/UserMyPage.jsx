@@ -1,9 +1,11 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import userProfile from '../pages/images/mypage_user.png';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import userProfile from '../pages/images/myPage_user.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 const MyPage = styled.div`
   position: fixed;
@@ -25,76 +27,87 @@ const MyPage = styled.div`
         height: 200px;
         margin-bottom: 3vh;
       }
+
+      button {
+        font-size: 1.2rem;
+        font-weight: 400;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 1px solid gray;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
       p {
-        :first-child {
-          font-size: 1.2rem;
-          font-weight: 400;
-          background-color: transparent;
-          border-bottom: 1px solid gray;
-          position: absolute;
-          bottom: 0px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: rgb(68, 106, 114);
+        border: 1px solid #fff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        position: absolute;
+        bottom: 8%;
+        right: 5%;
+        .profile_edit {
+          width: 20px;
+          height: 20px;
+          color: #fff;
+          position: relative;
+          top: 50%;
           left: 50%;
-          transform: translateX(-50%);
+          transform: translate(-50%, -50%);
         }
-        :last-child {
-          width: 40px;
-          height: 40px;
-          background-color: rgb(68, 106, 114);
-          .profile_edit {
-            width: 20px;
-            height: 20px;
-            color: rgb(255, 255, 255);
-          }
-        }
-        ul {
-          li {
-            width: 14vw;
-            height: 45px;
-            line-height: 45px;
-            background-color: rgb(255, 255, 255);
-            border-radius: 5px;
-            border-bottom: 1.5px solid rgba(68, 106, 114, 0.5);
-            p {
-              font-size: 1.6rem;
-              margin-left: 20px;
-            }
-          }
+      }
+    }
+
+    ul {
+      li {
+        width: 14vw;
+        height: 45px;
+        line-height: 45px;
+        background-color: #fff;
+        border-radius: 5px;
+        border-bottom: 1.5px solid rgba(68, 106, 114, 0.5);
+        p {
+          font-size: 1.6rem;
+          margin-left: 20px;
         }
       }
     }
   }
   .current_situation {
-    padding: 3vh 0px 0px 4vw;
+    padding: 3vh 0 0 4vw;
     p {
       font-size: 20px;
-      color: rgb(68, 106, 114);
+      color: #446a72;
       font-weight: 570;
       margin-top: 2vh;
     }
-    ul {
-      li {
-        display: flex;
-        background-color: rgb(68, 106, 114);
-        width: 53vw;
-        height: 35px;
-        line-height: 6px;
-        justify-content: space-around;
-        margin-top: 2vh;
-        border-radius: 5px;
-        p {
-          font-size: 16px;
-          color: rgb(255, 255, 255);
-          font-weight: 600;
-        }
-      }
+  }
+  .current_situation_header {
+    display: flex;
+    background-color: #446a72;
+    width: 53vw;
+    height: 35px;
+    line-height: 6px;
+    justify-content: space-around;
+    margin-top: 2vh;
+    border-radius: 5px;
+    p {
+      font-size: 16px;
+      color: #fff;
+      font-weight: 600;
     }
   }
 `;
 
 export default function UserMyPage() {
+  // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
   const userId = useSelector((state) => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
 
   const showMain = async () => {
     try {
@@ -111,12 +124,13 @@ export default function UserMyPage() {
   useEffect(() => {
     showMain();
   }, []);
+
   return (
     <MyPage>
       <div className="user_ImgInfo">
         <div className="user_profile">
           <img src={userProfile} alt="마이페이지 기본 이미지" />
-          <p>기본이미지</p>
+          <button>기본이미지</button>
           <p>
             <FontAwesomeIcon icon={faPen} className="profile_edit" />
           </p>
