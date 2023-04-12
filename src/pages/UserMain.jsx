@@ -53,8 +53,8 @@ export default function UserMain({ page }) {
         <Header />
 
         <UserMainMenu />
-        <UserRent />
-        {/* <UserMyPage /> */}
+        {/* <UserRent /> */}
+        <UserMyPage />
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
