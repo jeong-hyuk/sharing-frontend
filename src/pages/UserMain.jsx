@@ -30,7 +30,7 @@ export default function UserMain({ page }) {
   const userId = useSelector((state) => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
+
 
   const showMain = async () => {
     try {

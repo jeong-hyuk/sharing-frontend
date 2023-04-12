@@ -237,14 +237,16 @@ export default function ProductTable({ page, subMainData }) {
 
   const userId = useSelector((state) => state.user.userID);
 
-  const findRent = async () => {
+  const findRent = async (idx) => {
     try {
       // store 에서 가져온 나의 user_id
-      const type = subMainData[0].OBJECT_TYPE;
+      const type = subMainData[idx].OBJECT_TYPE;
+      const code = subMainData[idx].CODE;
+      console.log(code);
       const findRentObj = await axios.get(
-        `http://localhost:4000/subMain/find/${userId}/${type}`,
+        `http://localhost:4000/subMain/find/${userId}/${code}/${type}`,
       );
-      console.log(findRentObj);
+      alert(findRentObj.data);
     } catch (error) {
       console.log('여기로왔다~~~~~~~~~~~~~~~~~');
       console.error(error);
@@ -296,7 +298,7 @@ export default function ProductTable({ page, subMainData }) {
                         <p>{el.STATUS === 0 ? '대여가능' : '대여불가'}</p>
                         <p
                           onClick={() => {
-                            findRent();
+                            findRent(idx);
                           }}
                         >
                           {el.STATUS === 0 ? '대여' : 'X'}
@@ -304,25 +306,6 @@ export default function ProductTable({ page, subMainData }) {
                       </li>
                     );
                   })}
-
-                  <li>
-                    <p>001</p>
-                    <p>컴퓨터</p>
-                    <p>대여가능</p>
-                    <p>대여</p>
-                  </li>
-                  <li>
-                    <p>002</p>
-                    <p>컴퓨터</p>
-                    <p>대여가능</p>
-                    <p>대여</p>
-                  </li>
-                  <li>
-                    <p>003</p>
-                    <p>컴퓨터</p>
-                    <p>대여가능</p>
-                    <p>대여</p>
-                  </li>
                 </ol>
               </div>
             </div>
