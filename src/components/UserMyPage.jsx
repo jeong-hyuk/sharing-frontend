@@ -128,8 +128,8 @@ export default function UserMyPage() {
   const userId = useSelector((state) => state.user.userID);
 
   const [main, setMain] = useState([]);
-  const [user, setUser] = useState();
   const [myPage, setMyPage] = useState([]);
+  const [user, setUser] = useState();
   const [phoneNum, setPhoneNum] = useState();
 
   const showMain = async () => {
@@ -137,10 +137,12 @@ export default function UserMyPage() {
       const resShowMain = await axios.get(
         `http://localhost:4000/main/myPage/${userId}`,
       );
-      setMain(resShowMain.data.ARTICLE);
-      setMyPage(resShowMain.data.ARTICLE2);
+
       setUser(resShowMain.data.ARTICLE[0].USER_NAME);
       setPhoneNum(resShowMain.data.ARTICLE[0].PHONE_NUMBER);
+      setMain(resShowMain.data.ARTICLE);
+      setMyPage(resShowMain.data.ARTICLE2);
+
     } catch (error) {
       console.error(error);
     }
@@ -150,11 +152,18 @@ export default function UserMyPage() {
     showMain();
   }, []);
 
+  if (!main || !myPage) return null;
+
   return (
     <MyPage>
       <div className="user_ImgInfo">
         <div className="user_profile">
-          <img src={userProfile} alt="마이페이지 기본 이미지" />
+          {main.length >= 1 && main[0].PROFILE_IMG !== undefined ? (
+            <img src={'http://localhost:4000/uploads/' + main[0].PROFILE_IMG} />
+          ) : (
+            <img src={userProfile} alt="마이페이지 기본 이미지" />
+          )}
+
           <button>기본이미지</button>
           <p>
             <FontAwesomeIcon icon={faPen} className="profile_edit" />
@@ -175,16 +184,12 @@ export default function UserMyPage() {
       <div className="current_situation">
         <p>대여 현황</p>
         <ul>
-          <li className="current_situation_header">
-            <p>No</p>
-            <p>물품명</p>
-            <p>상태</p>
-            <p>반납일</p>
-          </li>
           <li>
             <div>
               {myPage.map((el, index) => (
+
                 <li key={index} className="current_rent">
+
                   <p>{el.CODE}</p>
                   <p>{el.NAME}</p>
                   <p>{el.STATUS}</p>
