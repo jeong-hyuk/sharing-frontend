@@ -142,7 +142,6 @@ export default function UserMyPage() {
       setPhoneNum(resShowMain.data.ARTICLE[0].PHONE_NUMBER);
       setMain(resShowMain.data.ARTICLE);
       setMyPage(resShowMain.data.ARTICLE2);
-
     } catch (error) {
       console.error(error);
     }
@@ -187,9 +186,7 @@ export default function UserMyPage() {
           <li>
             <div>
               {myPage.map((el, index) => (
-
                 <li key={index} className="current_rent">
-
                   <p>{el.CODE}</p>
                   <p>{el.NAME}</p>
                   <p>{el.STATUS}</p>
