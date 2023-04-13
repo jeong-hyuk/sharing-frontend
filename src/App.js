@@ -22,6 +22,7 @@ function App() {
 
         <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
 
+
         <Route path="/register" element={isLogin ? <Login /> : <Register />} />
         <Route
           path="/oauth/callback/kakao"
@@ -30,6 +31,7 @@ function App() {
         />
         <Route path="/usermain" element={<UserMain />} />
         <Route path="/subMain/:id" element={<UserRent />} />
+
 
       </Routes>
     </>

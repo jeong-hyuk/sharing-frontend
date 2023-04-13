@@ -198,6 +198,7 @@ export default function UserMyPage() {
             <p>반납일</p>
           </li>
           <li>
+
             {myPage.map((el, index) => (
               <div key={index} className="current_rent">
                 <p>{el.CODE}</p>
@@ -213,6 +214,7 @@ export default function UserMyPage() {
 
               </div>
             ))}
+
           </li>
         </ul>
       </div>
