@@ -5,7 +5,16 @@ import { faBell } from '@fortawesome/free-regular-svg-icons';
 import companyLogo from '../pages/images/userIcon.png';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { keyframes } from 'styled-components';
 
+const vibration = keyframes`
+  from {
+    transform: rotate(10deg);
+  }
+  to {
+    transform: rotate(-10deg);
+  }
+`;
 const CommonHeader = styled.div`
   position: fixed;
   width: 100%;
@@ -30,6 +39,12 @@ const CommonHeader = styled.div`
       height: 3vh;
       color: #fff;
     }
+    .header_alramred {
+      height: 3vh;
+      color: white;
+      animation: ${vibration} 0.25s infinite;
+    }
+
     .user_NameEmail {
       margin: 0px 20px;
       .user_logout_name {
@@ -72,6 +87,14 @@ export default function Header() {
   const userId = useSelector((state) => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState('');
+  const [date, setDate] = useState([]);
+  const [change, setChange] = useState(false);
+  // 현재 날짜 계산
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = `0${today.getMonth() + 1}`.slice(-2);
+  const day = `0${today.getDate()}`.slice(-2);
+  const dateString = `${year}-${month}-${day}`;
 
   const showMain = async () => {
     try {
@@ -79,7 +102,20 @@ export default function Header() {
         `http://localhost:4000/main/${userId}`,
       );
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
-      setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
+      setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아줘
+
+      // 현재 날짜 받아오기.
+      const delay = resShowMain.data.DATE.filter(
+        (el) => el.END_DATE.slice(0, 10) <= dateString,
+      );
+
+      if (delay.length >= 1) setChange(true);
+
+      // if (el.END_DATE.slice(0, 10) <= dateString) {
+      //   setChange(!change);
+      // }
+
+      // setDate(resShowMain.data.DATE);
     } catch (error) {
       console.error(error);
     }
@@ -95,7 +131,14 @@ export default function Header() {
           <img src="" alt="로고" className="header_logo" />
           <div className="user_info_header">
             <a href="">
-              <FontAwesomeIcon icon={faBell} className="header_alram" />
+              {console.log(change)}
+              {change === true ? (
+                <FontAwesomeIcon icon={faBell} className="header_alramred" />
+              ) : (
+                <FontAwesomeIcon icon={faBell} className="header_alram" />
+              )}
+              {/* <FontAwesomeIcon icon={faBell} className="header_alram" /> */}
+              {/* <FontAwesomeIcon icon={faBell} className="header_alramred" /> */}
             </a>
             <div className="user_NameEmail">
               <div className="user_logout_name">

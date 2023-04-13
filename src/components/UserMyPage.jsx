@@ -126,23 +126,31 @@ const MyPage = styled.div`
 export default function UserMyPage() {
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
   const userId = useSelector((state) => state.user.userID);
-
   const [main, setMain] = useState([]);
   const [myPage, setMyPage] = useState([]);
   const [user, setUser] = useState();
   const [phoneNum, setPhoneNum] = useState();
+
+  // 현재 날짜 계산 해보자
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = `0${today.getMonth() + 1}`.slice(-2);
+  const day = `0${today.getDate()}`.slice(-2);
+  const dateString = `${year}-${month}-${day}`;
+  console.log(dateString);
 
   const showMain = async () => {
     try {
       const resShowMain = await axios.get(
         `http://localhost:4000/main/myPage/${userId}`,
       );
-
+      console.log(resShowMain, '@@@@@@@@@@@@@@@@@@@@');
       setUser(resShowMain.data.ARTICLE[0].USER_NAME);
       setPhoneNum(resShowMain.data.ARTICLE[0].PHONE_NUMBER);
       setMain(resShowMain.data.ARTICLE);
       setMyPage(resShowMain.data.ARTICLE2);
     } catch (error) {
+      console.log('여기로왔냐?');
       console.error(error);
     }
   };
@@ -194,8 +202,15 @@ export default function UserMyPage() {
               <div key={index} className="current_rent">
                 <p>{el.CODE}</p>
                 <p>{el.NAME}</p>
-                <p>{el.STATUS}</p>
-                <p>{`${el.END_DATE.slice(0, 10)}`}</p>
+
+                <p>{el.STATUS === 1 ? '승인대기중' : '대여중'}</p>
+                <p>{`${el.END_DATE.slice(0, 10)} `}</p>
+                <p>
+                  {dateString >= `${el.END_DATE.slice(0, 10)}`
+                    ? '연체'
+                    : '연체아님'}
+                </p>
+
               </div>
             ))}
           </li>

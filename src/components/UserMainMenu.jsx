@@ -113,10 +113,12 @@ export default function UserMainMenu() {
           </Link>
         </li>
         <li>
-          <Link to="">MyPage</Link>
+
+          <Link to="/myPage">마이페이지</Link>
         </li>
         <li>
-          <Link to="">Notice</Link>
+          <Link to="/notice">공지사항</Link>
+
         </li>
       </ul>
       <div className="menu_button">
