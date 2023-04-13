@@ -142,7 +142,6 @@ export default function UserMyPage() {
       setPhoneNum(resShowMain.data.ARTICLE[0].PHONE_NUMBER);
       setMain(resShowMain.data.ARTICLE);
       setMyPage(resShowMain.data.ARTICLE2);
-
     } catch (error) {
       console.error(error);
     }
@@ -184,19 +183,21 @@ export default function UserMyPage() {
       <div className="current_situation">
         <p>대여 현황</p>
         <ul>
+          <li className="current_situation_header">
+            <p>코드</p>
+            <p>물품명</p>
+            <p>상태</p>
+            <p>반납일</p>
+          </li>
           <li>
-            <div>
-              {myPage.map((el, index) => (
-
-                <li key={index} className="current_rent">
-
-                  <p>{el.CODE}</p>
-                  <p>{el.NAME}</p>
-                  <p>{el.STATUS}</p>
-                  <p>{el.END_DATE}</p>
-                </li>
-              ))}
-            </div>
+            {myPage.map((el, index) => (
+              <div key={index} className="current_rent">
+                <p>{el.CODE}</p>
+                <p>{el.NAME}</p>
+                <p>{el.STATUS}</p>
+                <p>{`${el.END_DATE.slice(0, 10)}`}</p>
+              </div>
+            ))}
           </li>
         </ul>
       </div>

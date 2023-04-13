@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import UserMainMenu from '../components/UserMainMenu';
 import UserRent from '../components/UserRent';
 import UserMyPage from '../components/UserMyPage';
+import UserNotice from '../components/UserNotice';
 
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
@@ -54,7 +55,8 @@ export default function UserMain({ page }) {
 
         <UserMainMenu />
         {/* <UserRent /> */}
-        <UserMyPage />
+        {/* <UserMyPage /> */}
+        <UserNotice />
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>

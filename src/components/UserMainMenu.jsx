@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCircleArrowRight,
-  faCircleArrowLeft,
-} from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -39,7 +36,7 @@ const Menu = styled.div`
         text-align: center;
         font-size: 1.5rem;
         transition: all 0.1s;
-        border-right: 7px solid #446a72;
+        border-right: 3px solid #556080;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 25%);
         border-radius: 5px;
         :link,
@@ -49,7 +46,7 @@ const Menu = styled.div`
         }
         :hover {
           color: #fff;
-          background-color: #446a72;
+          background-color: #556080;
           border-radius: 5px;
           transition: all 0.1s;
           font-weight: 600;
@@ -60,27 +57,25 @@ const Menu = styled.div`
   .menu_button {
     display: flex;
     width: 100%;
-    height: calc(100vh - 120px);
-    a {
-      width: 50px;
-      height: 50px;
+    height: calc(100vh - 11vh);
+    .chat_bot {
+      width: 45px;
+      height: 45px;
       position: absolute;
-      .menu_prev_button_icon,
-      .menu_next_button_icon {
-        width: 40px;
-        height: 40px;
-        color: #446a72;
-        border-radius: 50%;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
-      }
-    }
-    .menu_prev_button {
       bottom: 4vh;
       left: 13vw;
-    }
-    .menu_next_button {
-      bottom: 4vh;
-      right: 2vw;
+      background-color: #f2685e;
+      border-radius: 50%;
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
+      .chat_bot_icon {
+        width: 25px;
+        height: 25px;
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 `;
@@ -114,35 +109,19 @@ export default function UserMainMenu() {
       <ul>
         <li>
           <Link to="/" className="menu_active">
-            기자재대여
+            Rent
           </Link>
         </li>
         <li>
-          <Link to="">마이페이지</Link>
+          <Link to="">MyPage</Link>
         </li>
         <li>
-          <Link to="">공지사항</Link>
+          <Link to="">Notice</Link>
         </li>
       </ul>
       <div className="menu_button">
-        <Link to="/" className="menu_prev_button">
-          <FontAwesomeIcon
-            icon={faCircleArrowLeft}
-            className="menu_prev_button_icon"
-          />
-        </Link>
-        {/* <a href="" className="menu_next_button">
-        <FontAwesomeIcon
-          icon={faCircleArrowRight}
-          className="menu_next_button_icon"
-        />
-      </a> */}
-
-        <Link to="/" className="menu_next_button">
-          <FontAwesomeIcon
-            icon={faCircleArrowRight}
-            className="menu_next_button_icon"
-          />
+        <Link to="/" className="chat_bot">
+          <FontAwesomeIcon icon={faCommentDots} className="chat_bot_icon" />
         </Link>
       </div>
     </Menu>

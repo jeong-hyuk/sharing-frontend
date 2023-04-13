@@ -10,7 +10,7 @@ const CommonHeader = styled.div`
   position: fixed;
   width: 100%;
   height: 11vh;
-  background-color: rgba(68, 106, 114, 0.9);
+  background-color: #618ffc;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   z-index: 1;
   .UserHeader {
