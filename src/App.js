@@ -19,18 +19,14 @@ function App() {
       <UserMainMenu />
       <UserRent /> */}
       <Routes>
-
-        <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
-
+        {/* <Route path="/myPage" element={<UserMyPage />} /> */}
+        <Route path="/" element={<FindRobot />} />
+        {/* <Route path="/" element={isLogin ? <UserMain /> : <Login />} />
         <Route path="/register" element={isLogin ? <Login /> : <Register />} />
         <Route
           path="/oauth/callback/kakao"
           element={<KakaoRedirectHandler />}
-
-        />
-        <Route path="/usermain" element={<UserMain />} />
-        <Route path="/subMain/:id" element={<UserRent />} />
-
+        /> */}
       </Routes>
     </>
   );
