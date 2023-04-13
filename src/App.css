@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes vibration {
+  from {
+    transform: rotate(1deg);
+  }
+  to {
+    transform: rotate(-1deg);
+  }
+}
