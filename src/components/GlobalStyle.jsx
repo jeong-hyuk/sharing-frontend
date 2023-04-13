@@ -34,6 +34,23 @@ const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
   }
 
+  //scrollBar
+  div::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+  }
+
+  div::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #446a728f; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+  }
+
+  div::-webkit-scrollbar-track {
+    background: #f5f5f5; 
+    /*스크롤바 뒷 배경 색상*/
+  }
+
 `;
 
 export default GlobalStyle;

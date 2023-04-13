@@ -11,6 +11,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const Desktopstyle = styled.div`
   position: relative;
@@ -215,9 +217,9 @@ const Mobilestyle = styled.div`
   }
 `;
 
-export default function ProductTable({ page, subMainData }) {
+export default function ProductTable({ page, subMainData, handleRender }) {
   // console.log(subMainData[0].OBJECT_TYPE);
-
+  const [rent, setRent] = useState(false);
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
     return isDesktop ? children : null;
@@ -247,6 +249,7 @@ export default function ProductTable({ page, subMainData }) {
         `http://localhost:4000/subMain/find/${userId}/${code}/${type}`,
       );
       alert(findRentObj.data);
+      handleRender('1');
     } catch (error) {
       console.log('여기로왔다~~~~~~~~~~~~~~~~~');
       console.error(error);
