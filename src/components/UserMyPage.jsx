@@ -84,20 +84,41 @@ const MyPage = styled.div`
       font-weight: 570;
       margin-top: 2vh;
     }
-  }
-  .current_situation_header {
-    display: flex;
-    background-color: #446a72;
-    width: 53vw;
-    height: 35px;
-    line-height: 6px;
-    justify-content: space-around;
-    margin-top: 2vh;
-    border-radius: 5px;
-    p {
-      font-size: 16px;
-      color: #fff;
-      font-weight: 600;
+    .current_situation_header {
+      display: flex;
+      background-color: #446a72;
+      width: 52vw;
+      height: 35px;
+      line-height: 6px;
+      justify-content: space-around;
+      margin-top: 2vh;
+      border-radius: 5px;
+      p {
+        font-size: 16px;
+        color: #fff;
+        font-weight: 600;
+        width: 13vw;
+        text-align: center;
+      }
+    }
+    .current_rent {
+      display: flex;
+      justify-content: space-around;
+      background-color: #fff;
+      border-radius: 5px;
+      border: 1px solid #fff;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      width: 52vw;
+      height: 40px;
+      margin: 1vh 0 2vh 0;
+      line-height: 7px;
+      p {
+        font-size: 15px;
+        font-weight: 500;
+        color: #666;
+        width: 13vw;
+        text-align: center;
+      }
     }
   }
 `;
@@ -105,6 +126,7 @@ const MyPage = styled.div`
 export default function UserMyPage() {
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
   const userId = useSelector((state) => state.user.userID);
+
   const [main, setMain] = useState([]);
   const [myPage, setMyPage] = useState([]);
   const [user, setUser] = useState();
@@ -115,10 +137,12 @@ export default function UserMyPage() {
       const resShowMain = await axios.get(
         `http://localhost:4000/main/myPage/${userId}`,
       );
+
       setUser(resShowMain.data.ARTICLE[0].USER_NAME);
       setPhoneNum(resShowMain.data.ARTICLE[0].PHONE_NUMBER);
       setMain(resShowMain.data.ARTICLE);
       setMyPage(resShowMain.data.ARTICLE2);
+
     } catch (error) {
       console.error(error);
     }
@@ -163,7 +187,9 @@ export default function UserMyPage() {
           <li>
             <div>
               {myPage.map((el, index) => (
-                <li key={index} className="current_situation_header">
+
+                <li key={index} className="current_rent">
+
                   <p>{el.CODE}</p>
                   <p>{el.NAME}</p>
                   <p>{el.STATUS}</p>

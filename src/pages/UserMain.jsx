@@ -51,7 +51,6 @@ export default function UserMain({ page }) {
     <>
       <Desktop>
         <Header />
-
         <UserMainMenu />
         {/* <UserRent /> */}
         <UserMyPage />
