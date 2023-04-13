@@ -204,10 +204,8 @@ export default function UserMyPage() {
                 <p>{el.NAME}</p>
                 <p>{el.STATUS === 1 ? '승인대기중' : '대여중'}</p>
                 <p>{`${el.END_DATE.slice(0, 10)} `}</p>
-                <p>
-                  {dateString >= `${el.END_DATE.slice(0, 10)}`
-                    ? '연체'
-                    : '연체아님'}
+                <p style={{ color: 'orangered', fontWeight: '600' }}>
+                  {dateString >= `${el.END_DATE.slice(0, 10)}` ? '연체' : ''}
                 </p>
               </div>
             ))}
