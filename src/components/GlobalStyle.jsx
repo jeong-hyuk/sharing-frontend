@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
   }
-
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
   body {
     font-family: 'PilseungGothic';
     padding-top: 1em;
@@ -16,6 +16,15 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
   }
 */
+
+@font-face {
+font-family: "NanumSquare";
+src: url("./fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+body {
+    font-family: 'NanumSquare';
+  }
   ul, ol {
     list-style: none;
     padding-left: 0px;

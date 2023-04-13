@@ -202,6 +202,7 @@ export default function UserMyPage() {
               <div key={index} className="current_rent">
                 <p>{el.CODE}</p>
                 <p>{el.NAME}</p>
+
                 <p>{el.STATUS === 1 ? '승인대기중' : '대여중'}</p>
                 <p>{`${el.END_DATE.slice(0, 10)} `}</p>
                 <p>
@@ -209,6 +210,7 @@ export default function UserMyPage() {
                     ? '연체'
                     : '연체아님'}
                 </p>
+
               </div>
             ))}
           </li>
