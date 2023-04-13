@@ -8,6 +8,11 @@ import UserMainMenu from '../components/UserMainMenu';
 import UserRent from '../components/UserRent';
 import UserMyPage from '../components/UserMyPage';
 
+import UserNotice from '../components/UserNotice';
+
+import { Route, Routes } from 'react-router-dom';
+
+
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -52,8 +57,13 @@ export default function UserMain({ page }) {
       <Desktop>
         <Header />
         <UserMainMenu />
-        {/* <UserRent /> */}
-        <UserMyPage />
+
+        <Routes>
+          <Route path="/" element={<UserRent />} />
+          <Route path="/myPage" element={<UserMyPage />} />
+        </Routes>
+        {/* <UserMyPage /> */}
+
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
