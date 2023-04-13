@@ -2,7 +2,122 @@ import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, register } from '../store/modules/user';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faEnvelope,
+  faEye,
+  faEyeSlash,
+} from '@fortawesome/free-regular-svg-icons';
+import { faCircleArrowRight, faLock } from '@fortawesome/free-solid-svg-icons';
+import kakaotalkImg from '../pages/images/kakaoIcon.png';
 
+const LoginStyle = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 5px 5px 13px 15px rgba(0, 0, 0, 10%);
+  width: 86vw;
+  height: 66vh;
+  // 로그인 파트
+  .login-part {
+    width: 40%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    h1 {
+      width: 65%;
+      font-size: 3.5rem;
+      color: #446a72;
+    }
+    p {
+      display: flex;
+      width: 65%;
+      font-size: 6rem;
+      color: #888888;
+      border-bottom: 2px solid #888888;
+      padding-top: 30px;
+      padding-bottom: 6px;
+      input {
+        width: 100%;
+        border-style: none;
+      }
+    }
+    .register_btn {
+      padding-top: 8px;
+      border-style: none;
+      font-size: 2.5rem;
+      background-color: transparent;
+      a {
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: #555555;
+      }
+    }
+
+    .pw-show-hide_btn {
+      border-style: none;
+      background-color: transparent;
+
+      .pw-show-hide_btn_icon {
+        width: 33px;
+        height: 33px;
+        color: #555555;
+        :hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .btn-part {
+      display: flex;
+      width: 30%;
+      justify-content: space-evenly;
+      position: absolute;
+      bottom: -60px;
+      right: 32%;
+      .kakao_btn {
+        border-style: none;
+        background-color: #ffe767;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
+
+        :hover {
+          transform: scale(1.05);
+        }
+      }
+      .login_btn {
+        border-style: none;
+        background-color: transparent;
+        .menu_next_button_icon {
+          width: 70px;
+          height: 70px;
+          color: #446a72;
+          border-radius: 50%;
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
+          :hover {
+            cursor: pointer;
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
+  .green-box {
+    background-color: #446a72;
+    width: 35vw;
+    position: absolute;
+    top: -5vh;
+    left: 8%;
+    height: 76vh;
+    box-shadow: 13px 13px 15px rgba(0, 0, 0, 10%);
+  }
+`;
 export default function Login() {
   const loginIdInput = useRef();
   const loginPwInput = useRef();
@@ -52,24 +167,50 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <>
+    <LoginStyle>
       {/* 로그인 파트 */}
-      <h1>로그인 파트</h1>
-      아이디 <input type="text" ref={loginIdInput} />
-      <input type={showPassword ? 'text' : 'password'} ref={loginPwInput} />
-      {capsLockOn && <div>Caps Lock이 켜져 있습니다.</div>}
-      <button onClick={() => setShowPassword(!showPassword)}>
-        {showPassword ? '숨기기' : '보기'}
-      </button>
-      <button onClick={loginUser}>로그인</button>
-      <br />
-      <button>
-        <Link to="/register">회원가입</Link>
-      </button>
-      <br />
-      <button>
-        <Link to={KAKAO_AUTH_URL}>카카오 로그인</Link>
-      </button>
-    </>
+      <div className="login-part">
+        <h1>Login</h1>
+        <p>
+          <FontAwesomeIcon icon={faEnvelope} />
+          <input type="text" ref={loginIdInput} />
+        </p>
+        <p>
+          <FontAwesomeIcon icon={faLock} />
+          <input type={showPassword ? 'text' : 'password'} ref={loginPwInput} />
+          <button
+            className="pw-show-hide_btn"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <FontAwesomeIcon
+                className="pw-show-hide_btn_icon"
+                icon={faEyeSlash}
+              />
+            ) : (
+              <FontAwesomeIcon className="pw-show-hide_btn_icon" icon={faEye} />
+            )}
+          </button>
+          {capsLockOn && <div>Caps Lock이 켜져 있습니다.</div>}
+        </p>
+        <button className="register_btn">
+          <Link to="/register">sign up</Link>
+        </button>
+
+        <div className="btn-part">
+          <Link to={KAKAO_AUTH_URL} className="kakao_btn">
+            {/* {kakaotalkImg} */}
+          </Link>
+
+          <button className="login_btn" onClick={loginUser}>
+            <FontAwesomeIcon
+              icon={faCircleArrowRight}
+              className="menu_next_button_icon"
+            />
+          </button>
+        </div>
+      </div>
+      <div className="green-box"></div>
+    </LoginStyle>
   );
 }
