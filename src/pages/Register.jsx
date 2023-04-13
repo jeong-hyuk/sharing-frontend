@@ -13,19 +13,19 @@ export default function Register() {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const checkDuplicateUser = async () => {
-    try {
-      if (!registerIdInput.current.value) return alert('ID 를 입력해 주세요');
+  // const checkDuplicateUser = async () => {
+  //   try {
+  //     if (!registerIdInput.current.value) return alert('ID 를 입력해 주세요');
 
-      const resRegister = await axios.post('http://localhost:4000/duplicate', {
-        id: registerIdInput.current.value,
-      });
+  //     const resRegister = await axios.post('http://localhost:4000/duplicate', {
+  //       id: registerIdInput.current.value,
+  //     });
 
-      alert(resRegister.data);
-    } catch (err) {
-      alert(err.response.data);
-    }
-  };
+  //     alert(resRegister.data);
+  //   } catch (err) {
+  //     alert(err.response.data);
+  //   }
+  // };
   //push 수정
   const checkPassword = () => {
     if (registerPwInput.current.value.length < 8) {
