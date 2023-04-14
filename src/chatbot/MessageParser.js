@@ -1,12 +1,26 @@
-class MessageParser {
-  constructor(actionProvider, state) {
-    this.actionProvider = actionProvider;
-    this.state = state;
-  }
+// 사용자가 입력한 데이터를 처리해줌
 
-  parse(message) {
-    console.log(message);
-  }
-}
+import React from 'react';
+
+const MessageParser = ({ children, actions }) => {
+  const parse = message => {
+    if (message.includes('안녕')) {
+      actions.handleHello();
+    } else {
+      actions.handleno();
+    }
+  };
+
+  return (
+    <div>
+      {React.Children.map(children, child => {
+        return React.cloneElement(child, {
+          parse: parse,
+          actions,
+        });
+      })}
+    </div>
+  );
+};
 
 export default MessageParser;
