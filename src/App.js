@@ -13,8 +13,12 @@ import { motion } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
 import AnimationRoutes from './components/AnimationRoutes';
 import Chatbotcontroller from './components/Chatbotcontroller';
+import MangerMain from './pages/MangerMain';
+
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
+  const userId = useSelector((state) => state.user.userID);
+  console.log(userId); // 관리자 확인.
   return (
     <>
       <GlobalStyle />
@@ -22,7 +26,7 @@ function App() {
       {/* <Header />
       <UserMainMenu />
       <UserRent /> */}
-      <AnimationRoutes />
+
       {/* <Routes location={location} key={location.pathname}>
         <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
 
@@ -34,6 +38,7 @@ function App() {
         <Route path="/usermain" element={<UserMain />} />
         <Route path="/subMain/:id" element={<UserRent />} />
       </Routes> */}
+      {userId === 'manager' ? <MangerMain /> : <AnimationRoutes />}
     </>
   );
 }
