@@ -1,6 +1,6 @@
 import './App.css';
 import { Provider, useSelector } from 'react-redux';
-import { Route, RouterProvider, Routes } from 'react-router-dom';
+import { Route, RouterProvider, Routes, useLocation } from 'react-router-dom';
 import GlobalStyle from './components/GlobalStyle';
 import Login from './pages/Login';
 import Main from './pages/Main';
@@ -9,6 +9,9 @@ import KakaoRedirectHandler from './components/KakaoRedirectHandler';
 import UserMain from './pages/UserMain';
 import UserRent from './pages/UserRent';
 import FindRobot from './components/FindRobot';
+import { motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
+import AnimationRoutes from './components/AnimationRoutes';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -18,16 +21,18 @@ function App() {
       {/* <Header />
       <UserMainMenu />
       <UserRent /> */}
-      <Routes>
-        {/* <Route path="/myPage" element={<UserMyPage />} /> */}
-        <Route path="/" element={<FindRobot />} />
-        {/* <Route path="/" element={isLogin ? <UserMain /> : <Login />} />
+      <AnimationRoutes />
+      {/* <Routes location={location} key={location.pathname}>
+        <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
+
         <Route path="/register" element={isLogin ? <Login /> : <Register />} />
         <Route
           path="/oauth/callback/kakao"
           element={<KakaoRedirectHandler />}
-        /> */}
-      </Routes>
+        />
+        <Route path="/usermain" element={<UserMain />} />
+        <Route path="/subMain/:id" element={<UserRent />} />
+      </Routes> */}
     </>
   );
 }
