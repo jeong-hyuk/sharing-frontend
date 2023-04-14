@@ -17,6 +17,7 @@ function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
   const userId = useSelector((state) => state.user.userID);
   console.log(userId); // 관리자 확인.
+  
   return (
     <>
       <GlobalStyle />
