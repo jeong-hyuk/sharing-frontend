@@ -8,16 +8,15 @@ import Register from './pages/Register';
 import KakaoRedirectHandler from './components/KakaoRedirectHandler';
 import UserMain from './pages/UserMain';
 import UserRent from './pages/UserRent';
-import FindRobot from './components/FindRobot';
+import Chatbotcontroller from './components/Chatbotcontroller';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
   return (
     <>
       <GlobalStyle />
-      {/* <Header />
-      <UserMainMenu />
-      <UserRent /> */}
+      <Chatbotcontroller />
+
       <Routes>
 
         <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
