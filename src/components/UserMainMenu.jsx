@@ -35,8 +35,9 @@ const Menu = styled.div`
         text-decoration: none;
         text-align: center;
         font-size: 1.5rem;
+        font-weight: 600;
         transition: all 0.1s;
-        border-right: 3px solid #556080;
+        border-right: 3px solid #565a7a;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 25%);
         border-radius: 5px;
         :link,
@@ -46,7 +47,7 @@ const Menu = styled.div`
         }
         :hover {
           color: #fff;
-          background-color: #556080;
+          background-color: #565a7a;
           border-radius: 5px;
           transition: all 0.1s;
           font-weight: 600;
@@ -64,7 +65,7 @@ const Menu = styled.div`
       position: absolute;
       bottom: 4vh;
       left: 13vw;
-      background-color: #f2685e;
+      background-color: #c6e36b;
       border-radius: 50%;
       box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
       .chat_bot_icon {
@@ -109,16 +110,14 @@ export default function UserMainMenu() {
       <ul>
         <li>
           <Link to="/" className="menu_active">
-            Rent
+            RENT
           </Link>
         </li>
         <li>
-
-          <Link to="/myPage">마이페이지</Link>
+          <Link to="/myPage">MYPAGE</Link>
         </li>
         <li>
-          <Link to="/notice">공지사항</Link>
-
+          <Link to="/notice">NOTICE</Link>
         </li>
       </ul>
       <div className="menu_button">

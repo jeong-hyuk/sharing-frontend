@@ -12,7 +12,6 @@ import UserNotice from '../components/UserNotice';
 
 import { Route, Routes } from 'react-router-dom';
 
-
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -61,9 +60,9 @@ export default function UserMain({ page }) {
         <Routes>
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
+          <Route path="/notice" element={<UserNotice />} />
         </Routes>
         {/* <UserMyPage /> */}
-
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
