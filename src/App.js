@@ -13,7 +13,6 @@ import { motion } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
 import AnimationRoutes from './components/AnimationRoutes';
 import Chatbotcontroller from './components/Chatbotcontroller';
-
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
   return (
@@ -27,9 +26,6 @@ function App() {
       {/* <Routes location={location} key={location.pathname}>
         <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
 
-      
-      <Routes>
-        <Route path="/" element={isLogin ? <UserMain /> : <Login />} />
         <Route path="/register" element={isLogin ? <Login /> : <Register />} />
         <Route
           path="/oauth/callback/kakao"

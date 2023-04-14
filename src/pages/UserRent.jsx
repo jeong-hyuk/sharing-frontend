@@ -9,8 +9,8 @@ export default function UserRent() {
   const [subMain, setSubMain] = useState([]);
   const [render, setRender] = useState('');
 
-  const handleRender = (param) => {
-    setRender((cur) => cur + param);
+  const handleRender = param => {
+    setRender(cur => cur + param);
   };
 
   // router 에서 받아온 parameter 값: 0001,0002 등 처리 해주는 useParams id 값에 저장.
@@ -21,7 +21,7 @@ export default function UserRent() {
         `http://localhost:4000/subMain/${id}`,
       );
       // 받아온 데이터를  -> setSubMain 에 담아서 Components/ProductTable
-      setSubMain((cur) => resShowObject.data.ARTICLE);
+      setSubMain(cur => resShowObject.data.ARTICLE);
     } catch (error) {
       console.error(error);
     }

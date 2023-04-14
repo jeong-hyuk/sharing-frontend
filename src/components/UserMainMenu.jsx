@@ -120,11 +120,11 @@ export default function UserMainMenu() {
           <Link to="/notice">NOTICE</Link>
         </li>
       </ul>
-      <div className="menu_button">
+      {/* <div className="menu_button">
         <Link to="/" className="chat_bot">
           <FontAwesomeIcon icon={faCommentDots} className="chat_bot_icon" />
         </Link>
-      </div>
+      </div> */}
     </Menu>
   );
 }
