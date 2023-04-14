@@ -1,10 +1,9 @@
 import ProductTable from '../components/ProductTable';
 import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import { createGlobalStyle } from 'styled-components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Chatbot from '../components/Chatbotcontroller';
 
 export default function UserRent() {
   const [subMain, setSubMain] = useState([]);
@@ -31,14 +30,9 @@ export default function UserRent() {
     showObject();
   }, [render]);
 
-  const Allstyle = createGlobalStyle`
-    /* *{font-size: 16px;} */
-  `;
   return (
     <>
-      <Allstyle />
       <Header />
-
       <ProductTable subMainData={subMain} handleRender={handleRender} />
     </>
   );

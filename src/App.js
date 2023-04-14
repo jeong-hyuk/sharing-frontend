@@ -8,8 +8,10 @@ import Register from './pages/Register';
 import KakaoRedirectHandler from './components/KakaoRedirectHandler';
 import UserMain from './pages/UserMain';
 import UserRent from './pages/UserRent';
-import FindRobot from './components/FindRobot';
+
 import MangerMain from './pages/MangerMain';
+import Chatbotcontroller from './components/Chatbotcontroller';
+
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -18,6 +20,8 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <Chatbotcontroller />
+
       {userId === 'manager' ? (
         <MangerMain />
       ) : (
@@ -35,6 +39,7 @@ function App() {
           <Route path="/subMain/:id" element={<UserRent />} />
         </Routes>
       )}
+
     </>
   );
 }
