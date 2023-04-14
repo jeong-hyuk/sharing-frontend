@@ -57,7 +57,6 @@ export default function UserMain({ page }) {
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
         </Routes>
-        {/* <UserMyPage /> */}
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
