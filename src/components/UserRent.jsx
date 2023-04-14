@@ -35,7 +35,7 @@ const Rent = styled.div`
         width: 100%;
         height: 100%;
         transition: all 0.1s;
-        border: 2px solid rgba(68, 106, 114, 0.7);
+        border: 2px solid rgba(86, 90, 122, 0.7);
         box-sizing: border-box;
         border-radius: 5px;
         position: relative;
@@ -43,18 +43,20 @@ const Rent = styled.div`
         :hover {
           box-sizing: border-box;
           border-radius: 5px;
-          border: 7px solid #446a72;
+          border: 7px solid #565a7a;
           box-shadow: 7px 7px 7px rgba(0, 0, 0, 25%);
-          transition: all 0.1s;
+          transition: all 0.2s;
           div {
             .rent_laptop_icon,
             .rent_mouse_icon,
             .rent_plug_icon {
-              transition: all 0.1s;
-              color: #446a72;
+              transition: all 0.2s;
+              color: #565a7a;
+              filter: invert(34%) sepia(7%) saturate(1954%) hue-rotate(196deg)
+                brightness(96%) contrast(86%);
             }
             P {
-              color: #446a72;
+              color: #565a7a;
               transition: all 0.1s;
             }
           }
@@ -72,11 +74,13 @@ const Rent = styled.div`
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: rgba(68, 106, 114, 0.7);
+            /* color: rgba(68, 106, 114, 0.7); */
+            filter: invert(34%) sepia(7%) saturate(1954%) hue-rotate(196deg)
+              brightness(96%) contrast(86%) opacity(70%);
             transition: all 0.1s;
           }
           P {
-            color: rgba(68, 106, 114, 0.7);
+            color: rgba(86, 90, 122, 0.7);
             font-weight: 700;
             font-size: 1.5rem;
             position: absolute;
@@ -125,7 +129,11 @@ export default function UserRent() {
           <li key={index}>
             <Link to={`/subMain/${el.OBJECT_TYPE}`}>
               <div>
-                <FontAwesomeIcon icon={faLaptop} className="rent_laptop_icon" />
+                <img
+                  src="http://localhost:4000/uploads/house-solid.svg"
+                  alt=""
+                  className="rent_laptop_icon"
+                />
                 <p>{el.OBJECT_NAME}</p>
               </div>
             </Link>

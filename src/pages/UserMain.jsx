@@ -8,6 +8,7 @@ import UserMainMenu from '../components/UserMainMenu';
 import UserRent from '../components/UserRent';
 import UserMyPage from '../components/UserMyPage';
 import { Route, Routes } from 'react-router-dom';
+import UserNotice from '../components/UserNotice';
 
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
@@ -56,6 +57,7 @@ export default function UserMain({ page }) {
         <Routes>
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
+          <Route path="/notice" element={<UserNotice />} />
         </Routes>
       </Desktop>
       <Tablet>Tablet</Tablet>

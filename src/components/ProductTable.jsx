@@ -16,28 +16,32 @@ import { useEffect } from 'react';
 
 const Desktopstyle = styled.div`
   position: relative;
-  top: 20vh;
-  left: 14vw;
-  width: 72vw;
-  height: 70vh;
-  text-align: center;
+  top: 17vh;
+
   .allcontroller {
     display: flex;
-    height: 70vh;
+    justify-content: center;
     .leftcontroller {
-      width: 70vw;
+      width: 66vw;
+      p {
+        font-size: 2rem;
+        color: #565a7a;
+        font-weight: 600;
+        margin-bottom: 2vh;
+      }
       .title {
-        background-color: #446a72;
+        background-color: #565a7a;
         color: #fff;
         border-radius: 5px;
-        height: 7vh;
+        height: 6vh;
         margin-bottom: 2vh;
         ol {
+          text-align: center;
           display: flex;
           justify-content: space-around;
           li {
             font-size: 1.6rem;
-            width: 33.3333%;
+            width: 22vw;
             height: 7vh;
             line-height: 7vh;
             :last-child {
@@ -48,9 +52,9 @@ const Desktopstyle = styled.div`
       }
       .content {
         border: 1px solid #e2e2e2;
-        height: 60vh;
+        height: 61.5vh;
         border-radius: 5px;
-        box-shadow: 0 2px 0 0 gray;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         ol {
           li {
             display: flex;
@@ -58,33 +62,16 @@ const Desktopstyle = styled.div`
             height: 8vh;
             line-height: 8vh;
             border-bottom: 1px solid #e2e2e2;
+            transition: all 0.1s;
+            cursor: pointer;
+            :hover {
+              transition: all 0.1s;
+              background-color: rgba(86, 90, 122, 0.1);
+            }
             p {
-              width: 33.333%;
+              width: 22vw;
               text-align: center;
               font-size: 1.6rem;
-              height: 5vh;
-              :first-child {
-                transform: translateX(0.3vw);
-              }
-              :nth-child(2) {
-                transform: translateX(1.3vw);
-              }
-              :nth-child(3) {
-                transform: translateX(2.5vw);
-              }
-              :last-child {
-                cursor: pointer;
-                margin-top: 2vh;
-                margin-bottom: 2vh;
-                transform: translate(6vw, -1vh);
-                color: #fff;
-                background-color: #446a72;
-                border-radius: 5px;
-                font-size: 1.3rem;
-                width: 5.5vw;
-                height: 7vh;
-                line-height: 7vh;
-              }
             }
           }
           border-bottom: none;
@@ -220,6 +207,7 @@ const Mobilestyle = styled.div`
 export default function ProductTable({ page, subMainData, handleRender }) {
   // console.log(subMainData[0].OBJECT_TYPE);
   const [rent, setRent] = useState(false);
+
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
     return isDesktop ? children : null;
@@ -284,6 +272,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
         <Desktopstyle>
           <div className="allcontroller">
             <div className="leftcontroller">
+              <p>LAPTOP</p>
               <div className="title">
                 <ol>
                   <li>코드</li>
@@ -299,22 +288,11 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                         <p>{el.CODE}</p>
                         <p>{el.NAME}</p>
                         <p>{el.STATUS === 0 ? '대여가능' : '대여불가'}</p>
-                        <p
-                          onClick={() => {
-                            findRent(idx);
-                          }}
-                        >
-                          {el.STATUS === 0 ? '대여' : 'X'}
-                        </p>
                       </li>
                     );
                   })}
                 </ol>
               </div>
-            </div>
-            <div className="rightcontroller">
-              <div className="blank"></div>
-              <div className="okbg"></div>
             </div>
           </div>
         </Desktopstyle>

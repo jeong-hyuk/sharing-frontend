@@ -12,6 +12,8 @@ import UserRent from './pages/UserRent';
 import MangerMain from './pages/MangerMain';
 import Chatbotcontroller from './components/Chatbotcontroller';
 import AnimationRoutes from './components/AnimationRoutes';
+import Chatbotcontroller from './components/Chatbotcontroller';
+import MangerMain from './pages/MangerMain';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
