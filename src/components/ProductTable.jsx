@@ -11,6 +11,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const Desktopstyle = styled.div`
   position: relative;
@@ -215,9 +217,11 @@ const Mobilestyle = styled.div`
   }
 `;
 
-export default function ProductTable({ page, subMainData }) {
-  // console.log(subMainData[0].OBJECT_TYPE);
 
+export default function ProductTable({ page, subMainData, handleRender }) {
+  // console.log(subMainData[0].OBJECT_TYPE);
+  const [rent, setRent] = useState(false);
+  
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
     return isDesktop ? children : null;
@@ -237,14 +241,17 @@ export default function ProductTable({ page, subMainData }) {
 
   const userId = useSelector((state) => state.user.userID);
 
-  const findRent = async () => {
+  const findRent = async (idx) => {
     try {
       // store 에서 가져온 나의 user_id
-      const type = subMainData[0].OBJECT_TYPE;
+      const type = subMainData[idx].OBJECT_TYPE;
+      const code = subMainData[idx].CODE;
+      console.log(code);
       const findRentObj = await axios.get(
-        `http://localhost:4000/subMain/find/${userId}/${type}`,
+        `http://localhost:4000/subMain/find/${userId}/${code}/${type}`,
       );
-      console.log(findRentObj);
+      alert(findRentObj.data);
+      handleRender('1');
     } catch (error) {
       console.log('여기로왔다~~~~~~~~~~~~~~~~~');
       console.error(error);
@@ -296,7 +303,7 @@ export default function ProductTable({ page, subMainData }) {
                         <p>{el.STATUS === 0 ? '대여가능' : '대여불가'}</p>
                         <p
                           onClick={() => {
-                            findRent();
+                            findRent(idx);
                           }}
                         >
                           {el.STATUS === 0 ? '대여' : 'X'}
@@ -304,25 +311,6 @@ export default function ProductTable({ page, subMainData }) {
                       </li>
                     );
                   })}
-
-                  <li>
-                    <p>001</p>
-                    <p>컴퓨터</p>
-                    <p>대여가능</p>
-                    <p>대여</p>
-                  </li>
-                  <li>
-                    <p>002</p>
-                    <p>컴퓨터</p>
-                    <p>대여가능</p>
-                    <p>대여</p>
-                  </li>
-                  <li>
-                    <p>003</p>
-                    <p>컴퓨터</p>
-                    <p>대여가능</p>
-                    <p>대여</p>
-                  </li>
                 </ol>
               </div>
             </div>

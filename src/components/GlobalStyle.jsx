@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
   }
-
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
   body {
     font-family: 'PilseungGothic';
     padding-top: 1em;
@@ -16,6 +16,15 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
   }
 */
+
+@font-face {
+font-family: "NanumSquare";
+src: url("./fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+body {
+    font-family: 'NanumSquare';
+  }
   ul, ol {
     list-style: none;
     padding-left: 0px;
@@ -32,6 +41,23 @@ const GlobalStyle = createGlobalStyle`
 
   *{
     font-size: 62.5%;
+  }
+
+  //scrollBar
+  div::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+  }
+
+  div::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #446a728f; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+  }
+
+  div::-webkit-scrollbar-track {
+    background: #f5f5f5; 
+    /*스크롤바 뒷 배경 색상*/
   }
 
 `;

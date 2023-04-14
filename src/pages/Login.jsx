@@ -2,7 +2,122 @@ import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, register } from '../store/modules/user';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faEnvelope,
+  faEye,
+  faEyeSlash,
+} from '@fortawesome/free-regular-svg-icons';
+import { faCircleArrowRight, faLock } from '@fortawesome/free-solid-svg-icons';
+import kakaotalkImg from '../pages/images/kakaoIcon.png';
 
+const LoginStyle = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 5px 5px 13px 15px rgba(0, 0, 0, 10%);
+  width: 86vw;
+  height: 66vh;
+  // 로그인 파트
+  .login-part {
+    width: 40%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    h1 {
+      width: 65%;
+      font-size: 3.5rem;
+      color: #446a72;
+    }
+    p {
+      display: flex;
+      width: 65%;
+      font-size: 6rem;
+      color: #888888;
+      border-bottom: 2px solid #888888;
+      padding-top: 30px;
+      padding-bottom: 6px;
+      input {
+        width: 100%;
+        border-style: none;
+      }
+    }
+    .register_btn {
+      padding-top: 8px;
+      border-style: none;
+      font-size: 2.5rem;
+      background-color: transparent;
+      a {
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: #555555;
+      }
+    }
+
+    .pw-show-hide_btn {
+      border-style: none;
+      background-color: transparent;
+
+      .pw-show-hide_btn_icon {
+        width: 33px;
+        height: 33px;
+        color: #555555;
+        :hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .btn-part {
+      display: flex;
+      width: 30%;
+      justify-content: space-evenly;
+      position: absolute;
+      bottom: -60px;
+      right: 32%;
+      .kakao_btn {
+        border-style: none;
+        background-color: #ffe767;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
+
+        :hover {
+          transform: scale(1.05);
+        }
+      }
+      .login_btn {
+        border-style: none;
+        background-color: transparent;
+        .menu_next_button_icon {
+          width: 70px;
+          height: 70px;
+          color: #446a72;
+          border-radius: 50%;
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
+          :hover {
+            cursor: pointer;
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
+  .green-box {
+    background-color: #446a72;
+    width: 35vw;
+    position: absolute;
+    top: -5vh;
+    left: 8%;
+    height: 76vh;
+    box-shadow: 13px 13px 15px rgba(0, 0, 0, 10%);
+  }
+`;
 export default function Login() {
   const loginIdInput = useRef();
   const loginPwInput = useRef();
@@ -14,6 +129,8 @@ export default function Login() {
   const KAKAO_CLIENT_ID = '48194ee06abc88e308d72719bbd68805';
   const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+  const KAKAO_LOGOUT_URI = 'http://localhost:3000';
+  const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
 
   const loginUser = async () => {
     if (!loginIdInput.current.value || !loginPwInput.current.value)
@@ -28,6 +145,10 @@ export default function Login() {
         password: loginPwInput.current.value,
       }),
     });
+    // 로그인이 성공하면 응답 데이터 token 프로퍼티에 accessToken 이 전달 되어 오므로
+    // 로컬 스토리지에 로그인 정보가 저장 된 토큰을 저장
+    // 해당 정보를 통하여 리액트 실행 시, 토큰을 백엔드 서버에 검증하여 자동 로그인을 처리
+    // window.localStorage.setItem('token', resLogin.data.token);
     if (resLogin.status === 200) {
       dispatch(
         login({
@@ -52,122 +173,51 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <>
+    <LoginStyle>
       {/* 로그인 파트 */}
-      <h1>로그인 파트</h1>
-      아이디 <input type="text" ref={loginIdInput} />
-      <br />
-      <br />
-      비밀번호{' '}
-      <input type={showPassword ? 'text' : 'password'} ref={loginPwInput} />
-      {capsLockOn && <div>Caps Lock이 켜져 있습니다.</div>}
-      <button onClick={() => setShowPassword(!showPassword)}>
-        {showPassword ? '숨기기' : '보기'}
-      </button>
-      <br />
-      <Link to="/register">회원가입</Link>
-      <br />
-      <Link to={KAKAO_AUTH_URL}>카카오 로그인</Link>
-      <button onClick={loginUser}>로그인</button>
-    </>
+
+      <div className="login-part">
+        <h1>Login</h1>
+        <p>
+          <FontAwesomeIcon icon={faEnvelope} />
+          <input type="text" ref={loginIdInput} />
+        </p>
+        <p>
+          <FontAwesomeIcon icon={faLock} />
+          <input type={showPassword ? 'text' : 'password'} ref={loginPwInput} />
+          <button
+            className="pw-show-hide_btn"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <FontAwesomeIcon
+                className="pw-show-hide_btn_icon"
+                icon={faEyeSlash}
+              />
+            ) : (
+              <FontAwesomeIcon className="pw-show-hide_btn_icon" icon={faEye} />
+            )}
+          </button>
+          {capsLockOn && <div>Caps Lock이 켜져 있습니다.</div>}
+        </p>
+        <button className="register_btn">
+          <Link to="/register">sign up</Link>
+        </button>
+
+        <div className="btn-part">
+          <Link to={KAKAO_AUTH_URL} className="kakao_btn">
+            {/* {kakaotalkImg} */}
+          </Link>
+
+          <button className="login_btn" onClick={loginUser}>
+            <FontAwesomeIcon
+              icon={faCircleArrowRight}
+              className="menu_next_button_icon"
+            />
+          </button>
+        </div>
+      </div>
+      <div className="green-box"></div>
+    </LoginStyle>
   );
-
-  // return (
-  //   <>
-  //     {/* 로그인 파트 */}
-  //     <h1>로그인 파트</h1>
-  //     아이디 <input type="text" ref={loginIdInput} />
-  //     <br />
-  //     <br />
-  //     비밀번호 <input type="password" ref={loginPwInput} />
-  //     <br />
-  //     <br />
-  //     <Link to="/register">회원가입</Link>
-  //     <br />
-  //     <Link to={KAKAO_AUTH_URL}>카카오 로그인</Link>
-  //     <button onClick={loginUser}>로그인</button>
-  //   </>
-  // );
 }
-
-// const resRegister = await fetch('http://localhost:4000/user/register', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify({
-//     id: registerIdInput.current.value,
-//     password: registerPwInput.current.value,
-//   }),
-// });
-
-// if (resRegister.status !== 200) return alert(await resRegister.json());
-
-// alert(await resRegister.json());
-// dispatch(
-//   login({
-//     id: registerIdInput.current.value,
-//     password: registerPwInput.current.value,
-//   }),
-// );
-
-//   import axios from 'axios';
-// import React, { useRef } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { Link } from 'react-router-dom';
-// import { login } from '../store/modules/user';
-
-// export default function Login() {
-//   const registerIdInput = useRef();
-//   const registerPwInput = useRef();
-
-//   const dispatch = useDispatch();
-
-//   const registerUser = async () => {
-//     if (!registerIdInput.current.value || !registerPwInput.current.value)
-//       return alert('필수 값을 입력해 주세요');
-
-//     const resRegister = await axios.post(
-//       'http://localhost:4000/user/register',
-//       {
-//         id: registerIdInput.current.value,
-//         password: registerPwInput.current.value,
-//       },
-//     );
-
-//     if (resRegister.status !== 200) return alert(resRegister.data);
-
-//     alert(resRegister.data);
-//     dispatch(
-//       login({
-//         id: registerIdInput.current.value,
-//         password: registerPwInput.current.value,
-//       }),
-//     );
-//   return (
-//     <>
-//       {/* 로그인 파트 */}
-//       <h1>로그인 파트입니다</h1>
-//       아이디 : <input type="text" />
-//       <br />
-//       <br />
-//       비밀번호 : <input type="password" />
-//       <br />
-//       <br />
-//       <button>로그인</button> <Link to="">카카오 로그인</Link>
-//       <br />
-//       <br />
-//       {/* 회원 가입 파트 */}
-//       <h1>회원 가입 파트입니다</h1>
-//       아이디 : <input type="text" ref={registerIdInput} />
-//       <br />
-//       <br />
-//       비밀번호 : <input type="password" ref={registerPwInput} />
-//       <br />
-//       <br />
-//       <button onClick={registerUser}>회원 가입</button>
-//       <br />
-//       <br />
-//     </>
-//   );
-// }
