@@ -82,7 +82,7 @@ const Menu = styled.div`
 
 export default function UserMainMenu() {
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
-  const userId = useSelector((state) => state.user.userID);
+  const userId = useSelector(state => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
@@ -113,19 +113,17 @@ export default function UserMainMenu() {
           </Link>
         </li>
         <li>
-
           <Link to="/myPage">마이페이지</Link>
         </li>
         <li>
           <Link to="/notice">공지사항</Link>
-
         </li>
       </ul>
-      <div className="menu_button">
+      {/* <div className="menu_button">
         <Link to="/" className="chat_bot">
           <FontAwesomeIcon icon={faCommentDots} className="chat_bot_icon" />
         </Link>
-      </div>
+      </div> */}
     </Menu>
   );
 }

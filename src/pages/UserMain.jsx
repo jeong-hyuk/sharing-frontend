@@ -12,7 +12,6 @@ import UserNotice from '../components/UserNotice';
 
 import { Route, Routes } from 'react-router-dom';
 
-
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -32,7 +31,7 @@ export default function UserMain({ page }) {
   };
 
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
-  const userId = useSelector((state) => state.user.userID);
+  const userId = useSelector(state => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
 
@@ -63,7 +62,6 @@ export default function UserMain({ page }) {
           <Route path="/myPage" element={<UserMyPage />} />
         </Routes>
         {/* <UserMyPage /> */}
-
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
