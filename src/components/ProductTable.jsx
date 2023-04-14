@@ -217,9 +217,11 @@ const Mobilestyle = styled.div`
   }
 `;
 
+
 export default function ProductTable({ page, subMainData, handleRender }) {
   // console.log(subMainData[0].OBJECT_TYPE);
   const [rent, setRent] = useState(false);
+  
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
     return isDesktop ? children : null;
@@ -311,10 +313,6 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                   })}
                 </ol>
               </div>
-            </div>
-            <div className="rightcontroller">
-              <div className="blank"></div>
-              <div className="okbg"></div>
             </div>
           </div>
         </Desktopstyle>

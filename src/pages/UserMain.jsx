@@ -31,7 +31,7 @@ export default function UserMain({ page }) {
   };
 
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
-  const userId = useSelector((state) => state.user.userID);
+  const userId = useSelector(state => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
 
@@ -56,13 +56,12 @@ export default function UserMain({ page }) {
       <Desktop>
         <Header />
         <UserMainMenu />
-
         <Routes>
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
           <Route path="/notice" element={<UserNotice />} />
         </Routes>
-        {/* <UserMyPage /> */}
+
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>

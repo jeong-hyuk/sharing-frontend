@@ -137,14 +137,13 @@ export default function UserMyPage() {
   const month = `0${today.getMonth() + 1}`.slice(-2);
   const day = `0${today.getDate()}`.slice(-2);
   const dateString = `${year}-${month}-${day}`;
-  console.log(dateString);
 
   const showMain = async () => {
     try {
       const resShowMain = await axios.get(
         `http://localhost:4000/main/myPage/${userId}`,
       );
-      console.log(resShowMain, '@@@@@@@@@@@@@@@@@@@@');
+
       setUser(resShowMain.data.ARTICLE[0].USER_NAME);
       setPhoneNum(resShowMain.data.ARTICLE[0].PHONE_NUMBER);
       setMain(resShowMain.data.ARTICLE);

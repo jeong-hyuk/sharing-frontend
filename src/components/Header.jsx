@@ -141,7 +141,6 @@ export default function Header() {
           <img src="" alt="로고" className="header_logo" />
           <div className="user_info_header">
             <a href="">
-              {console.log(change)}
               {change === true ? (
                 <FontAwesomeIcon icon={faBell} className="header_alramred" />
               ) : (
