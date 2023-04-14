@@ -6,20 +6,30 @@ import companyLogo from '../pages/images/userIcon.png';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const vibration = keyframes`
-  from {
+  0% {
     transform: rotate(10deg);
   }
-  to {
+  25% {
+    transform: rotate(0deg);
+  }
+  50%{
     transform: rotate(-10deg);
+  }
+  75%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(10deg);
   }
 `;
 const CommonHeader = styled.div`
   position: fixed;
   width: 100%;
   height: 11vh;
-  background-color: #618ffc;
+  background-color: #81a8e3;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
   z-index: 1;
   .UserHeader {
@@ -150,9 +160,9 @@ export default function Header() {
               </div>
               <p className="">{userId}</p>
             </div>
-            <a href="" className="user_info_img">
+            <Link to="/myPage" className="user_info_img">
               <img src={companyLogo} alt="프로필" />
-            </a>
+            </Link>
           </div>
         </div>
       </CommonHeader>

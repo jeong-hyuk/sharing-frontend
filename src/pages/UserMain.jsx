@@ -61,6 +61,7 @@ export default function UserMain({ page }) {
           <Route path="/myPage" element={<UserMyPage />} />
           <Route path="/notice" element={<UserNotice />} />
         </Routes>
+
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
