@@ -44,7 +44,7 @@ const Mainstyle = styled.div`
   .chatbotallcontroller {
     display: none;
     overflow: hidden;
-    transform: translate(13vw, 14vh);
+    transform: translate(5vw, 7vh);
     width: 20vw;
     height: 70vh;
     color: #fff;
@@ -149,11 +149,6 @@ const Mainstyle = styled.div`
 `;
 
 export default function Chatbotcontent() {
-  const profileBtn = () => {
-    const open = document.querySelector('.profile1');
-    open.style.display = open.style.display === 'none' ? 'block' : 'none';
-  };
-
   return (
     <>
       <Mainstyle>
