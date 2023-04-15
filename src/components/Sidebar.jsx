@@ -8,6 +8,8 @@ import {
   faHouse,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const SidebarDiv = styled.div`
   background-color: #fff;
@@ -134,13 +136,32 @@ const Sidelist = styled.div`
 const Sidebar = ({ width = 300 }) => {
   const [isOpen, setOpen] = useState(false);
   const [xPosition, setX] = useState(width);
+
+  // sidebar 디비에서 가져온 배열 저장.
+  const [name, setName] = useState([]);
+
   const side = useRef();
+
+  // toggleMenu 열릴때 axios 실행.
+  const showSideBar = async () => {
+    try {
+      console.log('잘옴');
+      const resShowSideBar = await axios.get(
+        'http://localhost:4000/subMain/sideBar/show',
+      );
+      setName(resShowSideBar.data.ARTICLE);
+    } catch (error) {
+      console.error(error);
+      console.log('단단히 잘못되었다.');
+    }
+  };
 
   // button 클릭 시 토글
   const toggleMenu = () => {
     if (xPosition > 0) {
       setX(0);
       setOpen(true);
+      showSideBar();
     } else {
       setX(width);
       setOpen(false);
@@ -163,23 +184,18 @@ const Sidebar = ({ width = 300 }) => {
           <span className="material-symbols-outlined">arrow_forward_ios</span>
         )}
       </SidebarBtn>
+
       <Sidelist>
         <ul>
-          <li>
-            <FontAwesomeIcon icon={faLaptop} className="sideBar_icon_laptop" />
-            <p>노트북</p>
-          </li>
-          <li>
-            <FontAwesomeIcon
-              icon={faComputerMouse}
-              className="sideBar_icon_mouse"
-            />
-            <p>마우스</p>
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faPlug} className="sideBar_icon_plug" />
-            <p>멀티탭</p>
-          </li>
+          {name.map((el, idx) => {
+            <li key={idx}>
+              <img
+                src={`http://localhost:4000/uploads/${el.IMG_SRC}`}
+                className="sideBar_icon_laptop"
+              />
+              <p>{el.OBJECT_NAME}</p>
+            </li>;
+          })}
           <Link to="/usermain" className="homeBtn">
             <div>
               <p>HOME</p>
