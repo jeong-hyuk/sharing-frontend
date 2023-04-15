@@ -112,6 +112,7 @@ export default function UserRent() {
         `http://localhost:4000/main/${userId}`,
       );
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
+
       setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
     } catch (error) {
       console.error(error);
@@ -130,7 +131,7 @@ export default function UserRent() {
             <Link to={`/subMain/${el.OBJECT_TYPE}`}>
               <div>
                 <img
-                  src="http://localhost:4000/uploads/house-solid.svg"
+                  src={`http://localhost:4000/uploads/${el.IMG_SRC}`}
                   alt=""
                   className="rent_laptop_icon"
                 />
