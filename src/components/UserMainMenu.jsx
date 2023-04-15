@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Chatbotcontent from '../chatbot/Chatbotcontent';
 
 const Menu = styled.div`
   position: fixed;
@@ -128,10 +129,10 @@ export default function UserMainMenu() {
         </li>
         <li>
           <Link to="/notice">NOTICE</Link>
-
         </li>
       </ul>
-      <div className="menu_button">
+      <div>
+        <Chatbotcontent />
         <Link to="/" className="chat_bot">
           <FontAwesomeIcon icon={faCommentDots} className="chat_bot_icon" />
         </Link>
