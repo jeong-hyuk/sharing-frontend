@@ -113,12 +113,10 @@ export default function UserMainMenu() {
           </Link>
         </li>
         <li>
-
           <Link to="/myPage">MYPAGE</Link>
         </li>
         <li>
           <Link to="/notice">NOTICE</Link>
-
         </li>
       </ul>
       {/* <div className="menu_button">

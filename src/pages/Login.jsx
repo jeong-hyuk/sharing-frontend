@@ -11,7 +11,32 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { faCircleArrowRight, faLock } from '@fortawesome/free-solid-svg-icons';
 import kakaotalkImg from '../pages/images/kakaoIcon.png';
+import { motion } from 'framer-motion';
 
+const TitlePart = styled(motion.div)`
+  z-index: 2;
+  background-color: #446a72;
+  width: 35vw;
+  position: absolute;
+  top: -5vh;
+  right: 10%;
+  height: 76vh;
+  box-shadow: 13px 13px 15px rgba(0, 0, 0, 10%);
+  h1 {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translate(0, -50%);
+    color: #ffffff;
+    font-size: 8rem;
+    font-weight: 600;
+    p {
+      padding-top: 10px;
+      font-size: 3.5rem;
+      font-weight: 400;
+    }
+  }
+`;
 const LoginStyle = styled.div`
   position: absolute;
   top: 50%;
@@ -19,11 +44,25 @@ const LoginStyle = styled.div`
   transform: translate(-50%, -50%);
   background-color: white;
   box-shadow: 5px 5px 13px 15px rgba(0, 0, 0, 10%);
-  width: 86vw;
+  width: 74vw;
   height: 66vh;
+
+  .logo-part {
+    position: absolute;
+    top: calc((7.4vw - 11vh) / 2);
+    left: calc((7.4vw - 11vh) / 2);
+    width: 11vh;
+    height: 11vh;
+    background-color: #446a72;
+    opacity: 0.5;
+    border-radius: 10px;
+  }
+  // 메인 제목 부분
+  /*  */
+
   // 로그인 파트
   .login-part {
-    width: 40%;
+    width: 32%;
     position: absolute;
     right: 0;
     top: 50%;
@@ -32,18 +71,30 @@ const LoginStyle = styled.div`
       width: 65%;
       font-size: 3.5rem;
       color: #446a72;
+      font-weight: 700;
     }
     p {
       display: flex;
       width: 65%;
       font-size: 6rem;
       color: #888888;
-      border-bottom: 2px solid #888888;
+      border-bottom: 1px solid #888888;
       padding-top: 30px;
       padding-bottom: 6px;
       input {
         width: 100%;
         border-style: none;
+        font-size: 1.5rem;
+
+        padding-left: 7px;
+        margin: 0px 5px 3px 10px;
+
+        :focus {
+          outline: none;
+          border: 1px solid #888888;
+          /* box-shadow: 0 0 5px #888888; */
+          border-radius: 3px;
+        }
       }
     }
     .register_btn {
@@ -74,7 +125,7 @@ const LoginStyle = styled.div`
 
     .btn-part {
       display: flex;
-      width: 30%;
+      width: 40%;
       justify-content: space-evenly;
       position: absolute;
       bottom: -60px;
@@ -82,8 +133,8 @@ const LoginStyle = styled.div`
       .kakao_btn {
         border-style: none;
         background-color: #ffe767;
-        width: 70px;
-        height: 70px;
+        width: 65px;
+        height: 65px;
         border-radius: 50%;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
 
@@ -95,8 +146,8 @@ const LoginStyle = styled.div`
         border-style: none;
         background-color: transparent;
         .menu_next_button_icon {
-          width: 70px;
-          height: 70px;
+          width: 65px;
+          height: 65px;
           color: #446a72;
           border-radius: 50%;
           box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
@@ -107,15 +158,6 @@ const LoginStyle = styled.div`
         }
       }
     }
-  }
-  .green-box {
-    background-color: #446a72;
-    width: 35vw;
-    position: absolute;
-    top: -5vh;
-    left: 8%;
-    height: 76vh;
-    box-shadow: 13px 13px 15px rgba(0, 0, 0, 10%);
   }
 `;
 export default function Login() {
@@ -130,7 +172,7 @@ export default function Login() {
   const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
   const KAKAO_LOGOUT_URI = 'http://localhost:3000';
-  const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
+  // const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
 
   const loginUser = async () => {
     if (!loginIdInput.current.value || !loginPwInput.current.value)
@@ -174,8 +216,18 @@ export default function Login() {
 
   return (
     <LoginStyle>
+      <p className="logo-part"></p>
+      {/* 메인 제목 파트 */}
+      <TitlePart
+        animate={{ translateX: '-24.2vw' }}
+        transition={{ duration: 0.8 }}
+      >
+        <h1>
+          Sharing
+          <p>Whatever you need</p>
+        </h1>
+      </TitlePart>
       {/* 로그인 파트 */}
-
       <div className="login-part">
         <h1>Login</h1>
         <p>
@@ -217,7 +269,6 @@ export default function Login() {
           </button>
         </div>
       </div>
-      <div className="green-box"></div>
     </LoginStyle>
   );
 }
