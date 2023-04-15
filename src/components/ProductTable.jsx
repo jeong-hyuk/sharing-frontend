@@ -42,8 +42,8 @@ const Desktopstyle = styled.div`
           li {
             font-size: 1.6rem;
             width: 22vw;
-            height: 7vh;
-            line-height: 7vh;
+            height: 6vh;
+            line-height: 6vh;
             :last-child {
               border-right: none;
             }

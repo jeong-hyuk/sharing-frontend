@@ -31,7 +31,7 @@ const CommonHeader = styled.div`
   height: 11vh;
   background-color: #81a8e3;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 3;
   .UserHeader {
     width: 70%;
     height: 11vh;
@@ -94,7 +94,7 @@ const CommonHeader = styled.div`
 `;
 
 export default function Header() {
-  const userId = useSelector((state) => state.user.userID);
+  const userId = useSelector(state => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState('');
   const [date, setDate] = useState([]);
@@ -116,7 +116,7 @@ export default function Header() {
 
       // 현재 날짜 받아오기.
       const delay = resShowMain.data.DATE.filter(
-        (el) => el.END_DATE.slice(0, 10) <= dateString,
+        el => el.END_DATE.slice(0, 10) <= dateString,
       );
 
       if (delay.length >= 1) setChange(true);

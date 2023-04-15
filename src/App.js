@@ -12,16 +12,15 @@ import UserRent from './pages/UserRent';
 import MangerMain from './pages/MangerMain';
 import Chatbotcontroller from './components/Chatbotcontroller';
 
-
 function App() {
-  const isLogin = useSelector((state) => state.user.isLogin);
-  const userId = useSelector((state) => state.user.userID);
+  const isLogin = useSelector(state => state.user.isLogin);
+  const userId = useSelector(state => state.user.userID);
   console.log(userId); // 관리자 확인.
-  
+
   return (
     <>
       <GlobalStyle />
-      <Chatbotcontroller />
+      {/* <Chatbotcontroller /> */}
 
       {userId === 'manager' ? (
         <MangerMain />
@@ -40,7 +39,6 @@ function App() {
           <Route path="/subMain/:id" element={<UserRent />} />
         </Routes>
       )}
-
     </>
   );
 }

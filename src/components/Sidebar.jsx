@@ -1,24 +1,31 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import {
+  faLaptop,
+  faComputerMouse,
+  faPlug,
+  faHouse,
+} from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const SidebarDiv = styled.div`
-  background-color: #000000be;
+  background-color: #fff;
   position: fixed;
-  top: 0;
   bottom: 0;
   left: 0;
   transition: 0.4s ease;
-  height: 100%;
-  z-index: 99;
+  z-index: 2;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
 `;
 
 const SidebarBtn = styled.button`
   position: relative;
-  left: 280px;
+  left: 300px;
   top: 50vh;
   width: 3vw;
   height: 10vh;
-  z-index: 99;
+  z-index: 2;
   transition: 0.8s ease;
   border-radius: 0 5px 5px 0;
   border: 0px solid;
@@ -29,22 +36,102 @@ const SidebarBtn = styled.button`
 
 const Sidelist = styled.div`
   position: relative;
-  left: 15%;
-  text-align: center;
+  height: 100%;
+
   ul {
-    li {
-      width: 70%;
-      height: 6vh;
-      line-height: 6vh;
-      margin-bottom: 5vh;
+    height: 100%;
+
+    .homeBtn {
+      position: absolute;
+      right: 3vw;
+      bottom: 14vh;
+      width: 120px;
+      height: 50px;
+      border-radius: 50px;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+      transition: all 0.1s;
+      :hover {
+        background-color: #565a7a;
+        box-shadow: 0;
+        transition: all 0.1s;
+        div {
+          p,
+          .sideBar_icon_home {
+            color: #fff;
+            transition: all 0.1s;
+          }
+        }
+      }
+    }
+
+    div {
+      display: flex;
+      align-items: flex-end;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      p {
+        font-size: 1.6rem;
+        margin-right: 0.5vw;
+      }
+      .sideBar_icon_home {
+        width: 25px;
+        height: 25px;
+        color: rgb(86, 90, 122);
+      }
+    }
+  }
+  li {
+    display: flex;
+    width: 70%;
+    height: 8vh;
+    line-height: 8vh;
+    cursor: pointer;
+    position: relative;
+    top: 6vh;
+    margin: 0 0 0.5vh 0;
+    transition: all 0.1s;
+    /* border-radius: 0 50px 50px 0; */
+    border-bottom: 1px solid rgb(86, 90, 122, 0.3);
+    transition: all 0.1s;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 0 0 20px 0;
+    .sideBar_icon_laptop,
+    .sideBar_icon_mouse,
+    .sideBar_icon_plug {
+      width: 15px;
+      height: 15px;
+      color: #565a7a;
+    }
+    :hover {
+      background-color: #565a7a;
+      border-radius: 0 50px 50px 0;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.1s;
+      p {
+        color: #fff;
+        transition: all 0.1s;
+      }
+      .sideBar_icon_laptop,
+      .sideBar_icon_mouse,
+      .sideBar_icon_plug {
+        color: #fff;
+        transition: all 0.1s;
+      }
+    }
+    p {
+      color: #565a7a;
       font-size: 1.6rem;
-      background-color: white;
-      border-radius: 5px;
-      cursor: pointer;
+      font-weight: 600;
+      text-align: right;
+      margin: 0 2vw 0 0.5vw;
+      transition: all 0.1s;
     }
   }
 `;
-const Sidebar = ({ width = 280 }) => {
+const Sidebar = ({ width = 300 }) => {
   const [isOpen, setOpen] = useState(false);
   const [xPosition, setX] = useState(width);
   const side = useRef();
@@ -78,9 +165,27 @@ const Sidebar = ({ width = 280 }) => {
       </SidebarBtn>
       <Sidelist>
         <ul>
-          <li>노트북</li>
-          <li>마우스</li>
-          <li>멀티탭</li>
+          <li>
+            <FontAwesomeIcon icon={faLaptop} className="sideBar_icon_laptop" />
+            <p>노트북</p>
+          </li>
+          <li>
+            <FontAwesomeIcon
+              icon={faComputerMouse}
+              className="sideBar_icon_mouse"
+            />
+            <p>마우스</p>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faPlug} className="sideBar_icon_plug" />
+            <p>멀티탭</p>
+          </li>
+          <Link to="/usermain" className="homeBtn">
+            <div>
+              <p>HOME</p>
+              <FontAwesomeIcon icon={faHouse} className="sideBar_icon_home" />
+            </div>
+          </Link>
         </ul>
       </Sidelist>
     </SidebarDiv>

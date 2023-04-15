@@ -17,16 +17,16 @@ import 'react-chatbot-kit/build/main.css';
 
 const Mainstyle = styled.div`
   position: absolute;
-  z-index: 100;
+  z-index: 1;
   //챗봇 전체 스타일 관리
   .chat_bot_btn {
     cursor: pointer;
     width: 45px;
     height: 45px;
     position: fixed;
-    bottom: 9vh;
+    bottom: 5vh;
     left: 13vw;
-    background-color: #f2685e;
+    background-color: #c6e36b;
     border-radius: 50%;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
     .chat_bot_icon {
