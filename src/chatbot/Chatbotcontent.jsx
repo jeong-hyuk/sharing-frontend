@@ -19,7 +19,7 @@ import 'react-chatbot-kit/build/main.css';
 
 const Mainstyle = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: 10000000;
   //챗봇 전체 스타일 관리
   .chat_bot_btn {
     cursor: pointer;
@@ -44,7 +44,7 @@ const Mainstyle = styled.div`
   .chatbotallcontroller {
     display: none;
     overflow: hidden;
-    transform: translate(5vw, 7vh);
+    transform: translate(14vw, 7vh);
     width: 20vw;
     height: 70vh;
     color: #fff;
