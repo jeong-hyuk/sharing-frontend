@@ -5,7 +5,9 @@ import {
   faCircleQuestion,
   faUser,
   faCommentDots,
+  faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
+import { FaGithub } from 'react-icons/fa';
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -88,8 +90,34 @@ const Mainstyle = styled.div`
         }
       }
     }
-    .help {
+    .member {
       display: none;
+      height: 85%;
+      background-color: #fff;
+      color: black;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      .person {
+        ol {
+          transform: translateX(2vw);
+          li {
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            width: 80%;
+            height: 11.9vh;
+            line-height: 11.9vh;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            p {
+              font-size: 1.5rem;
+            }
+          }
+          div {
+            display: none;
+          }
+        }
+      }
     }
 
     // 밑에 있는 3개의 버튼
@@ -99,7 +127,8 @@ const Mainstyle = styled.div`
       height: 15%;
       color: black;
       border-top: gray;
-      border-radius: 0 0 35px 35px;
+      border-radius: 0 0 20px 20px;
+      background-color: #fff;
       z-index: 10;
       ol {
         cursor: pointer;
@@ -120,18 +149,11 @@ const Mainstyle = styled.div`
 `;
 
 export default function Chatbotcontent() {
-  // const username = 'choiinyoung';
-  // const apiUrl = `https://api.github.com/users/${choiinyoung}`;
-  // const img = document.createElement('img');
-  // img.src = profileImage;
-  // document.querySelector('.profile-image-container').appendChild(img);
+  const profileBtn = () => {
+    const open = document.querySelector('.profile1');
+    open.style.display = open.style.display === 'none' ? 'block' : 'none';
+  };
 
-  // fetch(apiUrl)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     const profileImage = data.avatar_url;
-  //     console.log(profileImage);
-  //   });
   return (
     <>
       <Mainstyle>
@@ -171,14 +193,102 @@ export default function Chatbotcontent() {
               />
             </div>
           </div>
-          <div className="help">f</div>
+          <div className="member">
+            <div className="person">
+              <ol>
+                <li
+                  onClick={() => {
+                    const open = document.querySelector('.profile1');
+                    open.style.display =
+                      open.style.display === 'none' ? 'block' : 'none';
+                  }}
+                >
+                  <p>이찬호</p>
+                  <p>
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </p>
+                </li>
+                <div className="profile1">
+                  <img src="./member/chanho.png" alt="이찬호" />
+                  <p>zack8361</p>
+                  <p>
+                    <FaGithub />
+                  </p>
+                </div>
+
+                <li
+                  onClick={() => {
+                    const open = document.querySelector('.profile2');
+                    open.style.display =
+                      open.style.display === 'none' ? 'block' : 'none';
+                  }}
+                >
+                  <p>이유림</p>
+                  <p>
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </p>
+                </li>
+                <div className="profile2">
+                  <img src="./member/yu.png" alt="이유림" />
+                </div>
+
+                <li
+                  onClick={() => {
+                    const open = document.querySelector('.profile3');
+                    open.style.display =
+                      open.style.display === 'none' ? 'block' : 'none';
+                  }}
+                >
+                  <p>김정혁</p>
+                  <p>
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </p>
+                </li>
+                <div className="profile3">
+                  <img src="./member/jung.png" alt="김정혁" />
+                </div>
+
+                <li
+                  onClick={() => {
+                    const open = document.querySelector('.profile4');
+                    open.style.display =
+                      open.style.display === 'none' ? 'block' : 'none';
+                  }}
+                >
+                  <p>송민영</p>
+                  <p>
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </p>
+                </li>
+                <div className="profile4">
+                  <img src="./member/min.png" alt="송민영" />
+                </div>
+
+                <li
+                  onClick={() => {
+                    const open = document.querySelector('.profile5');
+                    open.style.display =
+                      open.style.display === 'none' ? 'block' : 'none';
+                  }}
+                >
+                  <p>최인영</p>
+                  <p>
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </p>
+                </li>
+                <div className="profile5">
+                  <img src="./member/chanho.png" alt="최인영" />
+                </div>
+              </ol>
+            </div>
+          </div>
           <div className="footer">
             <ol>
               <li
                 onClick={() => {
                   document.querySelector('.main').style.display = 'block';
                   document.querySelector('.msg').style.display = 'none';
-                  document.querySelector('.help').style.display = 'none';
+                  document.querySelector('.member').style.display = 'none';
                 }}
               >
                 <p className="icon">
@@ -191,7 +301,7 @@ export default function Chatbotcontent() {
                 onClick={() => {
                   document.querySelector('.main').style.display = 'none';
                   document.querySelector('.msg').style.display = 'block';
-                  document.querySelector('.help').style.display = 'none';
+                  document.querySelector('.member').style.display = 'none';
                 }}
               >
                 <p className="icon">
@@ -203,13 +313,13 @@ export default function Chatbotcontent() {
                 onClick={() => {
                   document.querySelector('.main').style.display = 'none';
                   document.querySelector('.msg').style.display = 'none';
-                  document.querySelector('.help').style.display = 'block';
+                  document.querySelector('.member').style.display = 'block';
                 }}
               >
                 <p className="icon">
                   <FontAwesomeIcon icon={faCircleQuestion} />
                 </p>
-                <p>Help</p>
+                <p>member</p>
               </li>
             </ol>
           </div>
