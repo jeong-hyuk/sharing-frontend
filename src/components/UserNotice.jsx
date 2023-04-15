@@ -18,7 +18,7 @@ const Notice = styled.div`
       font-size: 2.5rem;
       color: #556080;
       font-weight: 700;
-      padding: 7vh 0px 3vh 0vw;
+      padding: 7vh 0px 3vh 1vw;
     }
     .notice_qna {
       background-color: #fff;
@@ -26,6 +26,7 @@ const Notice = styled.div`
       border: 1px solid #fff;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
       width: 52vw;
+      border-top: 2px solid #565a7ab3;
       .notice_q {
         position: relative;
         border: 1px solid rgba(225, 228, 230, 0.5);
@@ -71,7 +72,7 @@ const Notice = styled.div`
 export default function UserNotice() {
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const handleClick = (index) => {
+  const handleClick = index => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 

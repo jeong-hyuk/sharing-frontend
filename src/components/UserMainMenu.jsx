@@ -52,6 +52,12 @@ const Menu = styled.div`
           transition: all 0.1s;
           font-weight: 600;
         }
+        .menu_active {
+          background-color: #565a7a;
+          color: #fff;
+          border-radius: 5px;
+          font-weight: 600;
+        }
       }
     }
   }
@@ -87,6 +93,7 @@ export default function UserMainMenu() {
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
+  const [activeMenu, setActiveMenu] = useState(0);
 
   const showMain = async () => {
     try {
@@ -108,7 +115,11 @@ export default function UserMainMenu() {
     <Menu>
       <ul>
         <li>
-          <Link to="/" className="menu_active">
+          <Link
+            to="/"
+            className={activeMenu === 0 ? 'menu_active' : ''}
+            onClick={() => setActiveMenu(0)}
+          >
             RENT
           </Link>
         </li>
@@ -117,13 +128,14 @@ export default function UserMainMenu() {
         </li>
         <li>
           <Link to="/notice">NOTICE</Link>
+
         </li>
       </ul>
-      {/* <div className="menu_button">
+      <div className="menu_button">
         <Link to="/" className="chat_bot">
           <FontAwesomeIcon icon={faCommentDots} className="chat_bot_icon" />
         </Link>
-      </div> */}
+      </div>
     </Menu>
   );
 }

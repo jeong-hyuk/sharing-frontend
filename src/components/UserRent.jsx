@@ -43,8 +43,8 @@ const Rent = styled.div`
         :hover {
           box-sizing: border-box;
           border-radius: 5px;
-          border: 7px solid #565a7a;
-          box-shadow: 7px 7px 7px rgba(0, 0, 0, 25%);
+          border: 4px solid #565a7a;
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
           transition: all 0.2s;
           div {
             .rent_laptop_icon,
@@ -55,7 +55,7 @@ const Rent = styled.div`
               filter: invert(34%) sepia(7%) saturate(1954%) hue-rotate(196deg)
                 brightness(96%) contrast(86%);
             }
-            P {
+            p {
               color: #565a7a;
               transition: all 0.1s;
             }
@@ -79,7 +79,7 @@ const Rent = styled.div`
               brightness(96%) contrast(86%) opacity(70%);
             transition: all 0.1s;
           }
-          P {
+          p {
             color: rgba(86, 90, 122, 0.7);
             font-weight: 700;
             font-size: 1.5rem;
@@ -102,7 +102,7 @@ const Rent = styled.div`
 
 export default function UserRent() {
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
-  const userId = useSelector((state) => state.user.userID);
+  const userId = useSelector(state => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
 
