@@ -11,6 +11,7 @@ import UserMyPage from '../components/UserMyPage';
 import UserNotice from '../components/UserNotice';
 
 import { Route, Routes } from 'react-router-dom';
+import UserNotice from '../components/UserNotice';
 
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
@@ -61,7 +62,6 @@ export default function UserMain({ page }) {
           <Route path="/myPage" element={<UserMyPage />} />
           <Route path="/notice" element={<UserNotice />} />
         </Routes>
-
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>

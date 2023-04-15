@@ -124,22 +124,11 @@ export default function UserMainMenu() {
           </Link>
         </li>
         <li>
-          <Link
-            to="/myPage"
-            className={activeMenu === 1 ? 'menu_active' : ''}
-            onClick={() => setActiveMenu(1)}
-          >
-            MYPAGE
-          </Link>
+          <Link to="/myPage">MYPAGE</Link>
         </li>
         <li>
-          <Link
-            to="/notice"
-            className={activeMenu === 2 ? 'menu_active' : ''}
-            onClick={() => setActiveMenu(2)}
-          >
-            NOTICE
-          </Link>
+          <Link to="/notice">NOTICE</Link>
+
         </li>
       </ul>
       <div className="menu_button">
