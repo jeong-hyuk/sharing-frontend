@@ -26,11 +26,11 @@ const RegisterStyle = styled.div`
   // 로고 파트
   .logo-part {
     position: absolute;
-    top: calc((7.4vw - 11vh) / 2);
-    left: calc((7.4vw - 11vh) / 2);
-    width: 11vh;
-    height: 11vh;
-    background-color: #446a72;
+    top: calc((7.4vw - 10vh) / 2);
+    left: calc((7.4vw - 10vh) / 2);
+    width: 10vh;
+    height: 10vh;
+    background-color: #81a8e3;
     opacity: 0.5;
     border-radius: 10px;
   }
@@ -38,7 +38,7 @@ const RegisterStyle = styled.div`
   .title-part {
     z-index: 2;
     /* background-color: #556080; */
-    background-color: #446a72;
+    background-color: #81a8e3;
     width: 35vw;
     position: absolute;
     top: -5vh;
@@ -50,7 +50,7 @@ const RegisterStyle = styled.div`
       top: 50%;
       left: 8%;
       transform: translate(0, -50%);
-      color: #ffffff;
+      color: #fff;
       font-size: 8rem;
       font-weight: 600;
       p {
@@ -70,8 +70,9 @@ const RegisterStyle = styled.div`
     h1 {
       width: 65%;
       font-size: 3.5rem;
-      color: #446a72;
+      color: #565a7a;
       margin-bottom: 15px;
+      font-weight: 730;
     }
     p {
       display: flex;
@@ -100,14 +101,14 @@ const RegisterStyle = styled.div`
     button {
       position: absolute;
       right: 36%;
-      margin-top: 20px;
+      margin-top: 23px;
 
       border-style: none;
       background-color: transparent;
       .menu_next_button_icon {
-        width: 65px;
-        height: 65px;
-        color: #446a72;
+        width: 60px;
+        height: 60px;
+        color: #565a7a;
         border-radius: 50%;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
         :hover {
@@ -131,7 +132,7 @@ export default function Register() {
   const [nameValue, setNameValue] = useState('');
   const [phoneNumberValue, setPhoneNumberValue] = useState('');
 
-  const inputFocus = (event) => {
+  const inputFocus = event => {
     const id = event.target.id;
     switch (id) {
       case 'id-input':
@@ -154,7 +155,7 @@ export default function Register() {
     }
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     const id = event.target.id;
     const value = event.target.value;
 
@@ -178,7 +179,7 @@ export default function Register() {
         break;
     }
   };
-  const inputBlur = (event) => {
+  const inputBlur = event => {
     const id = event.target.id;
     switch (id) {
       case 'id-input':
@@ -335,6 +336,7 @@ export default function Register() {
           <input
             id="id-input"
             type="text"
+            ref={registerIdInput}
             placeholder={idValue}
             onFocus={inputFocus}
             onBlur={inputBlur}
@@ -345,7 +347,8 @@ export default function Register() {
           <FontAwesomeIcon icon={faLock} />
           <input
             id="password-input"
-            type="text"
+            type="password"
+            ref={registerPwInput}
             placeholder={passwordValue}
             onFocus={inputFocus}
             onBlur={inputBlur}
@@ -356,7 +359,8 @@ export default function Register() {
           <FontAwesomeIcon icon={faLock} />
           <input
             id="password-repeat"
-            type="text"
+            type="password"
+            ref={passwordConfirmInput}
             placeholder={passwordConfirmValue}
             onFocus={inputFocus}
             onBlur={inputBlur}
@@ -368,6 +372,7 @@ export default function Register() {
           <input
             id="name-input"
             type="text"
+            ref={userName}
             placeholder={nameValue}
             onFocus={inputFocus}
             onBlur={inputBlur}
@@ -379,6 +384,7 @@ export default function Register() {
           <input
             id="phoneNumber-input"
             type="text"
+            ref={phoneNumber}
             placeholder={phoneNumberValue}
             onFocus={inputFocus}
             onBlur={inputBlur}
