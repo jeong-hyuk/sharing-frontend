@@ -7,7 +7,7 @@ import {
   faCommentDots,
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaBlogger } from 'react-icons/fa';
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -115,6 +115,19 @@ const Mainstyle = styled.div`
           }
           div {
             display: none;
+            width: 80%;
+            p {
+              font-size: 1.5rem;
+              text-align: center;
+            }
+            .icon {
+              width: 100%;
+              display: flex;
+              justify-content: space-around;
+              a {
+                font-size: 6rem;
+              }
+            }
           }
         }
       }
@@ -139,8 +152,11 @@ const Mainstyle = styled.div`
         box-shadow: rgba(237, 237, 237, 0.05) 0px 0px 25px;
         text-align: center;
         li {
+          p {
+            font-size: 1.3rem;
+          }
           p.icon {
-            font-size: 3rem;
+            font-size: 4rem;
           }
         }
       }
@@ -206,9 +222,14 @@ export default function Chatbotcontent() {
                 <div className="profile1">
                   <img src="./member/chanho.png" alt="이찬호" />
                   <p>zack8361</p>
-                  <p>
-                    <FaGithub />
-                  </p>
+                  <div className="icon">
+                    <a href="https://github.com/zack8361" target="_blank">
+                      <FaGithub />
+                    </a>
+                    <a href="https://kong8361.tistory.com/" target="_blank">
+                      <FaBlogger />
+                    </a>
+                  </div>
                 </div>
 
                 <li
@@ -225,6 +246,15 @@ export default function Chatbotcontent() {
                 </li>
                 <div className="profile2">
                   <img src="./member/yu.png" alt="이유림" />
+                  <p>yulimle</p>
+                  <div className="icon">
+                    <a href="https://github.com/yulimle" target="_blank">
+                      <FaGithub />
+                    </a>
+                    <a href="https://velog.io/@yulimle" target="_blank">
+                      <FaBlogger />
+                    </a>
+                  </div>
                 </div>
 
                 <li
@@ -241,6 +271,15 @@ export default function Chatbotcontent() {
                 </li>
                 <div className="profile3">
                   <img src="./member/jung.png" alt="김정혁" />
+                  <p>jeong-hyuk</p>
+                  <div className="icon">
+                    <a href="https://github.com/jeong-hyuk" target="_blank">
+                      <FaGithub />
+                    </a>
+                    <a href="https://jack1150.tistory.com/" target="_blank">
+                      <FaBlogger />
+                    </a>
+                  </div>
                 </div>
 
                 <li
@@ -257,6 +296,15 @@ export default function Chatbotcontent() {
                 </li>
                 <div className="profile4">
                   <img src="./member/min.png" alt="송민영" />
+                  <p>songmy1206</p>
+                  <div className="icon">
+                    <a href="https://github.com/songmy1206" target="_blank">
+                      <FaGithub />
+                    </a>
+                    <a href="https://jack1150.tistory.com/" target="_blank">
+                      <FaBlogger />
+                    </a>
+                  </div>
                 </div>
 
                 <li
@@ -273,6 +321,15 @@ export default function Chatbotcontent() {
                 </li>
                 <div className="profile5">
                   <img src="./member/chanho.png" alt="최인영" />
+                  <p>choiinyoung</p>
+                  <div className="icon">
+                    <a href="https://github.com/choiinyoung" target="_blank">
+                      <FaGithub />
+                    </a>
+                    <a href="https://jack1150.tistory.com/" target="_blank">
+                      <FaBlogger />
+                    </a>
+                  </div>
                 </div>
               </ol>
             </div>

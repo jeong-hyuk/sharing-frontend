@@ -10,7 +10,7 @@ const Rent = styled.div`
   position: fixed;
   top: 11vh;
   right: 0px;
-  background-color: rgba(2, 255, 255, 0.279);
+  /* background-color: rgba(255, 255, 255); */
   width: 70vw;
   height: 89vh;
   overflow-y: scroll;
@@ -20,9 +20,9 @@ const Rent = styled.div`
     position: absolute;
     border-radius: 5px;
     width: 25vw;
-    height: 69.5vh;
+    height: 80vh;
     left: 20vw;
-    top: 10vh;
+    top: 5vh;
     background-color: #fff;
     border: 1px solid rgba(86, 90, 122, 0.3);
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px;
@@ -38,6 +38,7 @@ const Rent = styled.div`
         top: 5vh;
         left: 3.5vw;
         border: 1px solid rgba(86, 90, 122, 0.3);
+        box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px inset;
         input {
           position: absolute;
           top: 10vh;
@@ -48,23 +49,24 @@ const Rent = styled.div`
       div {
         position: absolute;
         width: 100%;
-        top: 31vh;
-        left: 3vw;
+        top: 32vh;
+        left: 3.5vw;
         width: 25vw;
         ol {
           width: 80%;
           li {
-            display: flex;
-            justify-content: space-between;
-            line-height: 5vh;
-            height: 5vh;
+            border-bottom: solid 1px rgba(86, 90, 122, 0.3);
+            width: 18vw;
+            line-height: 5.5vh;
             span {
               font-size: 1.5rem;
             }
             input {
+              transform: translateX(1vw);
+              right: 10vw;
               font-size: 1.5rem;
-              width: 10vw;
-              height: 3vh;
+              height: 5vh;
+              border: none;
             }
           }
         }
@@ -73,9 +75,10 @@ const Rent = styled.div`
     .btn {
       position: absolute;
       display: flex;
-      justify-content: space-around;
-      width: 100%;
-      bottom: 3vh;
+      justify-content: space-between;
+      width: 18vw;
+      bottom: 5vh;
+      left: 3.5vw;
       li {
         cursor: pointer;
         width: 7vw;
@@ -215,27 +218,27 @@ export default function UserRent() {
             <div>
               <ol className="noticelist">
                 <li>
-                  <span>이름</span>
+                  <span>이름 :</span>
                   <input type="text" />
                 </li>
                 <li>
-                  <span>CPU</span>
+                  <span>CPU :</span>
                   <input type="text" />
                 </li>
                 <li>
-                  <span>메모리</span>
+                  <span>메모리 :</span>
                   <input type="text" />
                 </li>
                 <li>
-                  <span>GPU</span>
+                  <span>GPU :</span>
                   <input type="text" />
                 </li>
                 <li>
-                  <span>화면</span>
+                  <span>화면 :</span>
                   <input type="text" />
                 </li>
                 <li>
-                  <span>무게</span>
+                  <span>무게 :</span>
                   <input type="text" />
                 </li>
               </ol>
