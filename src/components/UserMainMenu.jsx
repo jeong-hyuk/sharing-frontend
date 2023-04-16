@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Chatbotcontent from '../chatbot/Chatbotcontent';
 
 const Menu = styled.div`
   position: fixed;
@@ -35,8 +36,9 @@ const Menu = styled.div`
         text-decoration: none;
         text-align: center;
         font-size: 1.5rem;
+        font-weight: 600;
         transition: all 0.1s;
-        border-right: 3px solid #556080;
+        border-right: 3px solid #565a7a;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 25%);
         border-radius: 5px;
         :link,
@@ -46,9 +48,15 @@ const Menu = styled.div`
         }
         :hover {
           color: #fff;
-          background-color: #556080;
+          background-color: #565a7a;
           border-radius: 5px;
           transition: all 0.1s;
+          font-weight: 600;
+        }
+        .menu_active {
+          background-color: #565a7a;
+          color: #fff;
+          border-radius: 5px;
           font-weight: 600;
         }
       }
@@ -64,7 +72,7 @@ const Menu = styled.div`
       position: absolute;
       bottom: 4vh;
       left: 13vw;
-      background-color: #f2685e;
+      background-color: #c6e36b;
       border-radius: 50%;
       box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
       .chat_bot_icon {
@@ -82,10 +90,11 @@ const Menu = styled.div`
 
 export default function UserMainMenu() {
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
-  const userId = useSelector((state) => state.user.userID);
+  const userId = useSelector(state => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
+  const [activeMenu, setActiveMenu] = useState(0);
 
   const showMain = async () => {
     try {
@@ -94,7 +103,6 @@ export default function UserMainMenu() {
       );
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
       setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
-      console.log(user);
     } catch (error) {
       console.error(error);
     }
@@ -108,20 +116,23 @@ export default function UserMainMenu() {
     <Menu>
       <ul>
         <li>
-          <Link to="/" className="menu_active">
-            Rent
+          <Link
+            to="/"
+            className={activeMenu === 0 ? 'menu_active' : ''}
+            onClick={() => setActiveMenu(0)}
+          >
+            RENT
           </Link>
         </li>
         <li>
-
-          <Link to="/myPage">마이페이지</Link>
+          <Link to="/myPage">MYPAGE</Link>
         </li>
         <li>
-          <Link to="/notice">공지사항</Link>
-
+          <Link to="/notice">NOTICE</Link>
         </li>
       </ul>
-      <div className="menu_button">
+      <div>
+        <Chatbotcontent />
         <Link to="/" className="chat_bot">
           <FontAwesomeIcon icon={faCommentDots} className="chat_bot_icon" />
         </Link>

@@ -43,7 +43,7 @@ const MyPage = styled.div`
         border-radius: 50%;
         width: 40px;
         height: 40px;
-        background-color: rgb(68, 106, 114);
+        background-color: #565a7a;
         border: 1px solid #fff;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         position: absolute;
@@ -68,7 +68,7 @@ const MyPage = styled.div`
         line-height: 45px;
         background-color: #fff;
         border-radius: 5px;
-        border-bottom: 1.5px solid rgba(68, 106, 114, 0.5);
+        border-bottom: 1.5px solid rgba(86, 90, 122, 0.5);
         p {
           font-size: 1.6rem;
           margin-left: 20px;
@@ -80,14 +80,14 @@ const MyPage = styled.div`
     padding: 3vh 0 0 4vw;
     p {
       font-size: 20px;
-      color: #446a72;
+      color: #565a7a;
       font-weight: 570;
       margin-top: 2vh;
     }
     .current_situation_header {
       display: flex;
-      background-color: #446a72;
-      width: 52vw;
+      background-color: rgba(86, 90, 122, 0.7);
+      width: 55vw;
       height: 35px;
       line-height: 6px;
       justify-content: space-around;
@@ -97,7 +97,7 @@ const MyPage = styled.div`
         font-size: 16px;
         color: #fff;
         font-weight: 600;
-        width: 13vw;
+        width: 11vw;
         text-align: center;
       }
     }
@@ -108,15 +108,15 @@ const MyPage = styled.div`
       border-radius: 5px;
       border: 1px solid #fff;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-      width: 52vw;
+      width: 55vw;
       height: 40px;
       margin: 1vh 0 2vh 0;
       line-height: 7px;
       p {
         font-size: 15px;
         font-weight: 500;
-        color: #666;
-        width: 13vw;
+        color: #565a7a;
+        width: 11vw;
         text-align: center;
       }
     }
@@ -139,14 +139,13 @@ export default function UserMyPage() {
   const month = `0${today.getMonth() + 1}`.slice(-2);
   const day = `0${today.getDate()}`.slice(-2);
   const dateString = `${year}-${month}-${day}`;
-  console.log(dateString);
 
   const showMain = async () => {
     try {
       const resShowMain = await axios.get(
         `http://localhost:4000/main/myPage/${userId}`,
       );
-      console.log(resShowMain, '@@@@@@@@@@@@@@@@@@@@');
+
       setUser(resShowMain.data.ARTICLE[0].USER_NAME);
       setPhoneNum(resShowMain.data.ARTICLE[0].PHONE_NUMBER);
       setMain(resShowMain.data.ARTICLE);
@@ -223,8 +222,9 @@ export default function UserMyPage() {
           <li className="current_situation_header">
             <p>코드</p>
             <p>물품명</p>
-            <p>상태</p>
+            <p>승인여부</p>
             <p>반납일</p>
+            <p>상태</p>
           </li>
           <li>
             {myPage.map((el, index) => (
@@ -234,10 +234,8 @@ export default function UserMyPage() {
 
                 <p>{el.STATUS === 1 ? '승인대기중' : '대여중'}</p>
                 <p>{`${el.END_DATE.slice(0, 10)} `}</p>
-                <p>
-                  {dateString >= `${el.END_DATE.slice(0, 10)}`
-                    ? '연체'
-                    : '연체아님'}
+                <p style={{ color: 'orangered', fontWeight: '600' }}>
+                  {dateString >= `${el.END_DATE.slice(0, 10)}` ? '연체' : ''}
                 </p>
               </div>
             ))}
