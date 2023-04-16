@@ -125,7 +125,7 @@ const MyPage = styled.div`
 
 export default function UserMyPage() {
   // 정혁이가 로그인 시켜줄떄 스토어에 저장해둔 userID 를 세션 으로 이용.
-  const userId = useSelector((state) => state.user.userID);
+  const userId = useSelector(state => state.user.userID);
   const [main, setMain] = useState([]);
   const [myPage, setMyPage] = useState([]);
   const [user, setUser] = useState();
@@ -170,20 +170,24 @@ export default function UserMyPage() {
         `http://localhost:4000/main/myPage/${userId}`,
         formData,
       );
-
-      setRender((cur) => !cur);
+      setRender(cur => !cur);
     } catch (error) {
       console.error(error);
       console.log('errorrrrr');
     }
   }
 
-  const changeImage = () => {
+  const changeImage = async () => {
+    try {
+      const resChangeImage = await axios.post(
+        `http://localhost:4000/main/mypage/common/${userId}`,
+      );
+      setRender(cur => !cur);
+    } catch (error) {
+      console.error(error);
+      console.log('기본 이미지 오류');
+    }
     // setMain((main) => [{ ...main[0], PROFILE_IMG: '' }]);
-    setMain((main) => [{ ...main[0], PROFILE_IMG: '' }]);
-    // setRender((cur) => !cur);
-    // console.log('commonImage', commonImage);
-    // console.log('main[0]', main[0]);
   };
 
   return (

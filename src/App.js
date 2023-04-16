@@ -2,20 +2,14 @@ import './App.css';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Route, RouterProvider, Routes } from 'react-router-dom';
 import GlobalStyle from './components/GlobalStyle';
-import Login from './pages/Login';
-import Main from './pages/Main';
-import Register from './pages/Register';
-import KakaoRedirectHandler from './components/KakaoRedirectHandler';
-import UserMain from './pages/UserMain';
-import UserRent from './pages/UserRent';
 
-import FindRobot from './components/FindRobot';
+import AnimationRoutes from './components/AnimationRoutes';
 import axios from 'axios';
-import { useEffect } from 'react';
 import { login } from './store/modules/user';
+import { useEffect } from 'react';
 
 function App() {
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const isLogin = useSelector(state => state.user.isLogin);
   const dispatch = useDispatch();
 
   // App 시작 시, 브라우저 로컬 스토리지에 저장 되어 있는 토큰이 있는지를 확인 후,
@@ -48,23 +42,10 @@ function App() {
     tokenLoginCheck();
   }, []);
 
-
-import MangerMain from './pages/ManagerMain';
-import Chatbotcontroller from './components/Chatbotcontroller';
-import AnimationRoutes from './components/AnimationRoutes';
-
-function App() {
-  const isLogin = useSelector(state => state.user.isLogin);
-  const userId = useSelector(state => state.user.userID);
-  console.log(userId); // 관리자 확인.
-
-
   return (
     <>
       <GlobalStyle />
-
       <AnimationRoutes />
-
     </>
   );
 }
