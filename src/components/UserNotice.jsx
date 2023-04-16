@@ -2,6 +2,7 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const Notice = styled.div`
@@ -71,15 +72,27 @@ const Notice = styled.div`
 
 export default function UserNotice() {
   const [activeIndex, setActiveIndex] = useState(null);
+  const userId = useSelector(state => state.user.userID);
+  const [items, setItems] = useState([]);
 
   const handleClick = index => {
     setActiveIndex(activeIndex === index ? null : index);
   };
-
+  const checkBoxClick = e => {
+    e.stopPropagation();
+  };
   return (
     <Notice>
       <div className="Notice_all">
         <p>공지사항</p>
+        {userId === 'manager' ? (
+          <div className="notice_header">
+            <button className="append_btn">추가</button>
+            <button className="delete_btn">삭제</button>
+          </div>
+        ) : (
+          ''
+        )}
         <ul className="notice_qna">
           <li
             className={`notice_q ${activeIndex === 0 ? 'active' : ''}`}

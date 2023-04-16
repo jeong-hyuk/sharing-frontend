@@ -11,6 +11,7 @@ import UserMyPage from '../components/UserMyPage';
 import UserNotice from '../components/UserNotice';
 
 import { Route, Routes } from 'react-router-dom';
+import ManagerNotice from '../components/ManagerNotice';
 
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {

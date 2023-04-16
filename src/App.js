@@ -9,8 +9,9 @@ import KakaoRedirectHandler from './components/KakaoRedirectHandler';
 import UserMain from './pages/UserMain';
 import UserRent from './pages/UserRent';
 
-import MangerMain from './pages/MangerMain';
+import MangerMain from './pages/ManagerMain';
 import Chatbotcontroller from './components/Chatbotcontroller';
+import AnimationRoutes from './components/AnimationRoutes';
 
 function App() {
   const isLogin = useSelector(state => state.user.isLogin);
@@ -20,25 +21,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      {/* <Chatbotcontroller /> */}
-
-      {userId === 'manager' ? (
-        <MangerMain />
-      ) : (
-        <Routes>
-          <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
-          <Route
-            path="/register"
-            element={isLogin ? <Login /> : <Register />}
-          />
-          <Route
-            path="/oauth/callback/kakao"
-            element={<KakaoRedirectHandler />}
-          />
-          <Route path="/usermain" element={<UserMain />} />
-          <Route path="/subMain/:id" element={<UserRent />} />
-        </Routes>
-      )}
+      <AnimationRoutes />
     </>
   );
 }
