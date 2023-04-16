@@ -13,6 +13,8 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { color, style } from '@mui/system';
+import { useRef } from 'react';
 
 const Desktopstyle = styled.div`
   position: relative;
@@ -263,7 +265,6 @@ const Mobilestyle = styled.div`
 `;
 
 export default function ProductTable({ page, subMainData, handleRender }) {
-  // console.log(subMainData[0].OBJECT_TYPE);
   const [rent, setRent] = useState(false);
 
   const Desktop = ({ children }) => {
@@ -288,8 +289,10 @@ export default function ProductTable({ page, subMainData, handleRender }) {
   const findRent = async idx => {
     try {
       // store 에서 가져온 나의 user_id
+
       const type = subMainData[idx].OBJECT_TYPE;
       const code = subMainData[idx].CODE;
+
       console.log(code);
       const findRentObj = await axios.get(
         `http://localhost:4000/subMain/find/${userId}/${code}/${type}`,
@@ -323,6 +326,15 @@ export default function ProductTable({ page, subMainData, handleRender }) {
     },
   ];
 
+  // const red = document.querySelector('ol > li > .red');
+  // red.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
+  // const parentRed = red.parentNode;
+  // // parentRed.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
+  const red = useRef();
+  if (red.current !== undefined) {
+    // console.log(red.current.parentNode);
+    red.current.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
+  }
   return (
     <>
       <Desktop>
@@ -362,7 +374,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
           </div>
           <div className="allcontroller">
             <div className="leftcontroller">
-              <p>LAPTOP</p>
+              <p>{name}</p>
               <div className="title">
                 <ol>
                   <li>코드</li>
@@ -374,10 +386,16 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                 <ol>
                   {subMainData.map((el, idx) => {
                     return (
-                      <li key={idx}>
+                      <li key={idx} onClick={() => findRent(idx)}>
                         <p>{el.CODE}</p>
                         <p>{el.NAME}</p>
-                        <p>{el.STATUS === 0 ? '대여가능' : '대여불가'}</p>
+                        {el.STATUS === 0 ? (
+                          <p>대여가능</p>
+                        ) : (
+                          <p ref={red} className="red" style={{ color: 'red' }}>
+                            대여불가
+                          </p>
+                        )}
                       </li>
                     );
                   })}

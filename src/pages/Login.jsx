@@ -15,7 +15,7 @@ import { motion } from 'framer-motion';
 
 const TitlePart = styled(motion.div)`
   z-index: 2;
-  background-color: #446a72;
+  background-color: #81a8e3;
   width: 35vw;
   position: absolute;
   top: -5vh;
@@ -27,7 +27,7 @@ const TitlePart = styled(motion.div)`
     top: 50%;
     left: 8%;
     transform: translate(0, -50%);
-    color: #ffffff;
+    color: #fff;
     font-size: 8rem;
     font-weight: 600;
     p {
@@ -42,18 +42,19 @@ const LoginStyle = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: #fff;
   box-shadow: 5px 5px 13px 15px rgba(0, 0, 0, 10%);
   width: 74vw;
   height: 66vh;
 
+  /* #565a7a */
   .logo-part {
     position: absolute;
-    top: calc((7.4vw - 11vh) / 2);
-    left: calc((7.4vw - 11vh) / 2);
-    width: 11vh;
-    height: 11vh;
-    background-color: #446a72;
+    top: calc((7.4vw - 10vh) / 2);
+    left: calc((7.4vw - 10vh) / 2);
+    width: 10vh;
+    height: 10vh;
+    background-color: #81a8e3;
     opacity: 0.5;
     border-radius: 10px;
   }
@@ -70,8 +71,8 @@ const LoginStyle = styled.div`
     h1 {
       width: 65%;
       font-size: 3.5rem;
-      color: #446a72;
-      font-weight: 700;
+      color: #565a7a;
+      font-weight: 730;
     }
     p {
       display: flex;
@@ -79,7 +80,7 @@ const LoginStyle = styled.div`
       font-size: 6rem;
       color: #888888;
       border-bottom: 1px solid #888888;
-      padding-top: 30px;
+      padding-top: 28px;
       padding-bottom: 6px;
       input {
         width: 100%;
@@ -103,8 +104,8 @@ const LoginStyle = styled.div`
       font-size: 2.5rem;
       background-color: transparent;
       a {
-        font-weight: 700;
-        font-size: 2.5rem;
+        font-weight: 500;
+        font-size: 2.2rem;
         color: #555555;
       }
     }
@@ -129,12 +130,12 @@ const LoginStyle = styled.div`
       justify-content: space-evenly;
       position: absolute;
       bottom: -60px;
-      right: 32%;
+      right: 29%;
       .kakao_btn {
         border-style: none;
         background-color: #ffe767;
-        width: 65px;
-        height: 65px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
 
@@ -146,9 +147,9 @@ const LoginStyle = styled.div`
         border-style: none;
         background-color: transparent;
         .menu_next_button_icon {
-          width: 65px;
-          height: 65px;
-          color: #446a72;
+          width: 60px;
+          height: 60px;
+          color: #565a7a;
           border-radius: 50%;
           box-shadow: 4px 4px 4px rgba(0, 0, 0, 25%);
           :hover {
@@ -172,7 +173,7 @@ export default function Login() {
   const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
   const KAKAO_LOGOUT_URI = 'http://localhost:3000';
-  // const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
+  const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
 
   const loginUser = async () => {
     if (!loginIdInput.current.value || !loginPwInput.current.value)
