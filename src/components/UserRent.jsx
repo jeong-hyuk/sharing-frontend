@@ -65,6 +65,7 @@ const Rent = styled.div`
               transform: translateX(1vw);
               right: 10vw;
               font-size: 1.5rem;
+              width: 14vw;
               height: 5vh;
               border: none;
             }
