@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -130,6 +130,8 @@ export default function UserMyPage() {
   const [myPage, setMyPage] = useState([]);
   const [user, setUser] = useState();
   const [phoneNum, setPhoneNum] = useState();
+  const [render, setRender] = useState(false);
+  const commonImage = useRef(main[0]);
 
   // 현재 날짜 계산 해보자
   const today = new Date();
@@ -149,30 +151,57 @@ export default function UserMyPage() {
       setMain(resShowMain.data.ARTICLE);
       setMyPage(resShowMain.data.ARTICLE2);
     } catch (error) {
-      console.log('여기로왔냐?');
+      console.log('error');
       console.error(error);
     }
   };
 
   useEffect(() => {
     showMain();
-  }, []);
+  }, [render]);
 
   if (!main || !myPage) return null;
+
+  async function handleImage(e) {
+    const formData = new FormData();
+    formData.append('image', e.target.files[0]);
+    try {
+      const resHandleImage = await axios.post(
+        `http://localhost:4000/main/myPage/${userId}`,
+        formData,
+      );
+
+      setRender((cur) => !cur);
+    } catch (error) {
+      console.error(error);
+      console.log('errorrrrr');
+    }
+  }
+
+  const changeImage = () => {
+    // setMain((main) => [{ ...main[0], PROFILE_IMG: '' }]);
+    setMain((main) => [{ ...main[0], PROFILE_IMG: '' }]);
+    // setRender((cur) => !cur);
+    // console.log('commonImage', commonImage);
+    // console.log('main[0]', main[0]);
+  };
 
   return (
     <MyPage>
       <div className="user_ImgInfo">
         <div className="user_profile">
-          {main.length >= 1 && main[0].PROFILE_IMG !== undefined ? (
-            <img src={'http://localhost:4000/uploads/' + main[0].PROFILE_IMG} />
+          {main.length >= 1 && main[0].PROFILE_IMG !== '' ? (
+            <img src={'http://localhost:4000/profile/' + main[0].PROFILE_IMG} />
           ) : (
             <img src={userProfile} alt="마이페이지 기본 이미지" />
           )}
 
-          <button>기본이미지</button>
+          <button onClick={changeImage}>기본이미지</button>
           <p>
-            <FontAwesomeIcon icon={faPen} className="profile_edit" />
+            <button>
+              <FontAwesomeIcon icon={faPen} className="profile_edit" />
+            </button>
+            <input type="file" name="file" onChange={handleImage} />
           </p>
         </div>
         <ul>

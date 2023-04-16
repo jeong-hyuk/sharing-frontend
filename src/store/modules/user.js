@@ -30,7 +30,7 @@ export default function user(state = initState, action) {
       return {
         ...state,
         userID: action.payload.id,
-        userPW: action.payload.password,
+        // userPW: action.payload.password,
         isLogin: true,
       };
     case LOGOUT:

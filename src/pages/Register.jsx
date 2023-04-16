@@ -217,6 +217,7 @@ export default function Register() {
   //     alert(err.response.data);
   //   }
   // };
+
   //push 수정
   const checkPassword = () => {
     if (registerPwInput.current.value.length < 8) {

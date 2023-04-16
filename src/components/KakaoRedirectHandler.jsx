@@ -38,11 +38,11 @@ const KakaoRedirectHandler = () => {
 
         if (userResponese.status === 200) {
           const userKaKaoInfo = await userResponese.json();
-
+          console.log('userKaKaoInfo', userKaKaoInfo);
           const userLoginInfo = {
             id: userKaKaoInfo.kakao_account.email,
             password: 'kakao-user',
-            phone: '000000',
+            phone: '마이페이지에서 휴대폰 번호를 입력해주세요',
             name: userKaKaoInfo.kakao_account.profile.nickname,
 
             // profile_img: userKaKaoInfo.kakao_account.profile.profile_imgage_url,
@@ -60,6 +60,9 @@ const KakaoRedirectHandler = () => {
           );
 
           if (resKakaoLogin.status == 200) {
+            const data = await resKakaoLogin.json();
+            const token = data.token;
+            window.localStorage.setItem('token', token);
             dispatch(login(userLoginInfo));
             return navigate('/');
           } else {
