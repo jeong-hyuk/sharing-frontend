@@ -1,6 +1,8 @@
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import axios from 'axios';
+import React, { useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -183,13 +185,31 @@ const Notice = styled.div`
 
 export default function ManagerNotice() {
   const [activeIndex, setActiveIndex] = useState(null);
-
+  const userId = useSelector(state => state.user.userID);
   const [isModalOpen, setIsModalOpen] = useState(false); // 추가 모달창
+
+  const [render, setRender] = useState(false);
+  const [text, setText] = useState([]);
+  const question = useRef();
+  const answer = useRef();
+  // 공지사항 화면 렌더링
+  const showNotice = async () => {
+    try {
+      const resShowNotice = await axios.get(
+        `http://localhost:4000/main/manager/notice`,
+      );
+      setText(resShowNotice.data.ARTICLE);
+    } catch (error) {
+      console.error(error);
+      console.log('ManagerNotice 잘못되었다.');
+    }
+  };
+  useEffect(() => {
+    showNotice();
+  }, []);
 
   // 공지사항 추가 변수들
   const [list, setList] = useState([]);
-  const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
 
   // 삭제버튼
   const deleteItem = () => {
@@ -223,19 +243,26 @@ export default function ManagerNotice() {
     e.stopPropagation();
   };
 
+  // 공지사항 추가 axios
+  const appendNotice = async () => {
+    try {
+      const resAppendNotice = await axios.post(
+        'http://localhost:4000/main/manager/notice',
+        { question: question.current.value, answer: answer.current.value },
+      );
+
+      console.log(render);
+    } catch (error) {
+      console.error(error);
+      console.log('ManagerNotice 추가 잘못되었다.');
+    }
+  };
+
   // 공지사항 추가 함수
   const appendItem = () => {
     // 추가한 내용 새로운 객체 담아줌
-    const newItem = {
-      question: question,
-      answer: answer,
-    };
-    // 리스트 새로 설정
-    setList([...list, newItem]);
-    // 칸 비워줌
-    setQuestion('');
-    setAnswer('');
-    // 모달창 닫음
+
+    appendNotice();
     setIsModalOpen(false);
   };
   const showModal = () => {
@@ -247,110 +274,60 @@ export default function ManagerNotice() {
       <div className="Notice_all">
         <p>공지사항</p>
         <div className="notice_header">
+          {/* {userId !== 'manager' ? (
+            <button className="append_btn" onClick={showModal}>
+              추가
+            </button>
+          ) : (
+            ''
+          )}
+          {userId !== 'manager' ? (
+            <button className="delete_btn" onClick={deleteItem}>
+              삭제
+            </button>
+          ) : (
+            ''
+          )} */}
           <button className="append_btn" onClick={showModal}>
             추가
           </button>
+
           <button className="delete_btn" onClick={deleteItem}>
             삭제
           </button>
         </div>
 
         <ul className="notice_qna">
-          {/* <li
-            className={`notice_q ${activeIndex === 0 ? 'active' : ''}`}
-            onClick={() => handleClick(0)}
-          >
-            <label className="checkbox-container" onClick={checkBoxClick}>
-              <input type="checkbox" />
-              <span className="checkmark"></span>
-            </label>
-            Q. 율임눈아는 언제 키가 클까요?
-            <FontAwesomeIcon
-              icon={activeIndex === 0 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 0 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A. 눈아의 성장판은 닫혔습니다.</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 1 ? 'active' : ''}`}
-            onClick={() => handleClick(1)}
-          >
-            <label className="checkbox-container" onClick={checkBoxClick}>
-              <input type="checkbox" />
-              <span className="checkmark"></span>
-            </label>
-            Q. 디자인 색은 언제 정해지나요?
-            <FontAwesomeIcon
-              icon={activeIndex === 1 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 1 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A. ..</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 2 ? 'active' : ''}`}
-            onClick={() => handleClick(2)}
-          >
-            <label className="checkbox-container" onClick={checkBoxClick}>
-              <input type="checkbox" />
-              <span className="checkmark"></span>
-            </label>
-            Q. 오늘의 할 일은 무엇인가요?
-            <FontAwesomeIcon
-              icon={activeIndex === 2 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 2 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A. 관리자 페이지 UI를 시작해야합니다.</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 3 ? 'active' : ''}`}
-            onClick={() => handleClick(3)}
-          >
-            <label className="checkbox-container" onClick={checkBoxClick}>
-              <input type="checkbox" />
-              <span className="checkmark"></span>
-            </label>
-            Q.
-            <FontAwesomeIcon
-              icon={activeIndex === 3 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 3 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A.</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 4 ? 'active' : ''}`}
-            onClick={() => handleClick(4)}
-          >
-            <label className="checkbox-container" onClick={checkBoxClick}>
-              <input type="checkbox" />
-              <span className="checkmark"></span>
-            </label>
-            Q.
-            <FontAwesomeIcon
-              icon={activeIndex === 4 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 4 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A.</p>
-          </li> */}
-          {list.map((item, index) => (
+          {text.map((el, index) => (
             <li
               key={index}
               className={`notice_q ${activeIndex === index ? 'active' : ''}`}
               onClick={() => handleClick(index)}
             >
+              {/* {userId === 'manager' ? (
+                <label className="checkbox-container" onClick={checkBoxClick}>
+                  <input type="checkbox" />
+                  <span className="checkmark"></span>
+                </label>
+              ) : (
+                ''
+              )} */}
               <label className="checkbox-container" onClick={checkBoxClick}>
                 <input type="checkbox" />
                 <span className="checkmark"></span>
               </label>
-              Q. {item.question}
+              Q. {el.QUESTION}
               <FontAwesomeIcon
                 icon={activeIndex === index ? faMinus : faPlus}
                 className={`notice_plus ${
                   activeIndex === index ? 'active' : ''
                 }`}
               />
-              <p className="notice_a">A. {item.answer}</p>
+              <p className="notice_a">A. {el.ANSWER}</p>
             </li>
           ))}
+
+          {/* 모달 열었을떄  */}
         </ul>
         {isModalOpen && (
           <div className="notice-append">
@@ -359,23 +336,21 @@ export default function ManagerNotice() {
                 Question
                 <br />
                 <textarea
+                  ref={question}
                   type="text"
                   className="input-q"
                   placeholder="질문"
-                  value={question}
-                  onChange={e => setQuestion(e.target.value)}
-                />
+                ></textarea>
               </li>
               <li>
                 Answer
                 <br />
                 <textarea
+                  ref={answer}
                   type="text"
                   className="input-a"
                   placeholder="답변"
-                  value={answer}
-                  onChange={e => setAnswer(e.target.value)}
-                />
+                ></textarea>
               </li>
             </ul>
             <button className="qna-btn" onClick={appendItem}>

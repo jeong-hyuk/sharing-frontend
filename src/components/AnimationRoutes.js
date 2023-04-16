@@ -5,7 +5,7 @@ import Login from '../pages/Login';
 import KakaoRedirectHandler from './KakaoRedirectHandler';
 import Register from '../pages/Register';
 import { useSelector } from 'react-redux';
-import UserRent from './UserRent';
+import UserRent from '../pages/UserRent';
 import { AnimatePresence } from 'framer-motion';
 import Chatbotcontroller from './Chatbotcontroller';
 import MangerMain from '../pages/ManagerMain';
