@@ -12,6 +12,7 @@ import { Route, Routes } from 'react-router-dom';
 import ManagerLog from '../components/ManagerLog';
 import ManagerConfirm from '../components/ManagerConfirm';
 import ManagerMainMenu from '../components/ManagerMainMenu';
+
 import ManagerNotice from '../components/ManagerNotice';
 import ManagerRent from '../components/ManagerRent';
 import Chatbotcontroller from '../components/Chatbotcontroller';
@@ -59,17 +60,28 @@ export default function UserMain({ page }) {
     <>
       <Desktop>
         <Header />
-        {/*<ManagerMainMenu /> */}
-        <UserMainMenu />
-        <Routes>
-          <Route path="/" element={<UserRent />} />
-          <Route path="/myPage" element={<UserMyPage />} />
-          <Route path="/notice" element={<UserNotice />} />
-        </Routes>
-        {/* <ManagerLog /> */}
-        {/* <ManagerConfirm /> */}
-        {/* <ManagerRent /> */}
-        <ManagerNotice />
+
+        {userId === 'manager' ? (
+          <>
+            <ManagerMainMenu />
+            <Routes>
+              <Route path="/" element={<ManagerRent />} />
+              <Route path="/log" element={<ManagerLog />} />
+              <Route path="/notice" element={<UserNotice />} />
+            </Routes>
+          </>
+        ) : (
+          <>
+            <UserMainMenu />
+            <Routes>
+              <Route path="/" element={<UserRent />} />
+              <Route path="/myPage" element={<UserMyPage />} />
+              <Route path="/notice" element={<UserNotice />} />
+            </Routes>
+          </>
+        )}
+
+       
         {/* managermain 없어서 여기에 임시로~ */}
       </Desktop>
       <Tablet>Tablet</Tablet>

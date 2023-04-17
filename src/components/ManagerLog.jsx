@@ -75,131 +75,94 @@ const Rent = styled.div`
 export default function ManagerLog() {
   const [selectTab, setSelectTab] = useState(0);
 
+  // console.log(objType);
+  // object map 데이터 받아오기.
+  const [top, setTop] = useState([]);
+  const [bottom, setBottom] = useState([]);
   // 현재 날짜 계산 해보자
   const today = new Date();
   const year = today.getFullYear();
   const month = `0${today.getMonth() + 1}`.slice(-2);
   const day = `0${today.getDate()}`.slice(-2);
   const dateString = `${year}-${month}-${day}`;
-
   const userId = useSelector(state => state.user.userID);
-  const [myPage, setMyPage] = useState([]);
-  const [main, setMain] = useState([]);
-  const showMain = async () => {
-    try {
-      const resShowMain = await axios.get(
-        `http://localhost:4000/main/myPage/${userId}`,
-      );
 
-      setMain(resShowMain.data.ARTICLE);
-      setMyPage(resShowMain.data.ARTICLE2);
+  const showObject = async () => {
+    try {
+      const resShowObject = await axios.get(
+        'http://localhost:4000/log/showLog',
+      );
+      setTop(resShowObject.data.ARTICLE);
     } catch (error) {
-      console.log('여기로왔냐?');
       console.error(error);
+      console.log('로그 윗부분 오류');
     }
   };
+
+  const showOBject2 = async type => {
+    try {
+      const resShowObject2 = await axios.get(
+        `http://localhost:4000/log/showLog/${type}`,
+      );
+      setBottom(resShowObject2.data.ARTICLE);
+    } catch (error) {
+      console.error(error);
+      console.log('로그 밑부분 오류');
+    }
+  };
+
   useEffect(() => {
-    showMain();
+    showObject();
   }, []);
-  if (!main || !myPage) return null;
+
   return (
     <Rent>
       <ul className="all_log">
         <li className="tab_name">
-          <p
-            className={`product_charger ${selectTab === 0 ? 'subtab' : ''}`}
-            onClick={() => setSelectTab(0)}
-          >
-            LAPTOP
-          </p>
-          <p
-            className={`product_charger ${selectTab === 1 ? 'subtab' : ''}`}
-            onClick={() => setSelectTab(1)}
-          >
-            MOUSE
-          </p>
-          <p
-            className={`product_charger ${selectTab === 2 ? 'subtab' : ''}`}
-            onClick={() => setSelectTab(2)}
-          >
-            CHARGER
-          </p>
-        </li>
-        <li>
-          <ul
-            className="laptop_log"
-            style={{
-              display: selectTab === 0 ? 'block' : 'none',
-              transition: 'all .1s',
-            }}
-          >
-            {myPage.map((el, index) => (
-              <li key={index} className="current_rent">
-                <div>
-                  <p>{el.CODE}</p>
-                  <p>{el.NAME}</p>
-                  <p>{main[0].USER_NAME}</p>
-                  <p>{el.START_DATE.slice(0, 10)}</p>
-                  <p>
-                    {dateString >= `${el.END_DATE.slice(0, 10)}`
-                      ? '연체'
-                      : '대여'}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          {top.map((el, idx) => {
+            return (
+              <p
+                key={idx}
+                className={`product_charger ${
+                  selectTab === idx ? 'subtab' : ''
+                }`}
+                onClick={() => {
+                  setSelectTab(idx), showOBject2(el.OBJECT_TYPE);
+                }}
+              >
+                {el.OBJECT_NAME}
+              </p>
+            );
+          })}
         </li>
         <li>
           <ul
             className="mouse_log"
             style={{
-              display: selectTab === 1 ? 'block' : 'none',
+              display: selectTab === 0 ? 'block' : 'none',
               transition: 'all .1s',
             }}
           >
-            {myPage.map((el, index) => (
-              <li key={index} className="current_rent">
-                <div>
-                  <p>{el.CODE}</p>
-                  <p>{el.NAME}</p>
-                  <p>{main[0].USER_NAME}</p>
-                  <p>{el.START_DATE.slice(0, 10)}</p>
-                  <p>
-                    {dateString >= `${el.END_DATE.slice(0, 10)}`
-                      ? '연체'
-                      : '대여'}
-                  </p>
-                </div>
-              </li>
-            ))}
+            {top.map((el, idx) => {
+              return (
+                <li key={idx} className="current_rent">
+                  <div>
+                    <p>{el.CODE}</p>
+                    <p>{el.NAME}</p>
+                    <p>username</p>
+                    <p>startdate</p>
+                    <p>enddate</p>
+                    {/* <p>
+                  {dateString >= `${el.END_DATE.slice(0, 10)}`
+                    ? '연체'
+                    : '대여'}
+                </p> */}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
-        </li>
-        <li>
-          <ul
-            className="charger_log"
-            style={{
-              display: selectTab === 2 ? 'block' : 'none',
-              transition: 'all .1s',
-            }}
-          >
-            {myPage.map((el, index) => (
-              <li key={index} className="current_rent">
-                <div>
-                  {/* 코드, 기종, 빌린사람, 빌린날짜, 연체유무 */}
-                  <p>{el.CODE}</p>
-                  <p>{el.NAME}</p>
-                  <p>{main[0].USER_NAME}</p>
-                  <p>{el.START_DATE.slice(0, 10)}</p>
-                  <p>
-                    {dateString >= `${el.END_DATE.slice(0, 10)}`
-                      ? '연체'
-                      : '대여'}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          ;
         </li>
       </ul>
     </Rent>
