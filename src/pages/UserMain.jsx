@@ -16,8 +16,6 @@ import ManagerNotice from '../components/ManagerNotice';
 import ManagerRent from '../components/ManagerRent';
 import Chatbotcontroller from '../components/Chatbotcontroller';
 
-
-
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -62,12 +60,12 @@ export default function UserMain({ page }) {
       <Desktop>
         <Header />
         {/*<ManagerMainMenu /> */}
-         <UserMainMenu />
+        <UserMainMenu />
         <Routes>
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
           <Route path="/notice" element={<UserNotice />} />
-        </Routes> */}
+        </Routes>
         {/* <ManagerLog /> */}
         {/* <ManagerConfirm /> */}
         {/* <ManagerRent /> */}

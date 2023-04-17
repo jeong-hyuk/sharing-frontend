@@ -55,11 +55,11 @@ const Mainstyle = styled.div`
     overflow: hidden;
     position: relative;
     top: 2vh;
-    left: 13vw;
+    /* left: 13vw; */
     width: 20vw;
     height: 70vh;
     color: #fff;
-    box-shadow: 0 0 0.5px 0.5px gray;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     // 첫 화면에 나오는 페이지
     .main {
@@ -259,9 +259,15 @@ const Mainstyle = styled.div`
             width: 80%;
             height: 11.9vh;
             line-height: 11.9vh;
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            border-top: 1px solid #c6e36b;
+            :first-child {
+              border-top: none;
+            }
             p {
               font-size: 1.5rem;
+              :nth-child(2) {
+                color: #769c06;
+              }
             }
           }
           div {
