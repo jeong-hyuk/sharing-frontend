@@ -196,6 +196,17 @@ const Mainstyle = styled.div`
           width: 20vw;
           height: 60vh;
         }
+        .react-chatbot-kit-chat-bot-message-container {
+          display: flex;
+          margin: 15px 0;
+          justify-content: flex-start;
+          img {
+            border: 0px;
+            vertical-align: top;
+            position: relative;
+            left: 0.5vw;
+          }
+        }
         .react-chatbot-kit-chat-bot-message {
           background-color: #b8d366;
           padding: 10px;
@@ -203,9 +214,15 @@ const Mainstyle = styled.div`
           color: #fff;
           font-weight: medium;
           position: relative;
-          width: 250px;
+          width: 200px;
           margin-left: auto;
           text-align: left;
+          img {
+            border: 0px;
+            vertical-align: top;
+            position: relative;
+            left: 100vw;
+          }
           span {
             font-size: 1.3rem;
           }
@@ -231,6 +248,14 @@ const Mainstyle = styled.div`
           padding: 0 17.5px 10px 17.5px;
           overflow: scroll;
           height: 50vh;
+        }
+        .react-chatbot-kit-chat-input {
+          width: 100%;
+          padding: 12.5px;
+          border: none;
+          font-size: 1.3rem;
+          border-top: 1px solid #d8d8d8;
+          border-bottom-left-radius: 5px;
         }
         .learning-options-container {
           display: flex;
