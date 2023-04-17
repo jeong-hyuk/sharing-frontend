@@ -13,6 +13,10 @@ import ManagerLog from '../components/ManagerLog';
 import ManagerConfirm from '../components/ManagerConfirm';
 import ManagerMainMenu from '../components/ManagerMainMenu';
 
+
+import ManagerNotice from '../components/ManagerNotice';
+
+
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });

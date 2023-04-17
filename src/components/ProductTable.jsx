@@ -20,6 +20,64 @@ const Desktopstyle = styled.div`
   position: relative;
   top: 17vh;
 
+  .productmodal {
+    display: none;
+    position: absolute;
+    border-radius: 5px;
+    width: 25vw;
+    height: 69.5vh;
+    background-color: #fff;
+    border: 1px solid rgba(86, 90, 122, 0.3);
+    box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px;
+    transform: translate(37vw, 5vh);
+    .noticepart {
+      width: 100%;
+      height: 80%;
+      transform: translate(-1.5vw, -1vh);
+      p {
+        width: 18vw;
+        height: 25vh;
+        transform: translate(5vw, 5vh);
+        border: 1px solid rgba(86, 90, 122, 0.3);
+      }
+      div {
+        transform: translate(5vw, 6vh);
+        width: 25vw;
+        ol {
+          width: 100%;
+          li {
+            font-size: 1.5rem;
+            line-height: 5vh;
+            height: 5vh;
+          }
+        }
+      }
+    }
+    .btn {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      transform: translateY(6vh);
+      li {
+        cursor: pointer;
+        width: 7vw;
+        height: 5vh;
+        line-height: 5vh;
+        text-align: center;
+        border-radius: 5px;
+        border: 1px solid gray;
+        color: rgb(86, 90, 122);
+        font-size: 1.6rem;
+        font-weight: 600;
+        :first-child {
+          background-color: #565a7a;
+          box-shadow: 0;
+          color: #fff;
+        }
+      }
+    }
+  }
+
   .allcontroller {
     display: flex;
     justify-content: center;
@@ -282,6 +340,38 @@ export default function ProductTable({ page, subMainData, handleRender }) {
       <Desktop>
         <Sidebar />
         <Desktopstyle>
+          <div className="productmodal">
+            <div className="noticepart">
+              <p>사진</p>
+              <div>
+                <ol className="noticelist">
+                  <li>이름</li>
+                  <li>CPU</li>
+                  <li>메모리</li>
+                  <li>GPU</li>
+                  <li>화면</li>
+                  <li>무게</li>
+                </ol>
+              </div>
+            </div>
+            <ol className="btn">
+              <li
+                onClick={() => {
+                  alert('대여되었음 ! ');
+                }}
+              >
+                대여
+              </li>
+              <li
+                onClick={() => {
+                  document.querySelector('.productmodal').style.display =
+                    'none';
+                }}
+              >
+                취소
+              </li>
+            </ol>
+          </div>
           <div className="allcontroller">
             <div className="leftcontroller">
               <p>{name}대여</p>
@@ -309,6 +399,15 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                       </li>
                     );
                   })}
+                  <li
+                    onClick={() => {
+                      const open = document.querySelector('.productmodal');
+                      open.style.display =
+                        open.style.display === 'none' ? 'block' : 'none';
+                    }}
+                  >
+                    d
+                  </li>
                 </ol>
               </div>
             </div>
