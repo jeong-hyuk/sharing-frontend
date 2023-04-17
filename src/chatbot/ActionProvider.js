@@ -1,5 +1,4 @@
 import React from 'react';
-import MessageParser from './MessageParser';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const handleHello = () => {
@@ -12,6 +11,14 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
   const handleno = () => {
     const botMessage = createChatBotMessage('잘못된 입력입니다');
+
+    setState(prev => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+  const handleHo = () => {
+    const botMessage = createChatBotMessage('분노조절을 못합니다');
 
     setState(prev => ({
       ...prev,
@@ -88,6 +95,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handlethird,
             handlefourth,
             handlefifth,
+            handleHo,
           },
         });
       })}
