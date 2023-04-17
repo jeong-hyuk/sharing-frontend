@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Chatbotcontent from '../chatbot/Chatbotcontent';
 
 const Menu = styled.div`
-  position: fixed;
+  position: absolute;
   top: 11vh;
   background-color: #fff;
   width: 30vw;
@@ -100,6 +100,7 @@ export default function ManagerMainMenu() {
       const resShowMain = await axios.get(
         `http://localhost:4000/main/${userId}`,
       );
+
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
       setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
     } catch (error) {
@@ -120,14 +121,18 @@ export default function ManagerMainMenu() {
             className={activeMenu === 0 ? 'menu_active' : ''}
             onClick={() => setActiveMenu(0)}
           >
-            CONFIRM
+            RENT
           </Link>
         </li>
         <li>
-          <Link to="/">NOTICE</Link>
+          <Link to="/confirm">CONFIRM</Link>
         </li>
         <li>
-          <Link to="/">LOG??</Link>
+          <Link to="/notice">NOTICE</Link>
+        </li>
+        <li>
+          <Link to="/log">LOG</Link>
+
         </li>
       </ul>
       <div>

@@ -27,8 +27,6 @@ import img5 from './member/inyoung.png';
 import { useSelector } from 'react-redux';
 
 const Mainstyle = styled.div`
-  position: absolute;
-  z-index: 5;
   //챗봇 전체 스타일 관리
   .chat_bot_btn {
     cursor: pointer;
@@ -55,12 +53,14 @@ const Mainstyle = styled.div`
     overflow: hidden;
     position: relative;
     top: 2vh;
-    left: 13vw;
+    /* left: 13vw; */
     width: 20vw;
     height: 70vh;
     color: #fff;
-    box-shadow: 0 0 0.5px 0.5px gray;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
+    position: relative;
+    z-index: 1;
     // 첫 화면에 나오는 페이지
     .main {
       width: 100%;
@@ -196,6 +196,17 @@ const Mainstyle = styled.div`
           width: 20vw;
           height: 60vh;
         }
+        .react-chatbot-kit-chat-bot-message-container {
+          display: flex;
+          margin: 15px 0;
+          justify-content: flex-start;
+          img {
+            border: 0px;
+            vertical-align: top;
+            position: relative;
+            left: 0.5vw;
+          }
+        }
         .react-chatbot-kit-chat-bot-message {
           background-color: #b8d366;
           padding: 10px;
@@ -203,9 +214,15 @@ const Mainstyle = styled.div`
           color: #fff;
           font-weight: medium;
           position: relative;
-          width: 250px;
+          width: 200px;
           margin-left: auto;
           text-align: left;
+          img {
+            border: 0px;
+            vertical-align: top;
+            position: relative;
+            left: 100vw;
+          }
           span {
             font-size: 1.3rem;
           }
@@ -231,6 +248,14 @@ const Mainstyle = styled.div`
           padding: 0 17.5px 10px 17.5px;
           overflow: scroll;
           height: 50vh;
+        }
+        .react-chatbot-kit-chat-input {
+          width: 100%;
+          padding: 12.5px;
+          border: none;
+          font-size: 1.3rem;
+          border-top: 1px solid #d8d8d8;
+          border-bottom-left-radius: 5px;
         }
         .learning-options-container {
           display: flex;
@@ -259,9 +284,15 @@ const Mainstyle = styled.div`
             width: 80%;
             height: 11.9vh;
             line-height: 11.9vh;
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            border-top: 1px solid #c6e36b;
+            :first-child {
+              border-top: none;
+            }
             p {
               font-size: 1.5rem;
+              :nth-child(2) {
+                color: #769c06;
+              }
             }
           }
           div {
@@ -399,7 +430,7 @@ export default function Chatbotcontent() {
                     <a href="https://github.com/zack8361" target="_blank">
                       <FaGithub />
                     </a>
-                    <a href="https://kong8361.tistory.com/" target="_blank">
+                    <a href="https://kong8361.tistory.com" target="_blank">
                       <FaBlogger />
                     </a>
                   </div>
