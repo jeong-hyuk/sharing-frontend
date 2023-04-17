@@ -19,8 +19,6 @@ export default function AnimationRoutes() {
   return (
     <>
       <AnimatePresence>
-        <Chatbotcontroller />
-
         {userId === 'manager' ? (
           <Routes>
             <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />

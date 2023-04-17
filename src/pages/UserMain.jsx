@@ -12,8 +12,11 @@ import { Route, Routes } from 'react-router-dom';
 import ManagerLog from '../components/ManagerLog';
 import ManagerConfirm from '../components/ManagerConfirm';
 import ManagerMainMenu from '../components/ManagerMainMenu';
-import ManagerRent from '../components/ManagerRent';
+
 import ManagerNotice from '../components/ManagerNotice';
+import ManagerRent from '../components/ManagerRent';
+import Chatbotcontroller from '../components/Chatbotcontroller';
+
 
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
@@ -58,7 +61,6 @@ export default function UserMain({ page }) {
     <>
       <Desktop>
         <Header />
-
         {userId === 'manager' ? (
           <>
             <ManagerMainMenu />
@@ -91,6 +93,7 @@ export default function UserMain({ page }) {
           <Route path="/myPage" element={<ManagerLog />} />
           <Route path="/notice" element={<ManagerConfirm />} />
         </Routes> */}
+
         {/* managermain 없어서 여기에 임시로~ */}
       </Desktop>
       <Tablet>Tablet</Tablet>
