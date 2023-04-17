@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Chatbotcontent from '../chatbot/Chatbotcontent';
 
 const Menu = styled.div`
-  position: fixed;
+  position: absolute;
   top: 11vh;
   background-color: #fff;
   width: 30vw;

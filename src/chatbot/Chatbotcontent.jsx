@@ -27,8 +27,6 @@ import img5 from './member/inyoung.png';
 import { useSelector } from 'react-redux';
 
 const Mainstyle = styled.div`
-  position: absolute;
-  z-index: 5;
   //챗봇 전체 스타일 관리
   .chat_bot_btn {
     cursor: pointer;
@@ -61,6 +59,8 @@ const Mainstyle = styled.div`
     color: #fff;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
+    position: relative;
+    z-index: 1;
     // 첫 화면에 나오는 페이지
     .main {
       width: 100%;
@@ -405,7 +405,7 @@ export default function Chatbotcontent() {
                     <a href="https://github.com/zack8361" target="_blank">
                       <FaGithub />
                     </a>
-                    <a href="https://kong8361.tistory.com/" target="_blank">
+                    <a href="https://kong8361.tistory.com" target="_blank">
                       <FaBlogger />
                     </a>
                   </div>

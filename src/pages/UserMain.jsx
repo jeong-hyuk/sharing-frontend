@@ -81,8 +81,6 @@ export default function UserMain({ page }) {
           </>
         )}
 
-       
-        {/* managermain 없어서 여기에 임시로~ */}
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>

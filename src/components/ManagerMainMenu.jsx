@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Chatbotcontent from '../chatbot/Chatbotcontent';
 
 const Menu = styled.div`
-  position: fixed;
+  position: absolute;
   top: 11vh;
   background-color: #fff;
   width: 30vw;
@@ -121,14 +121,18 @@ export default function ManagerMainMenu() {
             className={activeMenu === 0 ? 'menu_active' : ''}
             onClick={() => setActiveMenu(0)}
           >
-            CONFIRM
+            RENT
           </Link>
         </li>
         <li>
-          <Link to="/log">NOTICE</Link>
+          <Link to="/confirm">CONFIRM</Link>
         </li>
         <li>
-          <Link to="/notice">NOITCE</Link>
+          <Link to="/notice">NOTICE</Link>
+        </li>
+        <li>
+          <Link to="/log">LOG</Link>
+
         </li>
       </ul>
       <div>

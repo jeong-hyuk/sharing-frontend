@@ -10,7 +10,7 @@ const Rent = styled.div`
   position: fixed;
   top: 11vh;
   right: 0px;
-  /* background-color: rgba(255, 255, 255); */
+  background-color: rgba(255, 255, 255);
   width: 70vw;
   height: 89vh;
   overflow-y: scroll;
