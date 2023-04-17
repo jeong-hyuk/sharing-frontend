@@ -122,7 +122,7 @@ const Notice = styled.div`
       }
       &.active {
         .notice_a {
-          padding: 3vh 0 0 1.9vw;
+          padding: 3vh 0 0 2.5vw;
           height: auto;
           visibility: visible;
           font-size: 1.7rem;
@@ -130,6 +130,8 @@ const Notice = styled.div`
       }
     }
     .notice_a {
+      display: flex;
+      justify-content: space-between;
       padding-top: 0rem;
       padding-bottom: 0rem;
       height: 0px;
@@ -137,6 +139,20 @@ const Notice = styled.div`
       transition: padding-top 0.5s, padding-bottom 0.5s, height 0.5s,
         transform 0.5s;
       color: #888;
+      align-items: center;
+
+      .return_button {
+        width: 4vw;
+        height: 4vh;
+        background-color: #fff;
+        color: #565a7a;
+        border-radius: 5px;
+        font-size: 1.4rem;
+        transition: all 0.1s;
+        border: 0.1px solid rgba(86, 90, 122, 0.1);
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
     }
   }
   .notice-append {
@@ -190,8 +206,10 @@ export default function ManagerNotice() {
 
   const [render, setRender] = useState(false);
   const [text, setText] = useState([]);
+  const [deleteN, setDeleteN] = useState([]);
   const question = useRef();
   const answer = useRef();
+  const code = useRef();
   // 공지사항 화면 렌더링
   const showNotice = async () => {
     try {
@@ -212,7 +230,7 @@ export default function ManagerNotice() {
   const [list, setList] = useState([]);
 
   // 삭제버튼
-  const deleteItem = () => {
+  const deleteItem = async () => {
     const checkedList = document.querySelectorAll(
       '.notice_qna input[type="checkbox"]:checked',
     );
@@ -248,8 +266,27 @@ export default function ManagerNotice() {
     try {
       const resAppendNotice = await axios.post(
         'http://localhost:4000/main/manager/notice',
-        { question: question.current.value, answer: answer.current.value },
+        {
+          question: question.current.value,
+          answer: answer.current.value,
+        },
       );
+      setRender(cur => !cur);
+      console.log(render);
+    } catch (error) {
+      console.error(error);
+      console.log('ManagerNotice 추가 잘못되었다.');
+    }
+  };
+
+  // 공지사항 삭제 axios
+  const deleteNotice = async code => {
+    try {
+      // const id = code.current.value;
+      const resDeleteNotice = await axios.post(
+        `http://localhost:4000/main/manager/notice/${code}`,
+      );
+      setDeleteN(resDeleteNotice.data.CODE);
       setRender(cur => !cur);
       console.log(render);
     } catch (error) {
@@ -269,6 +306,7 @@ export default function ManagerNotice() {
     appendNotice();
     setIsModalOpen(false);
   };
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -295,10 +333,9 @@ export default function ManagerNotice() {
           <button className="append_btn" onClick={showModal}>
             추가
           </button>
-
-          <button className="delete_btn" onClick={deleteItem}>
-            삭제
-          </button>
+          {/* <button className="delete_btn" onClick={deleteItem}> */}
+          {/* 삭제 */}
+          {/* </button> */}
         </div>
 
         <ul className="notice_qna">
@@ -327,7 +364,16 @@ export default function ManagerNotice() {
                   activeIndex === index ? 'active' : ''
                 }`}
               />
-              <p className="notice_a">A. {el.ANSWER}</p>
+              <p className="notice_a">
+                A. {el.ANSWER}
+                <button
+                  key={index}
+                  className="return_button"
+                  onClick={() => deleteNotice(el.CODE)}
+                >
+                  삭제
+                </button>
+              </p>
             </li>
           ))}
 
