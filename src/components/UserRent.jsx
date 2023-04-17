@@ -18,11 +18,12 @@ const Rent = styled.div`
   .managermodal {
     /* display: none; */
     position: absolute;
+    z-index: 5;
     border-radius: 5px;
     width: 25vw;
-    height: 80vh;
-    left: 20vw;
-    top: 5vh;
+    height: 50vh;
+    left: 17vw;
+    top: 10vh;
     background-color: #fff;
     border: 1px solid rgba(86, 90, 122, 0.3);
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px;
@@ -198,7 +199,6 @@ export default function UserRent() {
         `http://localhost:4000/main/${userId}`,
       );
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
-
       setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
     } catch (error) {
       console.error(error);
@@ -221,26 +221,6 @@ export default function UserRent() {
               <ol className="noticelist">
                 <li>
                   <span>이름 :</span>
-                  <input type="text" />
-                </li>
-                <li>
-                  <span>CPU :</span>
-                  <input type="text" />
-                </li>
-                <li>
-                  <span>메모리 :</span>
-                  <input type="text" />
-                </li>
-                <li>
-                  <span>GPU :</span>
-                  <input type="text" />
-                </li>
-                <li>
-                  <span>화면 :</span>
-                  <input type="text" />
-                </li>
-                <li>
-                  <span>무게 :</span>
                   <input type="text" />
                 </li>
               </ol>
@@ -281,24 +261,5 @@ export default function UserRent() {
         </ul>
       </Rent>
     </>
-    
-    <Rent className="scrollBar">
-      <ul>
-        {main.map((el, index) => (
-          <li key={index}>
-            <Link to={`/subMain/${el.OBJECT_TYPE}`}>
-              <div>
-                <img
-                  src={`http://localhost:4000/uploads/${el.IMG_SRC}`}
-                  alt=""
-                  className="rent_laptop_icon"
-                />
-                <p>{el.OBJECT_NAME}</p>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </Rent>
   );
 }

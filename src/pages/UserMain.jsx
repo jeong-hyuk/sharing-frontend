@@ -12,6 +12,7 @@ import UserNotice from '../components/UserNotice';
 
 import { Route, Routes } from 'react-router-dom';
 import ManagerNotice from '../components/ManagerNotice';
+import Chatbotcontroller from '../components/Chatbotcontroller';
 
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
@@ -56,6 +57,7 @@ export default function UserMain({ page }) {
     <>
       <Desktop>
         <Header />
+        <Chatbotcontroller />
         <UserMainMenu />
         <Routes>
           <Route path="/" element={<UserRent />} />
