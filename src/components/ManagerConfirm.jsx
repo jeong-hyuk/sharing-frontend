@@ -67,6 +67,10 @@ const Confirm = styled.div`
               cursor: pointer;
               border: 0.1px solid rgba(86, 90, 122, 0.3);
               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+              :hover {
+                transition: all 0.1s;
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+              }
             }
           }
         }

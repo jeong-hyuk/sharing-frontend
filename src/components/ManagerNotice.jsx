@@ -206,7 +206,7 @@ export default function ManagerNotice() {
   };
   useEffect(() => {
     showNotice();
-  }, []);
+  }, [render]);
 
   // 공지사항 추가 변수들
   const [list, setList] = useState([]);
@@ -250,7 +250,7 @@ export default function ManagerNotice() {
         'http://localhost:4000/main/manager/notice',
         { question: question.current.value, answer: answer.current.value },
       );
-
+      setRender(cur => !cur);
       console.log(render);
     } catch (error) {
       console.error(error);
