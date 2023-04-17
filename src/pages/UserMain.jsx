@@ -7,10 +7,11 @@ import Header from '../components/Header';
 import UserMainMenu from '../components/UserMainMenu';
 import UserRent from '../components/UserRent';
 import UserMyPage from '../components/UserMyPage';
-
 import UserNotice from '../components/UserNotice';
-
 import { Route, Routes } from 'react-router-dom';
+import ManagerLog from '../components/ManagerLog';
+import ManagerConfirm from '../components/ManagerConfirm';
+import ManagerMainMenu from '../components/ManagerMainMenu';
 
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
@@ -55,12 +56,16 @@ export default function UserMain({ page }) {
     <>
       <Desktop>
         <Header />
-        <UserMainMenu />
+        <ManagerMainMenu />
+        {/* <UserMainMenu /> */}
         <Routes>
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
           <Route path="/notice" element={<UserNotice />} />
         </Routes>
+        {/* <ManagerLog /> */}
+        {/* <ManagerConfirm /> */}
+        {/* managermain 없어서 여기에 임시로~ */}
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>

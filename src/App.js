@@ -11,6 +11,8 @@ import UserRent from './pages/UserRent';
 
 import MangerMain from './pages/MangerMain';
 import Chatbotcontroller from './components/Chatbotcontroller';
+import ManagerConfirm from './components/ManagerConfirm';
+import ManagerLog from './components/ManagerLog';
 
 function App() {
   const isLogin = useSelector(state => state.user.isLogin);
@@ -21,7 +23,6 @@ function App() {
     <>
       <GlobalStyle />
       {/* <Chatbotcontroller /> */}
-
       {userId === 'manager' ? (
         <MangerMain />
       ) : (

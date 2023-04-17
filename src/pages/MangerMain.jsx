@@ -1,5 +1,15 @@
 import React from 'react';
+import ManagerLog from '../components/ManagerLog';
+import Header from '../components/Header';
+import UserMainMenu from '../components/UserMainMenu';
 
 export default function MangerMain() {
-  return <div>여기는 매니져 페이지입니다.</div>;
+  return (
+    <>
+      <Header />
+      <UserMainMenu />
+      {/* 유저메뉴는 임시 */}
+      <ManagerLog />
+    </>
+  );
 }
