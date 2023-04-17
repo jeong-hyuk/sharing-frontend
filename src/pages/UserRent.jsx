@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Chatbot from '../components/Chatbotcontroller';
+import ManagerConfirm from '../components/ManagerConfirm';
 
 export default function UserRent() {
   const [subMain, setSubMain] = useState([]);

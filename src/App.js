@@ -3,6 +3,11 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Route, RouterProvider, Routes } from 'react-router-dom';
 import GlobalStyle from './components/GlobalStyle';
 
+
+import MangerMain from './pages/MangerMain';
+import Chatbotcontroller from './components/Chatbotcontroller';
+import ManagerConfirm from './components/ManagerConfirm';
+import ManagerLog from './components/ManagerLog';
 import AnimationRoutes from './components/AnimationRoutes';
 import axios from 'axios';
 import { login } from './store/modules/user';
@@ -45,7 +50,9 @@ function App() {
   return (
     <>
       <GlobalStyle />
+
       <AnimationRoutes />
+
     </>
   );
 }

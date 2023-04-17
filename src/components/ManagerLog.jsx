@@ -1,0 +1,207 @@
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLaptop } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+
+const Rent = styled.div`
+  position: fixed;
+  top: 11vh;
+  right: 0px;
+  background-color: rgb(255, 255, 255);
+  width: 70vw;
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  .all_log {
+    position: absolute;
+    top: 6.5vh;
+    left: 4vw;
+    width: 52vw;
+    .tab_name {
+      display: flex;
+      p.subtab {
+        background-color: #fff;
+        color: #556080;
+        transition: all 0.1s;
+      }
+      .product_laptop,
+      .product_mouse,
+      .product_charger {
+        font-size: 1.7rem;
+        font-weight: 700;
+        padding: 2vh 0 2vh 0;
+        width: 8vw;
+        height: 2vh;
+        text-align: center;
+        border-radius: 5px 5px 0 0;
+        cursor: pointer;
+        background-color: #556080;
+        color: #fff;
+        border-top: 0.5px solid #fff;
+        border-left: 0.5px solid #fff;
+        border-right: 0.5px solid #fff;
+        transition: all 0.1s;
+      }
+    }
+    .laptop_log,
+    .mouse_log,
+    .charger_log {
+      width: 52vw;
+      background-color: #fff;
+      border-radius: 0 0 5px 5px;
+      border: 1px solid #fff;
+      border-top: 2px solid #556080;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      height: 71vh;
+      .current_rent {
+        border-bottom: 1px solid rgba(225, 228, 230, 0.5);
+        div {
+          margin: 2vh 1vw 2vh 1vw;
+          display: flex;
+          justify-content: space-around;
+        }
+        p {
+          font-size: 1.7rem;
+        }
+      }
+    }
+  }
+`;
+
+export default function ManagerLog() {
+  const [selectTab, setSelectTab] = useState(0);
+
+  // 현재 날짜 계산 해보자
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = `0${today.getMonth() + 1}`.slice(-2);
+  const day = `0${today.getDate()}`.slice(-2);
+  const dateString = `${year}-${month}-${day}`;
+
+  const userId = useSelector(state => state.user.userID);
+  const [myPage, setMyPage] = useState([]);
+  const [main, setMain] = useState([]);
+  const showMain = async () => {
+    try {
+      const resShowMain = await axios.get(
+        `http://localhost:4000/main/myPage/${userId}`,
+      );
+
+      setMain(resShowMain.data.ARTICLE);
+      setMyPage(resShowMain.data.ARTICLE2);
+    } catch (error) {
+      console.log('여기로왔냐?');
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    showMain();
+  }, []);
+  if (!main || !myPage) return null;
+  return (
+    <Rent>
+      <ul className="all_log">
+        <li className="tab_name">
+          <p
+            className={`product_charger ${selectTab === 0 ? 'subtab' : ''}`}
+            onClick={() => setSelectTab(0)}
+          >
+            LAPTOP
+          </p>
+          <p
+            className={`product_charger ${selectTab === 1 ? 'subtab' : ''}`}
+            onClick={() => setSelectTab(1)}
+          >
+            MOUSE
+          </p>
+          <p
+            className={`product_charger ${selectTab === 2 ? 'subtab' : ''}`}
+            onClick={() => setSelectTab(2)}
+          >
+            CHARGER
+          </p>
+        </li>
+        <li>
+          <ul
+            className="laptop_log"
+            style={{
+              display: selectTab === 0 ? 'block' : 'none',
+              transition: 'all .1s',
+            }}
+          >
+            {myPage.map((el, index) => (
+              <li key={index} className="current_rent">
+                <div>
+                  <p>{el.CODE}</p>
+                  <p>{el.NAME}</p>
+                  <p>{main[0].USER_NAME}</p>
+                  <p>{el.START_DATE.slice(0, 10)}</p>
+                  <p>
+                    {dateString >= `${el.END_DATE.slice(0, 10)}`
+                      ? '연체'
+                      : '대여'}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li>
+          <ul
+            className="mouse_log"
+            style={{
+              display: selectTab === 1 ? 'block' : 'none',
+              transition: 'all .1s',
+            }}
+          >
+            {myPage.map((el, index) => (
+              <li key={index} className="current_rent">
+                <div>
+                  <p>{el.CODE}</p>
+                  <p>{el.NAME}</p>
+                  <p>{main[0].USER_NAME}</p>
+                  <p>{el.START_DATE.slice(0, 10)}</p>
+                  <p>
+                    {dateString >= `${el.END_DATE.slice(0, 10)}`
+                      ? '연체'
+                      : '대여'}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li>
+          <ul
+            className="charger_log"
+            style={{
+              display: selectTab === 2 ? 'block' : 'none',
+              transition: 'all .1s',
+            }}
+          >
+            {myPage.map((el, index) => (
+              <li key={index} className="current_rent">
+                <div>
+                  {/* 코드, 기종, 빌린사람, 빌린날짜, 연체유무 */}
+                  <p>{el.CODE}</p>
+                  <p>{el.NAME}</p>
+                  <p>{main[0].USER_NAME}</p>
+                  <p>{el.START_DATE.slice(0, 10)}</p>
+                  <p>
+                    {dateString >= `${el.END_DATE.slice(0, 10)}`
+                      ? '연체'
+                      : '대여'}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </li>
+      </ul>
+    </Rent>
+  );
+}
