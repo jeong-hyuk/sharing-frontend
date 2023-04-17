@@ -18,8 +18,6 @@ export default function AnimationRoutes() {
   return (
     <>
       <AnimatePresence>
-        <Chatbotcontroller />
-
         {userId === 'manager' ? (
           <MangerMain />
         ) : (

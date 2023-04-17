@@ -21,11 +21,11 @@ const Desktopstyle = styled.div`
   top: 17vh;
 
   .productmodal {
-    display: none;
+    /* display: none; */
     position: absolute;
     border-radius: 5px;
     width: 25vw;
-    height: 69.5vh;
+    height: 50vh;
     background-color: #fff;
     border: 1px solid rgba(86, 90, 122, 0.3);
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px;
@@ -41,7 +41,9 @@ const Desktopstyle = styled.div`
         border: 1px solid rgba(86, 90, 122, 0.3);
       }
       div {
-        transform: translate(5vw, 6vh);
+        position: relative;
+        top: 8vh;
+        left: 5vw;
         width: 25vw;
         ol {
           width: 100%;
@@ -49,15 +51,17 @@ const Desktopstyle = styled.div`
             font-size: 1.5rem;
             line-height: 5vh;
             height: 5vh;
+            width: 75%;
+            border-bottom: solid 1px rgba(86, 90, 122, 0.3);
           }
         }
       }
     }
     .btn {
+      position: absolute;
       display: flex;
       justify-content: space-around;
       width: 100%;
-      transform: translateY(6vh);
       li {
         cursor: pointer;
         width: 7vw;
@@ -345,12 +349,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
               <p>사진</p>
               <div>
                 <ol className="noticelist">
-                  <li>이름</li>
-                  <li>CPU</li>
-                  <li>메모리</li>
-                  <li>GPU</li>
-                  <li>화면</li>
-                  <li>무게</li>
+                  <li>이름 :</li>
                 </ol>
               </div>
             </div>
@@ -386,7 +385,19 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                 <ol>
                   {subMainData.map((el, idx) => {
                     return (
-                      <li key={idx} onClick={() => findRent(idx)}>
+                      <li
+                        key={idx}
+                        onClick={
+                          (() => findRent(idx),
+                          () => {
+                            const open = document.querySelector(
+                              '.productmodal',
+                            );
+                            open.style.display =
+                              open.style.display === 'none' ? 'block' : 'none';
+                          })
+                        }
+                      >
                         <p>{el.CODE}</p>
                         <p>{el.NAME}</p>
                         {el.STATUS === 0 ? (
@@ -399,15 +410,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                       </li>
                     );
                   })}
-                  <li
-                    onClick={() => {
-                      const open = document.querySelector('.productmodal');
-                      open.style.display =
-                        open.style.display === 'none' ? 'block' : 'none';
-                    }}
-                  >
-                    d
-                  </li>
+                  <li>d</li>
                 </ol>
               </div>
             </div>

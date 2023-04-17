@@ -15,6 +15,7 @@ import ManagerMainMenu from '../components/ManagerMainMenu';
 
 
 import ManagerNotice from '../components/ManagerNotice';
+import Chatbotcontroller from '../components/Chatbotcontroller';
 
 
 export default function UserMain({ page }) {
@@ -60,8 +61,8 @@ export default function UserMain({ page }) {
     <>
       <Desktop>
         <Header />
-        <ManagerMainMenu />
-        {/* <UserMainMenu /> */}
+        {/*<ManagerMainMenu /> */}
+         <UserMainMenu />
         <Routes>
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
