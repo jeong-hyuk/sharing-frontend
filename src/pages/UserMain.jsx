@@ -17,6 +17,7 @@ import ManagerNotice from '../components/ManagerNotice';
 import ManagerRent from '../components/ManagerRent';
 import Chatbotcontroller from '../components/Chatbotcontroller';
 
+
 export default function UserMain({ page }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
@@ -60,17 +61,39 @@ export default function UserMain({ page }) {
     <>
       <Desktop>
         <Header />
-        {/*<ManagerMainMenu /> */}
-         <UserMainMenu />
-        <Routes>
+        {userId === 'manager' ? (
+          <>
+            <ManagerMainMenu />
+            <Routes>
+              <Route path="/" element={<ManagerRent />} />
+              <Route path="/log" element={<ManagerLog />} />
+              <Route path="/notice" element={<UserNotice />} />
+            </Routes>
+          </>
+        ) : (
+          <>
+            <UserMainMenu />
+            <Routes>
+              <Route path="/" element={<UserRent />} />
+              <Route path="/myPage" element={<UserMyPage />} />
+              <Route path="/notice" element={<UserNotice />} />
+            </Routes>
+          </>
+        )}
+
+        {/* <Routes>
+          <UserMainMenu />
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
           <Route path="/notice" element={<UserNotice />} />
+        </Routes>
+
+        <Routes>
+          <ManagerMainMenu />
+          <Route path="/myPage" element={<ManagerLog />} />
+          <Route path="/notice" element={<ManagerConfirm />} />
         </Routes> */}
-        {/* <ManagerLog /> */}
-        {/* <ManagerConfirm /> */}
-        {/* <ManagerRent /> */}
-        <ManagerNotice />
+
         {/* managermain 없어서 여기에 임시로~ */}
       </Desktop>
       <Tablet>Tablet</Tablet>
