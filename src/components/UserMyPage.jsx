@@ -131,7 +131,6 @@ export default function UserMyPage() {
   const [user, setUser] = useState();
   const [phoneNum, setPhoneNum] = useState();
   const [render, setRender] = useState(false);
-  const commonImage = useRef(main[0]);
 
   // 현재 날짜 계산 해보자
   const today = new Date();
@@ -156,10 +155,6 @@ export default function UserMyPage() {
     }
   };
 
-  useEffect(() => {
-    showMain();
-  }, [render]);
-
   if (!main || !myPage) return null;
 
   async function handleImage(e) {
@@ -176,12 +171,12 @@ export default function UserMyPage() {
       console.log('errorrrrr');
     }
   }
-
   const changeImage = async () => {
     try {
       const resChangeImage = await axios.post(
         `http://localhost:4000/main/mypage/common/${userId}`,
       );
+      console.log('통신오류');
       setRender(cur => !cur);
     } catch (error) {
       console.error(error);
@@ -189,6 +184,10 @@ export default function UserMyPage() {
     }
     // setMain((main) => [{ ...main[0], PROFILE_IMG: '' }]);
   };
+
+  useEffect(() => {
+    showMain();
+  }, [render]);
 
   return (
     <MyPage>
