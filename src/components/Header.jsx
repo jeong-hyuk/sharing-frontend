@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
+import logo from '../img/logo.png';
 
 const vibration = keyframes`
   0% {
@@ -41,6 +42,10 @@ const CommonHeader = styled.div`
     align-items: center;
   }
   .header_logo {
+    position: relative;
+    left: 2vw;
+    width: 100px;
+    height: 100px;
   }
   .user_info_header {
     display: flex;
@@ -138,7 +143,7 @@ export default function Header() {
     <>
       <CommonHeader>
         <div className="UserHeader">
-          <img src="" alt="로고" className="header_logo" />
+          <img src={logo} alt="로고" className="header_logo" />
           <div className="user_info_header">
             <a href="">
               {change === true ? (
