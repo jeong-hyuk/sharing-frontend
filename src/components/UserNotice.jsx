@@ -4,6 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import ManagerNotice from './ManagerNotice';
 
 const Notice = styled.div`
   position: fixed;
@@ -81,109 +82,5 @@ export default function UserNotice() {
   const checkBoxClick = e => {
     e.stopPropagation();
   };
-  return (
-    <Notice>
-      <div className="Notice_all">
-        <p>공지사항</p>
-        {userId === 'manager' ? (
-          <div className="notice_header">
-            <button className="append_btn">추가</button>
-            <button className="delete_btn">삭제</button>
-          </div>
-        ) : (
-          ''
-        )}
-        <ul className="notice_qna">
-          <li
-            className={`notice_q ${activeIndex === 0 ? 'active' : ''}`}
-            onClick={() => handleClick(0)}
-          >
-            Q. 율임눈아는 언제 키가 클까요?
-            <FontAwesomeIcon
-              icon={activeIndex === 0 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 0 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A. 눈아의 성장판은 닫혔습니다.</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 1 ? 'active' : ''}`}
-            onClick={() => handleClick(1)}
-          >
-            Q. 디자인 색은 언제 정해지나요?
-            <FontAwesomeIcon
-              icon={activeIndex === 1 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 1 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A. ..</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 2 ? 'active' : ''}`}
-            onClick={() => handleClick(2)}
-          >
-            Q. 오늘의 할 일은 무엇인가요?
-            <FontAwesomeIcon
-              icon={activeIndex === 2 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 2 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A. 관리자 페이지 UI를 시작해야합니다.</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 3 ? 'active' : ''}`}
-            onClick={() => handleClick(3)}
-          >
-            Q.
-            <FontAwesomeIcon
-              icon={activeIndex === 3 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 3 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A.</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 4 ? 'active' : ''}`}
-            onClick={() => handleClick(4)}
-          >
-            Q.
-            <FontAwesomeIcon
-              icon={activeIndex === 4 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 4 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A.</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 5 ? 'active' : ''}`}
-            onClick={() => handleClick(5)}
-          >
-            Q.
-            <FontAwesomeIcon
-              icon={activeIndex === 5 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 5 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A.</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 6 ? 'active' : ''}`}
-            onClick={() => handleClick(6)}
-          >
-            Q.
-            <FontAwesomeIcon
-              icon={activeIndex === 6 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 6 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A.</p>
-          </li>
-          <li
-            className={`notice_q ${activeIndex === 7 ? 'active' : ''}`}
-            onClick={() => handleClick(7)}
-          >
-            Q.
-            <FontAwesomeIcon
-              icon={activeIndex === 7 ? faMinus : faPlus}
-              className={`notice_plus ${activeIndex === 7 ? 'active' : ''}`}
-            />
-            <p className="notice_a">A.</p>
-          </li>
-        </ul>
-      </div>
-    </Notice>
-  );
+  return <ManagerNotice />;
 }

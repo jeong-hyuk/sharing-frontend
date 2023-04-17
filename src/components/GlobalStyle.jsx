@@ -45,12 +45,12 @@ body {
 
   //scrollBar
   div::-webkit-scrollbar {
-    width: 8px;  /* 스크롤바의 너비 */
+    width: 6px;  /* 스크롤바의 너비 */
   }
 
   div::-webkit-scrollbar-thumb {
     height: 30%; /* 스크롤바의 길이 */
-    background: #446a728f; /* 스크롤바의 색상 */
+    background: rgba(86, 90, 122, .3); /* 스크롤바의 색상 */
     
     border-radius: 10px;
   }
