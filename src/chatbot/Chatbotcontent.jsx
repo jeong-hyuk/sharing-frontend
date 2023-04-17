@@ -16,12 +16,15 @@ import Chatbot from 'react-chatbot-kit';
 import MessageParser from '../chatbot/MessageParser';
 import ActionProvider from '../chatbot/ActionProvider';
 import 'react-chatbot-kit/build/main.css';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import logo from '../img/logo.png';
 import img1 from './member/chanho.png';
-// import img2 from './member/yu.png';
-// import img3 from './member/jung.png';
-// import img4 from './member/min.png';
-// import img5 from './member/young.png';
+import img2 from './member/yu.png';
+import img3 from './member/jung.png';
+import img4 from './member/min.png';
+import img5 from './member/inyoung.png';
+import { useSelector } from 'react-redux';
 
 const Mainstyle = styled.div`
   position: absolute;
@@ -32,7 +35,7 @@ const Mainstyle = styled.div`
     width: 45px;
     height: 45px;
     position: fixed;
-    bottom: 5vh;
+    bottom: 10vh;
     left: 13vw;
     background-color: #c6e36b;
     border-radius: 50%;
@@ -51,7 +54,7 @@ const Mainstyle = styled.div`
     display: none;
     overflow: hidden;
     position: relative;
-    top: 18vh;
+    top: 2vh;
     left: 13vw;
     width: 20vw;
     height: 70vh;
@@ -62,22 +65,124 @@ const Mainstyle = styled.div`
     .main {
       width: 100%;
       height: 85%;
-      background: linear-gradient(#618ffc, #d4d2d2, #fff);
+      background: rgb(246, 243, 243);
       .header {
         display: flex;
-        height: 15%;
+        width: 100%;
+        height: 30%;
         justify-content: space-around;
+        background-color: #c6e36b;
         p {
           font-size: 5rem;
-          transform: translateX(2vw);
+        }
+        img {
+          position: relative;
+          top: 2vh;
+          width: 50px;
+          height: 50px;
         }
       }
-      .content {
-        height: 30%;
+      .contents {
+        position: absolute;
+        width: 80%;
+        height: 20%;
+        background-color: #fff;
+        border-radius: 15px;
+        z-index: 2;
+        top: 10vh;
+        left: 2vw;
         p {
-          font-size: 2.5rem;
+          position: absolute;
+          top: 2vh;
+          left: 3vw;
+          line-height: 5vh;
+          font-size: 2rem;
           font-weight: 700;
-          transform: translate(2.5vw, 5vh);
+          color: gray;
+        }
+      }
+      .calendar-container {
+        position: relative;
+        top: 8vh;
+        left: 0.5vw;
+        .react-calendar {
+          width: 320px;
+          height: 270px;
+          max-width: 100%;
+          background-color: #fff;
+          color: #222;
+          border-radius: 8px;
+          line-height: 1.125em;
+          border: none;
+        }
+        .react-calendar__navigation button {
+          color: #3e4822;
+          min-width: 44px;
+          background: none;
+          font-size: 20px;
+          margin-top: 8px;
+        }
+        .react-calendar__navigation button:enabled:hover,
+        .react-calendar__navigation button:enabled:focus {
+          background-color: #f8f8fa;
+        }
+        .react-calendar__navigation button[disabled] {
+          background-color: #f0f0f0;
+        }
+        abbr[title] {
+          text-decoration: none;
+        }
+        .react-calendar__month-view__weekdays {
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 3rem;
+        }
+        .react-calendar__month-view__days {
+          font-size: 3rem;
+        }
+        .react-calendar__tile:enabled:hover,
+        .react-calendar__tile:enabled:focus {
+          background: #f8f8fa;
+          color: #3e4822;
+          border-radius: 6px;
+        }
+        .react-calendar__tile--now {
+          background: #c6e36b;
+          border-radius: 6px;
+          font-weight: bold;
+          color: #c6e36b;
+        }
+        .react-calendar__tile--now:enabled:hover,
+        .react-calendar__tile--now:enabled:focus {
+          background: #c6e36b;
+          border-radius: 6px;
+          font-weight: bold;
+          color: #fff;
+        }
+        .react-calendar__tile--now {
+          background: #c6e36b;
+          border-radius: 6px;
+          font-weight: bold;
+          color: #fff;
+        }
+        .react-calendar__tile--hasActive:enabled:hover,
+        .react-calendar__tile--hasActive:enabled:focus {
+          background: #f8f8fa;
+        }
+        .react-calendar__tile--active {
+          background: #c6e36b;
+          border-radius: 6px;
+          font-weight: bold;
+          color: white;
+        }
+        .react-calendar__tile--active:enabled:hover,
+        .react-calendar__tile--active:enabled:focus {
+          background: #c6e36b;
+          color: white;
+        }
+        .react-calendar--selectRange .react-calendar__tile--hover {
+          background-color: #f8f8fa;
         }
       }
     }
@@ -91,17 +196,55 @@ const Mainstyle = styled.div`
           width: 20vw;
           height: 60vh;
         }
+        .react-chatbot-kit-chat-bot-message {
+          background-color: #b8d366;
+          padding: 10px;
+          border-radius: 5px;
+          color: #fff;
+          font-weight: medium;
+          position: relative;
+          width: 250px;
+          margin-left: auto;
+          text-align: left;
+          span {
+            font-size: 1.3rem;
+          }
+        }
+        .react-chatbot-kit-chat-bot-message-arrow {
+          width: 0;
+          height: 0;
+          border-top: 8px solid transparent;
+          border-bottom: 8px solid transparent;
+          border-right: 8px solid #b8d366;
+          position: absolute;
+          left: -7px;
+          top: 13px;
+        }
+        .react-chatbot-kit-chat-btn-send {
+          background-color: #b8d366;
+          width: 100px;
+          border: none;
+          color: #fff;
+          border-bottom-right-radius: 5px;
+        }
         .react-chatbot-kit-chat-message-container {
           padding: 0 17.5px 10px 17.5px;
           overflow: scroll;
           height: 50vh;
+        }
+        .learning-options-container {
+          display: flex;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          position: relative;
+          left: 2vw;
         }
       }
     }
     .member {
       display: none;
       height: 85%;
-      background-color: #fff;
+      background: rgb(246, 243, 243);
       color: black;
       overflow-y: scroll;
       overflow-x: hidden;
@@ -124,8 +267,18 @@ const Mainstyle = styled.div`
           div {
             display: none;
             width: 80%;
+            img {
+              position: relative;
+              left: 3vw;
+              width: 10vw;
+              height: 20vh;
+              border-radius: 50%;
+              box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px;
+            }
             p {
-              font-size: 1.5rem;
+              position: relative;
+              top: 2vh;
+              font-size: 1.8rem;
               text-align: center;
             }
             .icon {
@@ -148,8 +301,8 @@ const Mainstyle = styled.div`
       height: 10.5vh;
       color: black;
       border-top: gray;
-      border-radius: 0px 0px 20px 20px;
-      background-color: rgb(255, 255, 255);
+      border-radius: 0px 0px 16px 16px;
+      background-color: rgb(246, 243, 243);
       z-index: 10;
       ol {
         cursor: pointer;
@@ -175,6 +328,9 @@ const Mainstyle = styled.div`
 `;
 
 export default function Chatbotcontent() {
+  const [value, onChange] = useState(new Date());
+  // const userID = useSelector(state => state.user.userID);
+  // const[name,setName] = useState();
   return (
     <>
       <Mainstyle>
@@ -206,7 +362,9 @@ export default function Chatbotcontent() {
                 How can we help?
               </p>
             </div>
-            <div>달력</div>
+            <div className="calendar-container">
+              <Calendar onChange={onChange} value={value} />
+            </div>
           </div>
           <div className="msg">
             <div className="msgcontroller">
@@ -262,7 +420,7 @@ export default function Chatbotcontent() {
                   </p>
                 </li>
                 <div className="profile2">
-                  <img src="./member/yu.png" alt="이유림" />
+                  <img src={img2} alt="이유림" />
                   <p>yulimle</p>
                   <div className="icon">
                     <a href="https://github.com/yulimle" target="_blank">
@@ -287,7 +445,7 @@ export default function Chatbotcontent() {
                   </p>
                 </li>
                 <div className="profile3">
-                  <img src="./member/jung.png" alt="김정혁" />
+                  <img src={img3} alt="김정혁" />
                   <p>jeong-hyuk</p>
                   <div className="icon">
                     <a href="https://github.com/jeong-hyuk" target="_blank">
@@ -312,13 +470,13 @@ export default function Chatbotcontent() {
                   </p>
                 </li>
                 <div className="profile4">
-                  <img src="./member/min.png" alt="송민영" />
+                  <img src={img4} alt="송민영" />
                   <p>songmy1206</p>
                   <div className="icon">
                     <a href="https://github.com/songmy1206" target="_blank">
                       <FaGithub />
                     </a>
-                    <a href="https://jack1150.tistory.com/" target="_blank">
+                    <a href="https://fromys.tistory.com/" target="_blank">
                       <FaBlogger />
                     </a>
                   </div>
@@ -337,13 +495,13 @@ export default function Chatbotcontent() {
                   </p>
                 </li>
                 <div className="profile5">
-                  <img src="./member/chanho.png" alt="최인영" />
+                  <img src={img5} alt="최인영" />
                   <p>choiinyoung</p>
                   <div className="icon">
                     <a href="https://github.com/choiinyoung" target="_blank">
                       <FaGithub />
                     </a>
-                    <a href="https://jack1150.tistory.com/" target="_blank">
+                    <a href="https://velog.io/@choiinyoung" target="_blank">
                       <FaBlogger />
                     </a>
                   </div>
