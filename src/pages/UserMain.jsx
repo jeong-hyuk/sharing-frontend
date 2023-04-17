@@ -61,12 +61,12 @@ export default function UserMain({ page }) {
       <Desktop>
         <Header />
         {/*<ManagerMainMenu /> */}
-         <UserMainMenu />
+        <UserMainMenu />
         <Routes>
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
           <Route path="/notice" element={<UserNotice />} />
-        </Routes> */}
+        </Routes>
         {/* <ManagerLog /> */}
         {/* <ManagerConfirm /> */}
         {/* <ManagerRent /> */}
