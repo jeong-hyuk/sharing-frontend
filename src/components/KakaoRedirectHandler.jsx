@@ -42,7 +42,7 @@ const KakaoRedirectHandler = () => {
           const userLoginInfo = {
             id: userKaKaoInfo.kakao_account.email,
             password: 'kakao-user',
-            phone: '마이페이지에서 휴대폰 번호를 입력해주세요',
+            phone: '휴대폰 번호 입력',
             name: userKaKaoInfo.kakao_account.profile.nickname,
 
             // profile_img: userKaKaoInfo.kakao_account.profile.profile_imgage_url,

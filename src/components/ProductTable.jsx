@@ -23,46 +23,65 @@ const Desktopstyle = styled.div`
   .productmodal {
     display: none;
     position: absolute;
+    top: 55%;
+    left: 50%;
     border-radius: 5px;
-    width: 25vw;
-    height: 69.5vh;
+    width: 22vw;
+    height: 52vh;
     background-color: #fff;
     border: 1px solid rgba(86, 90, 122, 0.3);
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px;
-    transform: translate(37vw, 5vh);
+    transform: translate(-50%, -50%);
     .noticepart {
       width: 100%;
-      height: 80%;
-      transform: translate(-1.5vw, -1vh);
-      p {
-        width: 18vw;
-        height: 25vh;
-        transform: translate(5vw, 5vh);
-        border: 1px solid rgba(86, 90, 122, 0.3);
-      }
+
       div {
-        transform: translate(5vw, 6vh);
-        width: 25vw;
-        ol {
-          width: 100%;
+        /* transform: translate(5vw, 6vh); */
+
+        .noticelist {
+          margin-top: 2vh;
           li {
             font-size: 1.5rem;
-            line-height: 5vh;
-            height: 5vh;
+            line-height: 4vh;
+
+            text-align: center;
+            p {
+              width: 22vw;
+              height: 30vh;
+
+              img {
+                width: 90%;
+                height: 100%;
+                /* border: 1px solid rgba(86, 90, 122, 0.3); */
+              }
+            }
+            .object-img {
+              margin-bottom: 2vh;
+            }
+            .object-name {
+              font-size: 1.5rem;
+              line-height: 5vh;
+              height: 5vh;
+              font-weight: 600;
+            }
           }
         }
       }
     }
     .btn {
       display: flex;
-      justify-content: space-around;
-      width: 100%;
-      transform: translateY(6vh);
+      justify-content: space-evenly;
+      width: 50%;
+      position: absolute;
+      bottom: 2.5vh;
+      left: 50%;
+      transform: translate(-50%, 0);
+
       li {
         cursor: pointer;
-        width: 7vw;
-        height: 5vh;
-        line-height: 5vh;
+        width: 4vw;
+        height: 4vh;
+        line-height: 4vh;
         text-align: center;
         border-radius: 5px;
         border: 1px solid gray;
@@ -285,24 +304,30 @@ export default function ProductTable({ page, subMainData, handleRender }) {
   };
 
   const userId = useSelector(state => state.user.userID);
-
+  console.log(subMainData);
   const findRent = async idx => {
     try {
       // store 에서 가져온 나의 user_id
-
       const type = subMainData[idx].OBJECT_TYPE;
       const code = subMainData[idx].CODE;
 
-      console.log(code);
+      console.log(subMainData);
       const findRentObj = await axios.get(
         `http://localhost:4000/subMain/find/${userId}/${code}/${type}`,
       );
+
       alert(findRentObj.data);
       handleRender('1');
     } catch (error) {
       console.log('여기로왔다~~~~~~~~~~~~~~~~~');
       console.error(error);
     }
+  };
+
+  const [selectedCode, setSelectedCode] = useState('');
+  const showModal = code => {
+    setSelectedCode(code);
+    document.querySelector('.productmodal').style.display = 'block';
   };
 
   const arr = [
@@ -340,28 +365,46 @@ export default function ProductTable({ page, subMainData, handleRender }) {
       <Desktop>
         <Sidebar />
         <Desktopstyle>
+          {/* 모달창 */}
           <div className="productmodal">
             <div className="noticepart">
-              <p>사진</p>
               <div>
                 <ol className="noticelist">
-                  <li>이름</li>
-                  <li>CPU</li>
-                  <li>메모리</li>
-                  <li>GPU</li>
-                  <li>화면</li>
-                  <li>무게</li>
+                  {subMainData.map((e, i) => {
+                    if (e.CODE === selectedCode) {
+                      return (
+                        <li className="object-list" key={i}>
+                          <p className="object-img">
+                            <img
+                              src={
+                                'http://localhost:4000/uploads/' + e.OBJECT_IMG
+                              }
+                            />
+                          </p>
+                          물품명<p className="object-name">{e.NAME}</p>
+                          <ol className="btn">
+                            <li onClick={() => findRent(i)}>대여</li>
+                            <li
+                              onClick={() => {
+                                document.querySelector(
+                                  '.productmodal',
+                                ).style.display = 'none';
+                              }}
+                            >
+                              취소
+                            </li>
+                          </ol>
+                        </li>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
                 </ol>
               </div>
             </div>
-            <ol className="btn">
-              <li
-                onClick={() => {
-                  alert('대여되었음 ! ');
-                }}
-              >
-                대여
-              </li>
+            {/* <ol className="btn">
+              <li onClick={findRent(e.CODE)}>대여</li>
               <li
                 onClick={() => {
                   document.querySelector('.productmodal').style.display =
@@ -370,15 +413,15 @@ export default function ProductTable({ page, subMainData, handleRender }) {
               >
                 취소
               </li>
-            </ol>
+            </ol> */}
           </div>
           <div className="allcontroller">
             <div className="leftcontroller">
-              <p>{name}대여</p>
+              <p>{name}</p>
               <div className="title">
                 <ol>
                   <li>코드</li>
-                  <li>상품명</li>
+                  <li>물품명</li>
                   <li>상태</li>
                 </ol>
               </div>
@@ -386,7 +429,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                 <ol>
                   {subMainData.map((el, idx) => {
                     return (
-                      <li key={idx} onClick={() => findRent(idx)}>
+                      <li key={idx} onClick={() => showModal(el.CODE)}>
                         <p>{el.CODE}</p>
                         <p>{el.NAME}</p>
                         {el.STATUS === 0 ? (
@@ -399,7 +442,8 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                       </li>
                     );
                   })}
-                  <li
+
+                  {/* <li
                     onClick={() => {
                       const open = document.querySelector('.productmodal');
                       open.style.display =
@@ -407,7 +451,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                     }}
                   >
                     d
-                  </li>
+                  </li> */}
                 </ol>
               </div>
             </div>
