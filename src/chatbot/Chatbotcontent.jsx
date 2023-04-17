@@ -18,8 +18,6 @@ import ActionProvider from '../chatbot/ActionProvider';
 import 'react-chatbot-kit/build/main.css';
 
 const Mainstyle = styled.div`
-  position: absolute;
-  z-index: 10000000;
   //챗봇 전체 스타일 관리
   .chat_bot_btn {
     cursor: pointer;
@@ -50,6 +48,8 @@ const Mainstyle = styled.div`
     color: #fff;
     box-shadow: 0 0 0.5px 0.5px gray;
     border-radius: 15px;
+    position: relative;
+    z-index: 1;
     // 첫 화면에 나오는 페이지
     .main {
       width: 100%;
@@ -223,12 +223,12 @@ export default function Chatbotcontent() {
                   <img src="./member/chanho.png" alt="이찬호" />
                   <p>zack8361</p>
                   <div className="icon">
-                    <a href="https://github.com/zack8361" target="_blank">
+                    {/* <a href="https://github.com/zack8361" target="_blank">
                       <FaGithub />
                     </a>
-                    <a href="https://kong8361.tistory.com/" target="_blank">
+                    <a href="https://kong8361.tistory.com" target="_blank">
                       <FaBlogger />
-                    </a>
+                    </a> */}
                   </div>
                 </div>
 
@@ -248,12 +248,12 @@ export default function Chatbotcontent() {
                   <img src="./member/yu.png" alt="이유림" />
                   <p>yulimle</p>
                   <div className="icon">
-                    <a href="https://github.com/yulimle" target="_blank">
+                    {/* <a href="https://github.com/yulimle" target="_blank">
                       <FaGithub />
                     </a>
                     <a href="https://velog.io/@yulimle" target="_blank">
                       <FaBlogger />
-                    </a>
+                    </a> */}
                   </div>
                 </div>
 
@@ -273,12 +273,12 @@ export default function Chatbotcontent() {
                   <img src="./member/jung.png" alt="김정혁" />
                   <p>jeong-hyuk</p>
                   <div className="icon">
-                    <a href="https://github.com/jeong-hyuk" target="_blank">
+                    {/* <a href="https://github.com/jeong-hyuk" target="_blank">
                       <FaGithub />
                     </a>
                     <a href="https://jack1150.tistory.com/" target="_blank">
                       <FaBlogger />
-                    </a>
+                    </a> */}
                   </div>
                 </div>
 
@@ -298,12 +298,12 @@ export default function Chatbotcontent() {
                   <img src="./member/min.png" alt="송민영" />
                   <p>songmy1206</p>
                   <div className="icon">
-                    <a href="https://github.com/songmy1206" target="_blank">
+                    {/* <a href="https://github.com/songmy1206" target="_blank">
                       <FaGithub />
                     </a>
                     <a href="https://jack1150.tistory.com/" target="_blank">
                       <FaBlogger />
-                    </a>
+                    </a> */}
                   </div>
                 </div>
 
@@ -323,12 +323,12 @@ export default function Chatbotcontent() {
                   <img src="./member/chanho.png" alt="최인영" />
                   <p>choiinyoung</p>
                   <div className="icon">
-                    <a href="https://github.com/choiinyoung" target="_blank">
+                    {/* <a href="https://github.com/choiinyoung" target="_blank">
                       <FaGithub />
                     </a>
                     <a href="https://jack1150.tistory.com/" target="_blank">
                       <FaBlogger />
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </ol>

@@ -59,18 +59,12 @@ export default function UserMain({ page }) {
     <>
       <Desktop>
         <Header />
-        {/* <ManagerMainMenu /> */}
         <UserMainMenu />
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<UserRent />} />
           <Route path="/myPage" element={<UserMyPage />} />
           <Route path="/notice" element={<UserNotice />} />
-        </Routes> */}
-        {/* <ManagerLog /> */}
-        {/* <ManagerConfirm /> */}
-        {/* <ManagerRent /> */}
-        <ManagerNotice />
-        {/* managermain 없어서 여기에 임시로~ */}
+        </Routes>
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>

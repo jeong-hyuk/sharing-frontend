@@ -26,8 +26,14 @@ const MyPage = styled.div`
         width: 200px;
         height: 200px;
         margin-bottom: 3vh;
+        border-radius: 50%;
+        border: 3px solid rgba(86, 90, 122, 0.5);
+        box-sizing: border-box;
       }
-
+      .profile_edit_button {
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
+      }
       button {
         font-size: 1.2rem;
         font-weight: 400;
@@ -38,6 +44,7 @@ const MyPage = styled.div`
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
+        cursor: pointer;
       }
       p {
         border-radius: 50%;
@@ -56,7 +63,7 @@ const MyPage = styled.div`
           position: relative;
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -40%);
         }
       }
     }
@@ -140,6 +147,12 @@ export default function UserMyPage() {
   const day = `0${today.getDate()}`.slice(-2);
   const dateString = `${year}-${month}-${day}`;
 
+  // 첨부파일 추가
+  const imageInput = useRef();
+  const clickImageInput = () => {
+    imageInput.current.click();
+  };
+
   const showMain = async () => {
     try {
       const resShowMain = await axios.get(
@@ -202,10 +215,16 @@ export default function UserMyPage() {
 
           <button onClick={changeImage}>기본이미지</button>
           <p>
-            <button>
+            <button className="profile_edit_button" onClick={clickImageInput}>
               <FontAwesomeIcon icon={faPen} className="profile_edit" />
             </button>
-            <input type="file" name="file" onChange={handleImage} />
+            <input
+              type="file"
+              name="file"
+              onChange={handleImage}
+              style={{ display: 'none' }}
+              ref={imageInput}
+            />
           </p>
         </div>
         <ul>
