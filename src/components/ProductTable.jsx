@@ -152,10 +152,60 @@ const Desktopstyle = styled.div`
               text-align: center;
               font-size: 1.6rem;
             }
+            .object-delete {
+              width: 2vw;
+              height: 4vh;
+              background-color: #fff;
+              color: #565a7a;
+              border-radius: 5px;
+              font-size: 1.4rem;
+              transition: all 0.1s;
+              cursor: pointer;
+              border-style: none;
+              /* border: 0.1px solid rgba(86, 90, 122, 0.3);
+              box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); */
+            }
           }
           border-bottom: none;
         }
+        .object-input {
+          position: absolute;
+          bottom: 8vh;
+          right: 17vw;
+          font-size: 1.6rem;
+          line-height: 3vh;
+
+          input {
+            font-size: 1.2rem;
+            height: 3vh;
+            width: 10vw;
+            margin-left: 3px;
+            margin-right: 20px;
+            border-style: none;
+            border-bottom: 1px solid rgba(86, 90, 122, 0.3);
+            padding-left: 5px;
+            :focus {
+              outline: none;
+              border-radius: 6px;
+              border: 1px solid rgba(86, 90, 122, 0.5);
+            }
+          }
+        }
       }
+    }
+    .product-add {
+      margin-top: 12px;
+      float: right;
+      background-color: #565a7a;
+      border-style: none;
+      color: #fff;
+      margin-right: 20px;
+
+      height: 4.5vh;
+      font-size: 1.5rem;
+      width: 4vw;
+      border-radius: 5px;
+      cursor: pointer;
     }
   }
 `;
@@ -304,14 +354,13 @@ export default function ProductTable({ page, subMainData, handleRender }) {
   };
 
   const userId = useSelector(state => state.user.userID);
-  console.log(subMainData);
+
   const findRent = async idx => {
     try {
       // store 에서 가져온 나의 user_id
       const type = subMainData[idx].OBJECT_TYPE;
       const code = subMainData[idx].CODE;
 
-      console.log(subMainData);
       const findRentObj = await axios.get(
         `http://localhost:4000/subMain/find/${userId}/${code}/${type}`,
       );
@@ -324,10 +373,36 @@ export default function ProductTable({ page, subMainData, handleRender }) {
     }
   };
 
+  //user에서 Modal
   const [selectedCode, setSelectedCode] = useState('');
   const showModal = code => {
     setSelectedCode(code);
     document.querySelector('.productmodal').style.display = 'block';
+  };
+
+  const inputObjectCode = useRef();
+  const inputObjectName = useRef();
+
+  const inputObjectStatus = useRef();
+  const [render, setRender] = useState(false);
+
+  // 물품 추가 axios
+  const appendObject = async () => {
+    const type = subMainData[0].OBJECT_TYPE;
+    try {
+      await axios.post(
+        `http://localhost:4000/subMain/manager/producttable/${type}`,
+        {
+          inputObjectCode: inputObjectCode.current.value,
+          inputObjectName: inputObjectName.current.value,
+          inputObjectStatus: inputObjectStatus.current.value,
+        },
+      );
+      setRender(cur => !cur);
+    } catch (error) {
+      console.log(error);
+      console.log('object추가 잘못됨');
+    }
   };
 
   const arr = [
@@ -360,12 +435,17 @@ export default function ProductTable({ page, subMainData, handleRender }) {
     // console.log(red.current.parentNode);
     red.current.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
   }
+
+  useEffect(() => {
+    appendObject();
+  }, [render]);
+
   return (
     <>
       <Desktop>
         <Sidebar />
         <Desktopstyle>
-          {/* 모달창 */}
+          {/* 모달창 - user일때만 */}
           <div className="productmodal">
             <div className="noticepart">
               <div>
@@ -403,18 +483,8 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                 </ol>
               </div>
             </div>
-            {/* <ol className="btn">
-              <li onClick={findRent(e.CODE)}>대여</li>
-              <li
-                onClick={() => {
-                  document.querySelector('.productmodal').style.display =
-                    'none';
-                }}
-              >
-                취소
-              </li>
-            </ol> */}
           </div>
+          {/* 물품 목록 */}
           <div className="allcontroller">
             <div className="leftcontroller">
               <p>{name}</p>
@@ -439,21 +509,29 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                             대여불가
                           </p>
                         )}
+
+                        <button className="object-delete">X</button>
                       </li>
                     );
                   })}
-
-                  {/* <li
-                    onClick={() => {
-                      const open = document.querySelector('.productmodal');
-                      open.style.display =
-                        open.style.display === 'none' ? 'block' : 'none';
-                    }}
-                  >
-                    d
-                  </li> */}
                 </ol>
+                {userId !== 'manager' ? (
+                  <div className="object-input">
+                    코드 <input ref={inputObjectCode} type="text" />
+                    물품명 <input ref={inputObjectName} type="text" />
+                    상태 <input ref={inputObjectStatus} type="text" />
+                  </div>
+                ) : (
+                  ''
+                )}
               </div>
+              {userId !== 'manager' ? (
+                <button className="product-add" onClick={appendObject}>
+                  추가
+                </button>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </Desktopstyle>
