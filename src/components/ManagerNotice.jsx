@@ -258,6 +258,10 @@ export default function ManagerNotice() {
     }
   };
 
+  useEffect(() => {
+    showNotice();
+  }, [render]);
+
   // 공지사항 추가 함수
   const appendItem = () => {
     // 추가한 내용 새로운 객체 담아줌

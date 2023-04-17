@@ -8,7 +8,7 @@ import {
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 import { FaGithub, FaBlogger } from 'react-icons/fa';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import config from '../chatbot/config';
@@ -16,10 +16,16 @@ import Chatbot from 'react-chatbot-kit';
 import MessageParser from '../chatbot/MessageParser';
 import ActionProvider from '../chatbot/ActionProvider';
 import 'react-chatbot-kit/build/main.css';
+import logo from '../img/logo.png';
+import img1 from './member/chanho.png';
+// import img2 from './member/yu.png';
+// import img3 from './member/jung.png';
+// import img4 from './member/min.png';
+// import img5 from './member/young.png';
 
 const Mainstyle = styled.div`
   position: absolute;
-  z-index: 10000000;
+  z-index: 5;
   //챗봇 전체 스타일 관리
   .chat_bot_btn {
     cursor: pointer;
@@ -44,7 +50,9 @@ const Mainstyle = styled.div`
   .chatbotallcontroller {
     display: none;
     overflow: hidden;
-    transform: translate(14vw, 7vh);
+    position: relative;
+    top: 18vh;
+    left: 13vw;
     width: 20vw;
     height: 70vh;
     color: #fff;
@@ -136,22 +144,24 @@ const Mainstyle = styled.div`
     // 밑에 있는 3개의 버튼
     .footer {
       position: fixed;
-      width: 100%;
-      height: 15%;
+      width: 20vw;
+      height: 10.5vh;
       color: black;
       border-top: gray;
-      border-radius: 0 0 20px 20px;
-      background-color: #fff;
+      border-radius: 0px 0px 20px 20px;
+      background-color: rgb(255, 255, 255);
       z-index: 10;
       ol {
         cursor: pointer;
         display: flex;
+        width: 100%;
         justify-content: space-around;
         font-size: 14px;
         border-top: 1px solid rgba(0, 0, 0, 0.05);
         box-shadow: rgba(237, 237, 237, 0.05) 0px 0px 25px;
         text-align: center;
         li {
+          width: 100%;
           p {
             font-size: 1.3rem;
           }
@@ -173,7 +183,10 @@ export default function Chatbotcontent() {
           onClick={() => {
             const controller = document.querySelector('.chatbotallcontroller');
             controller.style.display =
-              controller.style.display === 'none' ? 'block' : 'none';
+              controller.style.display === 'none' ||
+              controller.style.display === ''
+                ? 'block'
+                : 'none';
           }}
         >
           <FontAwesomeIcon icon={faCommentDots} className="chat_bot_icon" />
@@ -181,7 +194,7 @@ export default function Chatbotcontent() {
         <div className="chatbotallcontroller">
           <div className="main on">
             <div className="header">
-              <img src="-" alt="로고" />
+              <img src={logo} alt="로고" />
               <p className="icon">
                 <FontAwesomeIcon icon={faUser} />
               </p>
@@ -211,7 +224,9 @@ export default function Chatbotcontent() {
                   onClick={() => {
                     const open = document.querySelector('.profile1');
                     open.style.display =
-                      open.style.display === 'none' ? 'block' : 'none';
+                      open.style.display === 'none' || open.style.display === ''
+                        ? 'block'
+                        : 'none';
                   }}
                 >
                   <p>이찬호</p>
@@ -220,7 +235,7 @@ export default function Chatbotcontent() {
                   </p>
                 </li>
                 <div className="profile1">
-                  <img src="./member/chanho.png" alt="이찬호" />
+                  <img src={img1} alt="이찬호" />
                   <p>zack8361</p>
                   <div className="icon">
                     <a href="https://github.com/zack8361" target="_blank">
@@ -236,7 +251,9 @@ export default function Chatbotcontent() {
                   onClick={() => {
                     const open = document.querySelector('.profile2');
                     open.style.display =
-                      open.style.display === 'none' ? 'block' : 'none';
+                      open.style.display === 'none' || open.style.display === ''
+                        ? 'block'
+                        : 'none';
                   }}
                 >
                   <p>이유림</p>
