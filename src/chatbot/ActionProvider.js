@@ -17,8 +17,94 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       messages: [...prev.messages, botMessage],
     }));
   };
+
+  // 찬호를 입력하였을 때 실행되는 함수
   const handleHo = () => {
-    const botMessage = createChatBotMessage('분노조절을 못합니다');
+    const text = [
+      '분노 조절을 못합니다',
+      '조금 이상합니다',
+      '얼굴이 어금니를 닮았습니다',
+      '란호 입니다',
+      'ENFP입니다',
+    ];
+    const botMessage = createChatBotMessage(
+      text[Math.floor(Math.random() * text.length)],
+    );
+
+    setState(prev => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  // 유림을 입력하였을 때 실행되는 함수
+  const handleLim = () => {
+    const text = [
+      '작고 소중합니다',
+      '리류릴 입니다',
+      '거누거누',
+      '귀여운것을 좋아합니다',
+      'INFP입니다',
+    ];
+    const botMessage = createChatBotMessage(
+      text[Math.floor(Math.random() * text.length)],
+    );
+
+    setState(prev => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  // 정혁을 입력하였을 때 실행되는 함수
+  const handleJung = () => {
+    const text = [
+      '집착이 심합니다',
+      '정말 착합니다 ?',
+      '캐로피입니다',
+      '얼굴이 볼링공입니다',
+      'ISTP입니다',
+    ];
+    const botMessage = createChatBotMessage(
+      text[Math.floor(Math.random() * text.length)],
+    );
+
+    setState(prev => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  // 민영을 입력하였을 때 실행되는 함수
+  const handleMin = () => {
+    const text = [
+      '송로몬 입니다',
+      '깍쟁이 입니다',
+      '만화를 좋아합니다',
+      '루친녀 입니다',
+      'INTP입니다',
+    ];
+    const botMessage = createChatBotMessage(
+      text[Math.floor(Math.random() * text.length)],
+    );
+
+    setState(prev => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  // 인영을 입력하였을 때 실행되는 함수
+  const handleIn = () => {
+    const text = [
+      '귀엽습니다',
+      '착하고 여린 사람입니다',
+      '눈썹이 조금 모자랍니다',
+      'ENTP입니다',
+    ];
+    const botMessage = createChatBotMessage(
+      text[Math.floor(Math.random() * text.length)],
+    );
 
     setState(prev => ({
       ...prev,
@@ -96,6 +182,10 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handlefourth,
             handlefifth,
             handleHo,
+            handleLim,
+            handleJung,
+            handleMin,
+            handleIn,
           },
         });
       })}

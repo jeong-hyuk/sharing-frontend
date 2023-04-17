@@ -2,6 +2,7 @@
 import { createChatBotMessage } from 'react-chatbot-kit';
 import styled from 'styled-components';
 import LearningOptions from './LearningOptions';
+import robot from '../img/robot.png';
 
 const Chatbotheader = styled.div`
   height: 8vh;
@@ -25,7 +26,7 @@ const config = {
   ],
   customComponents: {
     header: () => <Chatbotheader>Messages</Chatbotheader>,
-    botAvatar: props => <div {...props} />,
+    botAvatar: () => <img src={robot} alt="d" />,
     userAvatar: props => <div {...props} />,
   },
 };

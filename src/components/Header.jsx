@@ -44,8 +44,8 @@ const CommonHeader = styled.div`
   .header_logo {
     position: relative;
     left: 2vw;
-    width: 100px;
-    height: 100px;
+    width: 65px;
+    height: 65px;
   }
   .user_info_header {
     display: flex;
