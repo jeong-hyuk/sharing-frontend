@@ -112,7 +112,6 @@ const Mainstyle = styled.div`
           background-color: #fff;
           color: #222;
           border-radius: 8px;
-          font-family: Arial, Helvetica, sans-serif;
           line-height: 1.125em;
           border: none;
         }
@@ -159,7 +158,13 @@ const Mainstyle = styled.div`
           background: #c6e36b;
           border-radius: 6px;
           font-weight: bold;
-          color: #c6e36b;
+          color: #fff;
+        }
+        .react-calendar__tile--now {
+          background: #c6e36b;
+          border-radius: 6px;
+          font-weight: bold;
+          color: #fff;
         }
         .react-calendar__tile--hasActive:enabled:hover,
         .react-calendar__tile--hasActive:enabled:focus {
