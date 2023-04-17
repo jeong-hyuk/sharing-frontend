@@ -100,6 +100,7 @@ export default function ManagerMainMenu() {
       const resShowMain = await axios.get(
         `http://localhost:4000/main/${userId}`,
       );
+
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
       setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아주 ㅓ
     } catch (error) {
@@ -131,6 +132,7 @@ export default function ManagerMainMenu() {
         </li>
         <li>
           <Link to="/log">LOG</Link>
+
         </li>
       </ul>
       <div>

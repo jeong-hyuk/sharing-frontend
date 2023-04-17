@@ -9,7 +9,6 @@ export default function MangerMain() {
     <>
       <Header />
       <UserMainMenu />
-      {/* 유저메뉴는 임시 */}
       <ManagerLog />
       <ManagerRent />
     </>

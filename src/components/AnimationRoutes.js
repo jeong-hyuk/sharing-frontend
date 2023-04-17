@@ -15,11 +15,15 @@ export default function AnimationRoutes() {
   const isLogin = useSelector(state => state.user.isLogin);
   const userId = useSelector(state => state.user.userID);
   const location = useLocation();
+
   return (
     <>
       <AnimatePresence>
         {userId === 'manager' ? (
-          <MangerMain />
+          <Routes>
+            <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
+            <Route path="/subMain/:id" element={<UserRent />} />
+          </Routes>
         ) : (
           <Routes>
             <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
@@ -33,7 +37,6 @@ export default function AnimationRoutes() {
             />
             <Route path="/usermain" element={<UserMain />} />
             <Route path="/subMain/:id" element={<UserRent />} />
-            <Route path="/managernotice" element={<ManagerNotice />} />
           </Routes>
         )}
       </AnimatePresence>

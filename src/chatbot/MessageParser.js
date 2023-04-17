@@ -6,6 +6,8 @@ const MessageParser = ({ children, actions }) => {
   const parse = message => {
     if (message.includes('안녕')) {
       actions.handleHello();
+    } else if (message.includes('찬호')) {
+      actions.handleHo();
     } else {
       actions.handleno();
     }

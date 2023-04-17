@@ -60,6 +60,7 @@ export default function UserMain({ page }) {
     <>
       <Desktop>
         <Header />
+
         {userId === 'manager' ? (
           <>
             <ManagerMainMenu />
@@ -80,20 +81,6 @@ export default function UserMain({ page }) {
           </>
         )}
 
-        {/* <Routes>
-          <UserMainMenu />
-          <Route path="/" element={<UserRent />} />
-          <Route path="/myPage" element={<UserMyPage />} />
-          <Route path="/notice" element={<UserNotice />} />
-        </Routes>
-
-        <Routes>
-          <ManagerMainMenu />
-          <Route path="/myPage" element={<ManagerLog />} />
-          <Route path="/notice" element={<ManagerConfirm />} />
-        </Routes> */}
-
-        {/* managermain 없어서 여기에 임시로~ */}
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
