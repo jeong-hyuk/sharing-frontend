@@ -25,10 +25,103 @@ const Rent = styled.div`
       height: 37vh;
       background-color: rgb(255, 255, 255);
       margin: 0 3vw 3vw 0;
+      position: relative;
+
       :last-child {
-        background-color: rgba(68, 106, 114, 0.2);
+        /* 추가버튼이 들어갈 li */
+        background-color: rgba(85, 96, 128, 0.3);
         border: none;
         border-radius: 5px;
+        a {
+          border: none;
+          :hover {
+            border: none;
+            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0);
+            background-color: rgba(255, 255, 255, 0);
+          }
+          .rent_product_info {
+            display: none;
+            cursor: alias;
+          }
+        }
+        .product_add_button {
+          display: inline;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+          transition: all 0.2s;
+          p {
+            font-size: 4.5rem;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            width: 50px;
+            background-color: #fff;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            color: rgb(85, 96, 128);
+            text-align: center;
+            font-weight: 300;
+          }
+          .add {
+            cursor: pointer;
+          }
+        }
+        :hover {
+          .product_add_button {
+            p {
+              transition: all 0.2s;
+              :hover {
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+              }
+            }
+          }
+          .product_edit_button {
+            display: none;
+          }
+        }
+      }
+      :hover {
+        .product_edit_button {
+          display: flex;
+          transition: all 0.2s;
+        }
+      }
+      .product_edit_button {
+        /* display: flex; */
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 110%);
+        z-index: 1;
+        transition: all 0.2s;
+        p {
+          font-size: 1.7rem;
+          height: 4vh;
+          line-height: 4vh;
+          color: #565a7a;
+        }
+        .modify,
+        .delete {
+          display: block;
+          cursor: pointer;
+          width: 4vw;
+          text-align: center;
+          background-color: #fff;
+          border-radius: 5px;
+          border: 0.1px solid rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+          transition: all 0.1s;
+          :hover {
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.1s;
+          }
+        }
+        .modify {
+          margin-right: 0.5vw;
+        }
       }
       a {
         display: inline-block;
@@ -46,6 +139,7 @@ const Rent = styled.div`
           border: 4px solid #565a7a;
           box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
           transition: all 0.2s;
+          background-color: rgba(255, 255, 255, 0.2);
           div {
             .rent_laptop_icon,
             .rent_mouse_icon,
@@ -126,9 +220,14 @@ export default function ManagerRent() {
     <Rent className="scrollBar">
       <ul>
         {main.map((el, index) => (
-          <li key={index}>
+          <li key={index} className="rent_product">
+            <div className="product_edit_button">
+              {/* <p className="modify">수정</p> */}
+              <p className="delete">삭제</p>
+            </div>
+
             <Link to={`/subMain/${el.OBJECT_TYPE}`}>
-              <div>
+              <div className="rent_product_info">
                 <img
                   src="http://localhost:4000/uploads/house-solid.svg"
                   alt=""
@@ -139,6 +238,12 @@ export default function ManagerRent() {
             </Link>
           </li>
         ))}
+        <li>
+          <div className="product_add_button">
+            <p className="add">+</p>
+          </div>
+          <div className="add_product_last"></div>
+        </li>
       </ul>
     </Rent>
   );
