@@ -127,6 +127,7 @@ const Sidelist = styled.div`
           brightness(111%) contrast(100%);
       }
     }
+
     p {
       color: #565a7a;
       font-size: 1.6rem;

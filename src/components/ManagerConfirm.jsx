@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import ManagerSidebar from './ManagerSidebar';
+import Header from './Header';
 
 const Confirm = styled.div`
   position: relative;
@@ -145,6 +146,10 @@ const Return = styled.div`
               cursor: pointer;
               border: 0.1px solid rgba(86, 90, 122, 0.3);
               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+              :hover {
+                transition: all 0.1s;
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+              }
             }
           }
         }
@@ -157,6 +162,7 @@ const Return = styled.div`
 export default function ManagerConfirm() {
   return (
     <>
+      <Header />
       <ManagerSidebar />
       <Confirm>
         <div className="product_confirm">
