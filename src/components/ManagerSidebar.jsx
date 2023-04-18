@@ -199,7 +199,7 @@ const Sidebar = ({ width = 300 }) => {
               </li>
             );
           })}
-          <Link to="/usermain" className="homeBtn">
+          <Link to="/" className="homeBtn">
             <div>
               <p>HOME</p>
               <FontAwesomeIcon icon={faHouse} className="sideBar_icon_home" />
