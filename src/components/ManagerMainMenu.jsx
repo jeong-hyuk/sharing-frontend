@@ -70,7 +70,7 @@ const Menu = styled.div`
       width: 45px;
       height: 45px;
       position: absolute;
-      bottom: 4vh;
+      bottom: 5vh;
       left: 13vw;
       background-color: #c6e36b;
       border-radius: 50%;
