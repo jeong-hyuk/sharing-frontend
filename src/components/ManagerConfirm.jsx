@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+
 import Header from './Header';
 import Sidebar from './Sidebar';
 import ManagerSidebar from './ManagerSidebar';
@@ -7,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+
 const Confirm = styled.div`
   position: relative;
   top: 17vh;
@@ -147,7 +149,6 @@ const Return = styled.div`
               border-radius: 5px;
               font-size: 1.4rem;
               transition: all 0.1s;
-              /* font-weight: 600; */
               cursor: pointer;
               border: 0.1px solid rgba(86, 90, 122, 0.3);
               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -161,6 +162,7 @@ const Return = styled.div`
 `;
 
 export default function ManagerConfirm() {
+
   const { type } = useParams();
 
   const [confirmData, setConfirmData] = useState([]);
@@ -217,6 +219,7 @@ export default function ManagerConfirm() {
   return (
     <>
       <Header />
+
       <ManagerSidebar />
       <Confirm>
         <div className="product_confirm">
@@ -232,6 +235,7 @@ export default function ManagerConfirm() {
           </div>
           <div className="content">
             <ul>
+
               {confirmData.map((el, idx) => {
                 return (
                   <li key={idx}>
@@ -250,6 +254,7 @@ export default function ManagerConfirm() {
                   </li>
                 );
               })}
+
             </ul>
           </div>
         </div>
