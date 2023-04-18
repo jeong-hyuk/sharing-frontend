@@ -30,6 +30,7 @@ function App() {
 
       // 토큰 검증이 성공 적으로 검증이 되었으므로 리덕스에 로그인 처리
       // 해당 함수로 인하여 토큰이 있는 동안은, 로그인을 하지 않아도 바로 로그인이 처리
+
       dispatch(
         login({
           id: resToken.data.user_ID,

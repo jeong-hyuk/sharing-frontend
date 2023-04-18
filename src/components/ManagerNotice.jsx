@@ -314,26 +314,13 @@ export default function ManagerNotice() {
       <div className="Notice_all">
         <p>공지사항</p>
         <div className="notice_header">
-          {/* {userId !== 'manager' ? (
+          {userId === 'manager' ? (
             <button className="append_btn" onClick={showModal}>
               추가
             </button>
           ) : (
             ''
           )}
-          {userId !== 'manager' ? (
-            <button className="delete_btn" onClick={deleteItem}>
-              삭제
-            </button>
-          ) : (
-            ''
-          )} */}
-          <button className="append_btn" onClick={showModal}>
-            추가
-          </button>
-          {/* <button className="delete_btn" onClick={deleteItem}> */}
-          {/* 삭제 */}
-          {/* </button> */}
         </div>
 
         <ul className="notice_qna">
@@ -343,18 +330,14 @@ export default function ManagerNotice() {
               className={`notice_q ${activeIndex === index ? 'active' : ''}`}
               onClick={() => handleClick(index)}
             >
-              {/* {userId === 'manager' ? (
+              {userId === 'manager' ? (
                 <label className="checkbox-container" onClick={checkBoxClick}>
                   <input type="checkbox" />
                   <span className="checkmark"></span>
                 </label>
               ) : (
                 ''
-              )} */}
-              <label className="checkbox-container" onClick={checkBoxClick}>
-                <input type="checkbox" />
-                <span className="checkmark"></span>
-              </label>
+              )}
               Q. {el.QUESTION}
               <FontAwesomeIcon
                 icon={activeIndex === index ? faMinus : faPlus}
@@ -364,13 +347,17 @@ export default function ManagerNotice() {
               />
               <p className="notice_a">
                 A. {el.ANSWER}
-                <button
-                  key={index}
-                  className="return_button"
-                  onClick={() => deleteNotice(el.CODE)}
-                >
-                  삭제
-                </button>
+                {userId === 'manager' ? (
+                  <button
+                    key={index}
+                    className="return_button"
+                    onClick={() => deleteNotice(el.CODE)}
+                  >
+                    삭제
+                  </button>
+                ) : (
+                  ''
+                )}
               </p>
             </li>
           ))}

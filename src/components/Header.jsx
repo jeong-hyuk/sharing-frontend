@@ -75,9 +75,12 @@ const CommonHeader = styled.div`
           font-size: 1.5rem;
         }
         :last-child {
-          font-size: 0.5rem;
-          color: #333;
-          margin-left: 10px;
+          span {
+            font-size: 0.5rem;
+            color: #333;
+            margin-left: 10px;
+            cursor: pointer;
+          }
         }
         :first-child {
           font-size: 1.4rem;
@@ -191,9 +194,7 @@ export default function Header() {
                   {/* {kakaoUser ? (
                     <a href={KAKAO_LOGOUT_URL}>로그아웃</a>
                   ) : ( */}
-                  <a href="javascript:void(0)" onClick={nomalLogout}>
-                    로그아웃
-                  </a>
+                  <span onClick={nomalLogout}>로그아웃</span>
                   {/* )} */}
                   {/* <a href="javascript:void(0)" onClick={nomalLogout}>
                     로그아웃
@@ -203,8 +204,9 @@ export default function Header() {
               <p className="">{userId}</p>
             </div>
             <Link to="/myPage" className="user_info_img">
-              <img src={companyLogo} alt="프로필" />
-              {/* {profile.length >= 1 && profile[0].PROFILE_IMG !== '' ? (
+
+              {profile?.length >= 1 && profile[0].PROFILE_IMG !== '' ? (
+
                 <img
                   src={'http://localhost:4000/profile/' + profile}
                   className="user_info_img2"
