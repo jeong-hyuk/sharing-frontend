@@ -4,13 +4,11 @@ import styled from 'styled-components';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import ManagerSidebar from './ManagerSidebar';
-import Header from './Header';
 
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-
 
 const Confirm = styled.div`
   position: relative;
@@ -169,7 +167,6 @@ const Return = styled.div`
 `;
 
 export default function ManagerConfirm() {
-
   const { type } = useParams();
 
   const [confirmData, setConfirmData] = useState([]);
@@ -241,7 +238,6 @@ export default function ManagerConfirm() {
           </div>
           <div className="content">
             <ul>
-
               {confirmData.map((el, idx) => {
                 return (
                   <li key={idx}>
@@ -260,7 +256,6 @@ export default function ManagerConfirm() {
                   </li>
                 );
               })}
-
             </ul>
           </div>
         </div>

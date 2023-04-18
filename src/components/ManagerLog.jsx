@@ -79,6 +79,7 @@ export default function ManagerLog() {
   // object map 데이터 받아오기.
   const [top, setTop] = useState([]);
   const [bottom, setBottom] = useState([]);
+  const [render, setRender] = useState(false);
   // 현재 날짜 계산 해보자
   const today = new Date();
   const year = today.getFullYear();
@@ -114,7 +115,7 @@ export default function ManagerLog() {
 
   useEffect(() => {
     showObject();
-    showOBject2();
+    showOBject2('0001');
   }, []);
 
   return (
