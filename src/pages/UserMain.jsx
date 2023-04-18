@@ -80,7 +80,6 @@ export default function UserMain({ page }) {
             </Routes>
           </>
         )}
-
       </Desktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>

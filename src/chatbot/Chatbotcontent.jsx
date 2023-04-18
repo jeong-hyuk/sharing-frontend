@@ -53,7 +53,7 @@ const Mainstyle = styled.div`
     overflow: hidden;
     position: relative;
     top: 2vh;
-    /* left: 13vw; */
+    left: 13vw;
     width: 20vw;
     height: 70vh;
     color: #fff;
@@ -466,8 +466,9 @@ export default function Chatbotcontent() {
                 <li
                   onClick={() => {
                     const open = document.querySelector('.profile3');
-                    open.style.display =
-                      open.style.display === 'none' ? 'block' : 'none';
+                    open.style.display === 'none' || open.style.display === ''
+                      ? 'block'
+                      : 'none';
                   }}
                 >
                   <p>김정혁</p>
@@ -491,8 +492,9 @@ export default function Chatbotcontent() {
                 <li
                   onClick={() => {
                     const open = document.querySelector('.profile4');
-                    open.style.display =
-                      open.style.display === 'none' ? 'block' : 'none';
+                    open.style.display === 'none' || open.style.display === ''
+                      ? 'block'
+                      : 'none';
                   }}
                 >
                   <p>송민영</p>
@@ -516,8 +518,9 @@ export default function Chatbotcontent() {
                 <li
                   onClick={() => {
                     const open = document.querySelector('.profile5');
-                    open.style.display =
-                      open.style.display === 'none' ? 'block' : 'none';
+                    open.style.display === 'none' || open.style.display == ''
+                      ? 'block'
+                      : 'none';
                   }}
                 >
                   <p>최인영</p>

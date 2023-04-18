@@ -326,8 +326,12 @@ export default function ProductTable({ page, subMainData, handleRender }) {
 
   const [selectedCode, setSelectedCode] = useState('');
   const showModal = code => {
+    const modal = document.querySelector('.productmodal');
+    modal.style.display =
+      modal.style.display === 'none' || modal.style.display === ''
+        ? 'block'
+        : 'none';
     setSelectedCode(code);
-    document.querySelector('.productmodal').style.display = 'block';
   };
 
   const arr = [
