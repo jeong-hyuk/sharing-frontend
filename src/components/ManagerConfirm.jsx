@@ -35,6 +35,7 @@ const Confirm = styled.div`
       line-height: 5vh;
       margin-bottom: 2vh;
       overflow-y: scroll;
+      overflow-x: hidden;
       ol {
         text-align: center;
         display: flex;
@@ -114,6 +115,7 @@ const Return = styled.div`
       line-height: 5vh;
       margin-bottom: 2vh;
       overflow-y: scroll;
+      overflow-x: hidden;
       ol {
         text-align: center;
         display: flex;
