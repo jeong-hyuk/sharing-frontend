@@ -29,12 +29,12 @@ export default function UserRent() {
   };
   useEffect(() => {
     showObject();
-  }, [render]);
+  }, [render, id]);
 
   return (
     <>
       <Header />
-      <ProductTable subMainData={subMain} handleRender={handleRender} />
+      <ProductTable subMainData={subMain} handleRender={handleRender} id={id} />
     </>
   );
 }

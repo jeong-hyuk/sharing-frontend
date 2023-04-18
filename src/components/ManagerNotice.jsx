@@ -29,13 +29,14 @@ const Notice = styled.div`
       right: 13vw;
 
       button {
+        float: right;
         background-color: #565a7a;
         border-style: none;
         color: #fff;
         margin-right: 10px;
-        height: 3.5vh;
+        height: 4.5vh;
         font-size: 1.5rem;
-        width: 3vw;
+        width: 4vw;
         border-radius: 5px;
         cursor: pointer;
       }
@@ -190,9 +191,9 @@ const Notice = styled.div`
       margin-top: 10px;
       margin-right: 13.6vw;
 
-      height: 3.5vh;
+      height: 4.5vh;
       font-size: 1.5rem;
-      width: 6.5vw;
+      width: 7.5vw;
       border-radius: 5px;
       cursor: pointer;
     }
@@ -272,7 +273,6 @@ export default function ManagerNotice() {
         },
       );
       setRender(cur => !cur);
-      console.log(render);
     } catch (error) {
       console.error(error);
       console.log('ManagerNotice 추가 잘못되었다.');
@@ -282,13 +282,11 @@ export default function ManagerNotice() {
   // 공지사항 삭제 axios
   const deleteNotice = async code => {
     try {
-      // const id = code.current.value;
-      const resDeleteNotice = await axios.post(
+      const resDeleteNotice = await axios.delete(
         `http://localhost:4000/main/manager/notice/${code}`,
       );
-      setDeleteN(resDeleteNotice.data.CODE);
       setRender(cur => !cur);
-      console.log(render);
+      console.log(render, '@@@@@@@@@@@@@@@@@@@');
     } catch (error) {
       console.error(error);
       console.log('ManagerNotice 추가 잘못되었다.');

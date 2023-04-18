@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, register } from '../store/modules/user';
@@ -273,7 +274,6 @@ export default function Login() {
           <Link to={KAKAO_AUTH_URL} className="kakao_btn">
             {/* {kakaotalkImg} */}
           </Link>
-
           <button className="login_btn" onClick={loginUser}>
             <FontAwesomeIcon
               icon={faCircleArrowRight}

@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { color, style } from '@mui/system';
 import { useRef } from 'react';
+import e from 'cors';
 
 const Desktopstyle = styled.div`
   position: relative;
@@ -152,10 +153,65 @@ const Desktopstyle = styled.div`
               text-align: center;
               font-size: 1.6rem;
             }
+            .object-delete {
+              width: 2vw;
+              height: 4vh;
+              margin-top: 2vh;
+              margin-right: 1vw;
+              background-color: #eee;
+              color: #565a7a;
+              border-radius: 5px;
+              font-size: 1.4rem;
+              transition: all 0.1s;
+              cursor: pointer;
+              border-style: none;
+              /* border: 0.1px solid rgba(86, 90, 122, 0.3);
+              box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); */
+              :hover {
+                background-color: #fff;
+              }
+            }
           }
           border-bottom: none;
         }
+        .object-input {
+          position: absolute;
+          bottom: 8vh;
+          right: 17vw;
+          font-size: 1.6rem;
+          line-height: 3vh;
+
+          input {
+            font-size: 1.2rem;
+            height: 3vh;
+            width: 10vw;
+            margin-left: 3px;
+            margin-right: 20px;
+            border-style: none;
+            border-bottom: 1px solid rgba(86, 90, 122, 0.3);
+            padding-left: 5px;
+            :focus {
+              outline: none;
+              border-radius: 6px;
+              border: 1px solid rgba(86, 90, 122, 0.5);
+            }
+          }
+        }
       }
+    }
+    .product-add {
+      margin-top: 12px;
+      float: right;
+      background-color: #565a7a;
+      border-style: none;
+      color: #fff;
+      margin-right: 20px;
+
+      height: 4.5vh;
+      font-size: 1.5rem;
+      width: 4vw;
+      border-radius: 5px;
+      cursor: pointer;
     }
   }
 `;
@@ -283,7 +339,7 @@ const Mobilestyle = styled.div`
   }
 `;
 
-export default function ProductTable({ page, subMainData, handleRender }) {
+export default function ProductTable({ page, subMainData, handleRender, id }) {
   const [rent, setRent] = useState(false);
 
   const Desktop = ({ children }) => {
@@ -304,14 +360,13 @@ export default function ProductTable({ page, subMainData, handleRender }) {
   };
 
   const userId = useSelector(state => state.user.userID);
-  console.log(subMainData);
+
   const findRent = async idx => {
     try {
       // store 에서 가져온 나의 user_id
       const type = subMainData[idx].OBJECT_TYPE;
       const code = subMainData[idx].CODE;
 
-      console.log(subMainData);
       const findRentObj = await axios.get(
         `http://localhost:4000/subMain/find/${userId}/${code}/${type}`,
       );
@@ -324,6 +379,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
     }
   };
 
+  //user에서 Modal
   const [selectedCode, setSelectedCode] = useState('');
   const showModal = code => {
     const modal = document.querySelector('.productmodal');
@@ -332,6 +388,54 @@ export default function ProductTable({ page, subMainData, handleRender }) {
         ? 'block'
         : 'none';
     setSelectedCode(code);
+  };
+
+  const inputObjectCode = useRef();
+  const inputObjectName = useRef();
+
+  const inputObjectStatus = useRef();
+  const [render, setRender] = useState(false);
+
+  // 물품 추가 axios
+  const appendObject = async () => {
+    const type = subMainData[0].OBJECT_TYPE;
+    try {
+      const resAddObject = await axios.post(
+        `http://localhost:4000/subMain/manager/producttable/append/${type}`,
+        {
+          inputObjectCode: inputObjectCode.current.value,
+          inputObjectName: inputObjectName.current.value,
+          inputObjectStatus: inputObjectStatus.current.value,
+        },
+      );
+      console.log('resAddObject', resAddObject);
+      //setRender(cur => !cur);
+      handleRender();
+    } catch (error) {
+      console.log(error);
+      console.log('object추가 잘못됨');
+    }
+  };
+
+  // 물품 삭제 axios
+
+  const [deleteNew, setDeleteNew] = useState([]);
+
+  const deleteObject = async code => {
+    try {
+      console.log(code);
+      const resDeleteObject = await axios.post(
+        `http://localhost:4000/subMain/manager/producttable/delete/${code}`,
+      );
+      // console.log(resDeleteObject);
+      // setDeleteNew(resDeleteObject.data.CODE);
+      // console.log(deleteNew.data);
+      // setRender(cur => !cur);
+      handleRender();
+    } catch (error) {
+      console.log(error);
+      console.log('object 삭제안돼');
+    }
   };
 
   const arr = [
@@ -359,17 +463,21 @@ export default function ProductTable({ page, subMainData, handleRender }) {
   // red.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
   // const parentRed = red.parentNode;
   // // parentRed.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
-  const red = useRef();
-  if (red.current !== undefined) {
-    // console.log(red.current.parentNode);
-    red.current.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
-  }
+  // const red = useRef();
+  // if (red.current !== undefined) {
+  //   // console.log(red.current.parentNode);
+  //   red.current.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
+  // }
+
+  useEffect(() => {}, [render]);
+
   return (
     <>
       <Desktop>
         <Sidebar />
         <Desktopstyle>
-          {/* 모달창 */}
+          {/* 모달창 - user일때만 */}
+
           <div className="productmodal">
             <div className="noticepart">
               <div>
@@ -381,7 +489,10 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                           <p className="object-img">
                             <img
                               src={
-                                'http://localhost:4000/uploads/' + e.OBJECT_IMG
+                                e.OBJECT_IMG !== null
+                                  ? 'http://localhost:4000/uploads/' +
+                                    e.OBJECT_IMG
+                                  : ''
                               }
                             />
                           </p>
@@ -407,21 +518,11 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                 </ol>
               </div>
             </div>
-            {/* <ol className="btn">
-              <li onClick={findRent(e.CODE)}>대여</li>
-              <li
-                onClick={() => {
-                  document.querySelector('.productmodal').style.display =
-                    'none';
-                }}
-              >
-                취소
-              </li>
-            </ol> */}
           </div>
+          {/* 물품 목록 */}
           <div className="allcontroller">
             <div className="leftcontroller">
-              <p>{name}</p>
+              <p>{name} 대여</p>
               <div className="title">
                 <ol>
                   <li>코드</li>
@@ -433,31 +534,56 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                 <ol>
                   {subMainData.map((el, idx) => {
                     return (
-                      <li key={idx} onClick={() => showModal(el.CODE)}>
+                      <li
+                        key={idx}
+                        onClick={() => showModal(el.CODE)}
+                        style={
+                          el.STATUS === 0
+                            ? {}
+                            : { backgroundColor: 'rgba(86, 90, 122, 0.05)' }
+                        }
+                      >
                         <p>{el.CODE}</p>
                         <p>{el.NAME}</p>
                         {el.STATUS === 0 ? (
                           <p>대여가능</p>
                         ) : (
-                          <p ref={red} className="red" style={{ color: 'red' }}>
+                          <p className="red" style={{ color: 'red' }}>
                             대여불가
                           </p>
+                        )}
+
+                        {userId == 'manager' ? (
+                          <button
+                            className="object-delete"
+                            onClick={() => deleteObject(el.CODE)}
+                          >
+                            X
+                          </button>
+                        ) : (
+                          ''
                         )}
                       </li>
                     );
                   })}
-
-                  {/* <li
-                    onClick={() => {
-                      const open = document.querySelector('.productmodal');
-                      open.style.display =
-                        open.style.display === 'none' ? 'block' : 'none';
-                    }}
-                  >
-                    d
-                  </li> */}
                 </ol>
+                {userId == 'manager' ? (
+                  <div className="object-input">
+                    코드 <input ref={inputObjectCode} type="text" />
+                    물품명 <input ref={inputObjectName} type="text" />
+                    상태 <input ref={inputObjectStatus} type="text" />
+                  </div>
+                ) : (
+                  ''
+                )}
               </div>
+              {userId == 'manager' ? (
+                <button className="product-add" onClick={appendObject}>
+                  추가
+                </button>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </Desktopstyle>

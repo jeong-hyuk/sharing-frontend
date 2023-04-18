@@ -83,7 +83,7 @@ const Sidelist = styled.div`
       }
     }
   }
-  li {
+  .select {
     display: flex;
     width: 70%;
     height: 8vh;
@@ -96,7 +96,7 @@ const Sidelist = styled.div`
     /* border-radius: 0 50px 50px 0; */
     border-bottom: 1px solid rgb(86, 90, 122, 0.3);
     transition: all 0.1s;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     border-radius: 0 0 20px 0;
     .sideBar_icon_laptop,
@@ -104,7 +104,10 @@ const Sidelist = styled.div`
     .sideBar_icon_plug {
       width: 15px;
       height: 15px;
-      color: #565a7a;
+      /* color: #565a7a;  */
+      filter: invert(34%) sepia(7%) saturate(1954%) hue-rotate(196deg)
+        brightness(96%) contrast(86%);
+      margin-left: 7vw;
     }
     :hover {
       background-color: #565a7a;
@@ -118,8 +121,10 @@ const Sidelist = styled.div`
       .sideBar_icon_laptop,
       .sideBar_icon_mouse,
       .sideBar_icon_plug {
-        color: #fff;
+        /* color: #fff; */
         transition: all 0.1s;
+        filter: invert(99%) sepia(27%) saturate(0%) hue-rotate(70deg)
+          brightness(111%) contrast(100%);
       }
     }
     p {
@@ -190,16 +195,20 @@ const Sidebar = ({ width = 300 }) => {
         <ul>
           {name.map((el, idx) => {
             return (
-              <li key={idx}>
+              <Link
+                to={`/confirm/${el.OBJECT_TYPE}`}
+                className="select"
+                key={idx}
+              >
                 <img
                   src={`http://localhost:4000/uploads/${el.IMG_SRC}`}
                   className="sideBar_icon_laptop"
                 />
                 <p>{el.OBJECT_NAME}</p>
-              </li>
+              </Link>
             );
           })}
-          <Link to="/usermain" className="homeBtn">
+          <Link to="/" className="homeBtn">
             <div>
               <p>HOME</p>
               <FontAwesomeIcon icon={faHouse} className="sideBar_icon_home" />

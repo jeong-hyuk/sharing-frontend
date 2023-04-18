@@ -190,6 +190,7 @@ export default function UserMyPage() {
         `http://localhost:4000/main/mypage/common/${userId}`,
       );
       console.log('통신오류');
+
       setRender(cur => !cur);
     } catch (error) {
       console.error(error);

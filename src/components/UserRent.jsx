@@ -113,7 +113,7 @@ const Rent = styled.div`
       background-color: rgb(255, 255, 255);
       margin: 0 3vw 3vw 0;
       :last-child {
-        background-color: rgba(68, 106, 114, 0.2);
+        background-color: rgba(85, 96, 128, 0.3);
         border: none;
         border-radius: 5px;
       }
@@ -277,6 +277,9 @@ export default function UserRent() {
               </Link>
             </li>
           ))}
+          <li>
+            <div className="add_product_last"></div>
+          </li>
         </ul>
       </Rent>
     </>
