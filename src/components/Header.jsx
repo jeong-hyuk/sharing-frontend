@@ -97,16 +97,26 @@ const CommonHeader = styled.div`
         height: 5vh;
       }
     }
+    .user_info_img2 {
+      height: 5vh;
+      width: 5vh;
+      border-radius: 50%;
+      border: 2px solid rgba(86, 90, 122, 0.5);
+      box-sizing: border;
+    }
   }
 `;
 
 export default function Header() {
   const userId = useSelector(state => state.user.userID);
+  const reduxrender = useSelector(state => state.user.reduxrender);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState('');
   const [date, setDate] = useState([]);
   const [change, setChange] = useState(false);
+  const [profile, setProfile] = useState('');
   const dispatch = useDispatch();
+  const [render, setRender] = useState(false);
 
   // 현재 날짜 계산
   const today = new Date();
@@ -128,6 +138,7 @@ export default function Header() {
       );
       setMain(resShowMain.data.ARTICLE); // 배열 담아줘
       setUser(resShowMain.data.NAME.USER_NAME); // 이름 담아줘
+      setProfile(resShowMain.data.NAME.PROFILE_IMG); // 프로필 담아줘
 
       // 현재 날짜 받아오기.
       const delay = resShowMain.data.DATE.filter(
@@ -135,7 +146,7 @@ export default function Header() {
       );
 
       if (delay.length >= 1) setChange(true);
-
+      // setRender(cur => !cur);
       // if (el.END_DATE.slice(0, 10) <= dateString) {
       //   setChange(!change);
       // }
@@ -155,7 +166,7 @@ export default function Header() {
 
   useEffect(() => {
     showMain();
-  }, []);
+  }, [render, reduxrender]);
   return (
     <>
       <CommonHeader>
@@ -192,7 +203,14 @@ export default function Header() {
               <p className="">{userId}</p>
             </div>
             <Link to="/myPage" className="user_info_img">
-              <img src={companyLogo} alt="프로필" />
+              {profile.length >= 1 && profile[0].PROFILE_IMG !== '' ? (
+                <img
+                  src={'http://localhost:4000/profile/' + profile}
+                  className="user_info_img2"
+                />
+              ) : (
+                <img src={companyLogo} alt="프로필" />
+              )}
             </Link>
           </div>
         </div>

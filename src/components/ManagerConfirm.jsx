@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import ManagerSidebar from './ManagerSidebar';
+import Header from './Header';
 
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';

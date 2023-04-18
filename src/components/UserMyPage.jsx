@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import userProfile from '../pages/images/mypage_user.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { reduxRender } from '../store/modules/user';
 
 const MyPage = styled.div`
   position: fixed;
@@ -139,6 +140,8 @@ export default function UserMyPage() {
   const [phoneNum, setPhoneNum] = useState();
   const [render, setRender] = useState(false);
 
+  const dispatch = useDispatch();
+
   // 현재 날짜 계산 해보자
   const today = new Date();
   const year = today.getFullYear();
@@ -179,6 +182,7 @@ export default function UserMyPage() {
         formData,
       );
       setRender(cur => !cur);
+      dispatch(reduxRender());
     } catch (error) {
       console.error(error);
       console.log('errorrrrr');
@@ -192,6 +196,7 @@ export default function UserMyPage() {
       console.log('통신오류');
 
       setRender(cur => !cur);
+      dispatch(reduxRender());
     } catch (error) {
       console.error(error);
       console.log('기본 이미지 오류');
