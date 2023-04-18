@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import ManagerSidebar from './ManagerSidebar';
+
 const Confirm = styled.div`
   position: relative;
   top: 17vh;
@@ -141,7 +142,6 @@ const Return = styled.div`
               border-radius: 5px;
               font-size: 1.4rem;
               transition: all 0.1s;
-              /* font-weight: 600; */
               cursor: pointer;
               border: 0.1px solid rgba(86, 90, 122, 0.3);
               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);

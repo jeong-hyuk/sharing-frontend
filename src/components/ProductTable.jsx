@@ -333,7 +333,7 @@ const Mobilestyle = styled.div`
   }
 `;
 
-export default function ProductTable({ page, subMainData, handleRender }) {
+export default function ProductTable({ page, subMainData, handleRender, id }) {
   const [rent, setRent] = useState(false);
 
   const Desktop = ({ children }) => {
@@ -430,11 +430,11 @@ export default function ProductTable({ page, subMainData, handleRender }) {
   // red.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
   // const parentRed = red.parentNode;
   // // parentRed.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
-  const red = useRef();
-  if (red.current !== undefined) {
-    // console.log(red.current.parentNode);
-    red.current.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
-  }
+  // const red = useRef();
+  // if (red.current !== undefined) {
+  //   // console.log(red.current.parentNode);
+  //   red.current.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
+  // }
 
   useEffect(() => {
     appendObject();
@@ -487,7 +487,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
           {/* 물품 목록 */}
           <div className="allcontroller">
             <div className="leftcontroller">
-              <p>{name}</p>
+              <p>{name} 대여</p>
               <div className="title">
                 <ol>
                   <li>코드</li>
@@ -505,7 +505,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                         {el.STATUS === 0 ? (
                           <p>대여가능</p>
                         ) : (
-                          <p ref={red} className="red" style={{ color: 'red' }}>
+                          <p className="red" style={{ color: 'red' }}>
                             대여불가
                           </p>
                         )}

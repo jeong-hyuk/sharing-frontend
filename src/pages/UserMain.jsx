@@ -58,13 +58,14 @@ export default function UserMain({ page }) {
 
   return (
     <>
-      <Desktop>
+      <esktop>
         <Header />
         {userId === 'manager' ? (
           <>
             <ManagerMainMenu />
             <Routes>
               <Route path="/" element={<ManagerRent />} />
+
               <Route path="/log" element={<ManagerLog />} />
               <Route path="/notice" element={<UserNotice />} />
             </Routes>
@@ -79,7 +80,7 @@ export default function UserMain({ page }) {
             </Routes>
           </>
         )}
-      </Desktop>
+      </esktop>
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
       <Default></Default>
