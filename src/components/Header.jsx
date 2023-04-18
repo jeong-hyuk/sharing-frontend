@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import companyLogo from '../pages/images/userIcon.png';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo.png';
+import { logout } from '../store/modules/user';
+import KakaoRedirectHandler from './KakaoRedirectHandler';
 
 const vibration = keyframes`
   0% {
@@ -104,12 +106,20 @@ export default function Header() {
   const [user, setUser] = useState('');
   const [date, setDate] = useState([]);
   const [change, setChange] = useState(false);
+  const dispatch = useDispatch();
+
   // 현재 날짜 계산
   const today = new Date();
   const year = today.getFullYear();
   const month = `0${today.getMonth() + 1}`.slice(-2);
   const day = `0${today.getDate()}`.slice(-2);
   const dateString = `${year}-${month}-${day}`;
+
+  const KAKAO_CLIENT_ID = '48194ee06abc88e308d72719bbd68805';
+  const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+  const KAKAO_LOGOUT_URI = 'http://localhost:3000';
+  const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
 
   const showMain = async () => {
     try {
@@ -136,6 +146,13 @@ export default function Header() {
     }
   };
 
+  const kakaoUser = true;
+
+  const nomalLogout = () => {
+    window.localStorage.removeItem('token');
+    dispatch(logout());
+  };
+
   useEffect(() => {
     showMain();
   }, []);
@@ -160,7 +177,16 @@ export default function Header() {
                   <strong>{user}</strong>&nbsp;님
                 </span>
                 <span>
-                  <a href="">로그아웃</a>
+                  {/* {kakaoUser ? (
+                    <a href={KAKAO_LOGOUT_URL}>로그아웃</a>
+                  ) : ( */}
+                  <a href="javascript:void(0)" onClick={nomalLogout}>
+                    로그아웃
+                  </a>
+                  {/* )} */}
+                  {/* <a href="javascript:void(0)" onClick={nomalLogout}>
+                    로그아웃
+                  </a> */}
                 </span>
               </div>
               <p className="">{userId}</p>
