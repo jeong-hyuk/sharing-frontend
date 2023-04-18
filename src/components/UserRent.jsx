@@ -184,6 +184,11 @@ const Rent = styled.div`
         }
       }
     }
+    .add_product_last {
+      background-color: rgba(85, 96, 128, 0.3);
+      border: none;
+      border-radius: 5px;
+    }
   }
 `;
 
@@ -277,6 +282,9 @@ export default function UserRent() {
               </Link>
             </li>
           ))}
+          <li>
+            <div className="add_product_last"></div>
+          </li>
         </ul>
       </Rent>
     </>

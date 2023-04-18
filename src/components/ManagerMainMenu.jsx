@@ -132,7 +132,6 @@ export default function ManagerMainMenu() {
         </li>
         <li>
           <Link to="/log">LOG</Link>
-
         </li>
       </ul>
       <div>

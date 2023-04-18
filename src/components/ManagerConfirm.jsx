@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Sidebar from './Sidebar';
+import ManagerSidebar from './ManagerSidebar';
 
 const Confirm = styled.div`
   position: relative;
@@ -142,7 +142,6 @@ const Return = styled.div`
               border-radius: 5px;
               font-size: 1.4rem;
               transition: all 0.1s;
-              /* font-weight: 600; */
               cursor: pointer;
               border: 0.1px solid rgba(86, 90, 122, 0.3);
               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -158,7 +157,7 @@ const Return = styled.div`
 export default function ManagerConfirm() {
   return (
     <>
-      <Sidebar />
+      <ManagerSidebar />
       <Confirm>
         <div className="product_confirm">
           <p className="product_confirm_text">승인</p>
