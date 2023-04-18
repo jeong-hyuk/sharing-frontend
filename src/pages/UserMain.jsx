@@ -58,7 +58,7 @@ export default function UserMain({ page }) {
 
   return (
     <>
-      <esktop>
+      <Desktop>
         <Header />
         {userId === 'manager' ? (
           <>
