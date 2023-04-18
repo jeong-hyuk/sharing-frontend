@@ -104,6 +104,7 @@ export default function ManagerLog() {
       const resShowObject2 = await axios.get(
         `http://localhost:4000/log/showLog/${type}`,
       );
+      console.log(resShowObject2.data.ARTICLE);
       setBottom(resShowObject2.data.ARTICLE);
     } catch (error) {
       console.error(error);
@@ -113,6 +114,7 @@ export default function ManagerLog() {
 
   useEffect(() => {
     showObject();
+    showOBject2();
   }, []);
 
   return (
@@ -136,32 +138,37 @@ export default function ManagerLog() {
           })}
         </li>
         <li>
-          <ul
-            className="mouse_log"
-            style={{
-              display: selectTab === 0 ? 'block' : 'none',
-              transition: 'all .1s',
-            }}
-          >
-            {top.map((el, idx) => {
-              return (
-                <li key={idx} className="current_rent">
-                  <div>
-                    <p>{el.CODE}</p>
-                    <p>{el.NAME}</p>
-                    <p>username</p>
-                    <p>startdate</p>
-                    <p>enddate</p>
-                    {/* <p>
+          {top.map((el, topIdx) => {
+            return (
+              <ul
+                className="mouse_log"
+                style={{
+                  display: selectTab === topIdx ? 'block' : 'none',
+                  transition: 'all .1s',
+                }}
+                key={topIdx}
+              >
+                {bottom.map((el, idx) => {
+                  return (
+                    <li key={idx} className="current_rent">
+                      <div>
+                        <p>{el.CODE}</p>
+                        <p>{el.NAME}</p>
+                        <p>{el.RENT_USER_ID}</p>
+                        <p>{el.START_DATE.slice(0, 10)}</p>
+                        <p>{el.END_DATE.slice(0, 10)}</p>
+                        {/* <p>
                   {dateString >= `${el.END_DATE.slice(0, 10)}`
                     ? '연체'
                     : '대여'}
                 </p> */}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            );
+          })}
           ;
         </li>
       </ul>

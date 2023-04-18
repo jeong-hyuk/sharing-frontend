@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { color, style } from '@mui/system';
 import { useRef } from 'react';
+import e from 'cors';
 
 const Desktopstyle = styled.div`
   position: relative;
@@ -499,7 +500,15 @@ export default function ProductTable({ page, subMainData, handleRender, id }) {
                 <ol>
                   {subMainData.map((el, idx) => {
                     return (
-                      <li key={idx} onClick={() => showModal(el.CODE)}>
+                      <li
+                        key={idx}
+                        onClick={() => showModal(el.CODE)}
+                        style={
+                          el.STATUS === 0
+                            ? {}
+                            : { backgroundColor: 'rgba(86, 90, 122, 0.05)' }
+                        }
+                      >
                         <p>{el.CODE}</p>
                         <p>{el.NAME}</p>
                         {el.STATUS === 0 ? (
