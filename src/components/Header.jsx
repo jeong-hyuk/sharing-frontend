@@ -145,7 +145,6 @@ export default function Header() {
       console.error(error);
     }
   };
-<<<<<<< HEAD
 
   const kakaoUser = true;
 
@@ -154,9 +153,6 @@ export default function Header() {
     dispatch(logout());
   };
 
-=======
-  //
->>>>>>> 3df592f (123123)
   useEffect(() => {
     showMain();
   }, []);
