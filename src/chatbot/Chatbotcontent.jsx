@@ -443,12 +443,12 @@ export default function Chatbotcontent() {
                   <img src={img1} alt="이찬호" />
                   <p>zack8361</p>
                   <div className="icon">
-                    {/* <a href="https://github.com/zack8361" target="_blank">
+                    <a href="https://github.com/zack8361" target="_blank">
                       <FaGithub />
                     </a>
                     <a href="https://kong8361.tistory.com" target="_blank">
                       <FaBlogger />
-                    </a> */}
+                    </a>
                   </div>
                 </div>
 
@@ -470,12 +470,12 @@ export default function Chatbotcontent() {
                   <img src={img2} alt="이유림" />
                   <p>yulimle</p>
                   <div className="icon">
-                    {/* <a href="https://github.com/yulimle" target="_blank">
+                    <a href="https://github.com/yulimle" target="_blank">
                       <FaGithub />
                     </a>
                     <a href="https://velog.io/@yulimle" target="_blank">
                       <FaBlogger />
-                    </a> */}
+                    </a>
                   </div>
                 </div>
 
@@ -495,12 +495,12 @@ export default function Chatbotcontent() {
                   <img src={img3} alt="김정혁" />
                   <p>jeong-hyuk</p>
                   <div className="icon">
-                    {/* <a href="https://github.com/jeong-hyuk" target="_blank">
+                    <a href="https://github.com/jeong-hyuk" target="_blank">
                       <FaGithub />
                     </a>
                     <a href="https://jack1150.tistory.com/" target="_blank">
                       <FaBlogger />
-                    </a> */}
+                    </a>
                   </div>
                 </div>
 
@@ -520,12 +520,12 @@ export default function Chatbotcontent() {
                   <img src={img4} alt="송민영" />
                   <p>songmy1206</p>
                   <div className="icon">
-                    {/* <a href="https://github.com/songmy1206" target="_blank">
+                    <a href="https://github.com/songmy1206" target="_blank">
                       <FaGithub />
                     </a>
                     <a href="https://fromys.tistory.com/" target="_blank">
                       <FaBlogger />
-                    </a> */}
+                    </a>
                   </div>
                 </div>
 
@@ -545,12 +545,12 @@ export default function Chatbotcontent() {
                   <img src={img5} alt="최인영" />
                   <p>choiinyoung</p>
                   <div className="icon">
-                    {/* <a href="https://github.com/choiinyoung" target="_blank">
+                    <a href="https://github.com/choiinyoung" target="_blank">
                       <FaGithub />
                     </a>
                     <a href="https://velog.io/@choiinyoung" target="_blank">
                       <FaBlogger />
-                    </a> */}
+                    </a>
                   </div>
                 </div>
               </ol>
