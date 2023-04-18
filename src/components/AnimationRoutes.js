@@ -24,13 +24,14 @@ export default function AnimationRoutes() {
   return (
     <>
       <AnimatePresence>
-        <Header />
         {userId === 'manager' ? (
           <Routes>
             <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
             <Route path="/subMain/:id" element={<UserRent />} />
 
+
             <Route path="/confirm/:type" element={<ManagerConfirm />} />
+
 
           </Routes>
         ) : (
