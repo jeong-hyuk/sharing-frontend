@@ -80,7 +80,8 @@ export default function UserMain({ page }) {
             </Routes>
           </>
         )}
-      </esktop>
+      </Desktop>
+
       <Tablet>Tablet</Tablet>
       <Mobile>Mobile</Mobile>
       <Default></Default>

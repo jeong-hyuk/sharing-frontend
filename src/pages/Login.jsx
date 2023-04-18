@@ -13,6 +13,7 @@ import {
 import { faCircleArrowRight, faLock } from '@fortawesome/free-solid-svg-icons';
 import kakaotalkImg from '../pages/images/kakaoIcon.png';
 import { motion } from 'framer-motion';
+import logo from '../img/logo2.png';
 
 const TitlePart = styled(motion.div)`
   z-index: 2;
@@ -55,9 +56,15 @@ const LoginStyle = styled.div`
     left: calc((7.4vw - 10vh) / 2);
     width: 10vh;
     height: 10vh;
-    background-color: #81a8e3;
     opacity: 0.5;
     border-radius: 10px;
+    img {
+      position: relative;
+      z-index: 1000;
+      width: 10vh;
+      height: 10vh;
+      /* background-color: orange; */
+    }
   }
   // 메인 제목 부분
   /*  */
@@ -221,7 +228,9 @@ export default function Login() {
 
   return (
     <LoginStyle>
-      <p className="logo-part"></p>
+      <p className="logo-part">
+        <img src={logo} alt="로고" />
+      </p>
       {/* 메인 제목 파트 */}
       <TitlePart
         animate={{ translateX: '-24.2vw' }}

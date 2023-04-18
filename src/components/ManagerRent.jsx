@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLaptop } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { async } from 'q';
+import { func } from 'prop-types';
 
 const Rent = styled.div`
   position: fixed;
@@ -12,8 +14,95 @@ const Rent = styled.div`
   right: 0px;
   /* background-color: rgb(255, 255, 255); */
   width: 70vw;
-  height: 89vh;
+  height: 87vh;
   overflow-y: scroll;
+  .managermodal {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    border-radius: 5px;
+    width: 18vw;
+    height: 55vh;
+    left: 22vw;
+    top: 10vh;
+    background-color: #fff;
+    border: 1px solid rgba(86, 90, 122, 0.3);
+    box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px;
+    .noticepart {
+      position: absolute;
+      width: 100%;
+      height: 80%;
+
+      p {
+        position: absolute;
+        width: 13vw;
+        height: 20vh;
+        top: 4vh;
+        left: 2.5vw;
+        border: 1px solid rgba(86, 90, 122, 0.3);
+        box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px inset;
+        input {
+          position: absolute;
+          top: 8vh;
+          left: 1vw;
+          font-size: 1.2rem;
+        }
+      }
+      div {
+        position: absolute;
+        width: 15vw;
+        top: 27vh;
+        left: 1vw;
+        ol {
+          width: 100%;
+          li {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            line-height: 8vh;
+            span {
+              font-size: 1.3rem;
+              width: 3vw;
+              left: 0;
+            }
+            input {
+              width: 10vw;
+              right: 10vw;
+              font-size: 1.5rem;
+              line-height: 5vh;
+              height: 5vh;
+              border: none;
+              transform: translate(-0.5vw, 1.5vh);
+            }
+          }
+        }
+      }
+    }
+    .btn {
+      position: absolute;
+      display: flex;
+      justify-content: space-around;
+      width: 18vw;
+      bottom: 5vh;
+      li {
+        cursor: pointer;
+        width: 7vw;
+        height: 5vh;
+        line-height: 5vh;
+        text-align: center;
+        border-radius: 5px;
+        border: 1px solid gray;
+        color: rgb(86, 90, 122);
+        font-size: 1.3rem;
+        font-weight: 600;
+        :first-child {
+          background-color: #565a7a;
+          box-shadow: 0;
+          color: #fff;
+        }
+      }
+    }
+  }
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -199,6 +288,12 @@ export default function ManagerRent() {
   const userId = useSelector(state => state.user.userID);
   const [main, setMain] = useState([]);
   const [user, setUser] = useState();
+  const [render, setRender] = useState(false);
+  const productname = useRef();
+  const productcode = useRef();
+  const productmodal = useRef();
+  const imgRef = useRef();
+  const modalRef = useRef();
 
   const showMain = async () => {
     try {
@@ -212,24 +307,95 @@ export default function ManagerRent() {
     }
   };
 
+  async function handleAddimg(e) {
+    const formData = new FormData();
+    formData.append('image', imgRef.current.files[0]);
+    formData.append(
+      'data',
+      JSON.stringify({
+        productname: productname.current.value,
+        productcode: productcode.current.value,
+      }),
+    );
+
+    try {
+      const resAddImg = await axios.post(
+        'http://localhost:4000/manager',
+        formData,
+      );
+      modalRef.current.style.display = 'none';
+      setRender(!render);
+    } catch (error) {
+      console.error(error);
+      console.log('이미지업로드 잘못되었다.');
+    }
+  }
+  const handleDelete = async type => {
+    try {
+      const resDelete = await axios.post(
+        `http://localhost:4000/manager/delete/${type}`,
+      );
+      console.log('%%%%%%');
+      // handleRender();
+      setRender(!render);
+    } catch (error) {
+      console.error(error);
+      console.log('잘못됨');
+    }
+  };
+
   useEffect(() => {
     showMain();
-  }, []);
+  }, [render]);
 
   return (
     <Rent className="scrollBar">
+      <div className="managermodal" ref={modalRef}>
+        <div className="noticepart">
+          <p>
+            <input type="file" name="img" ref={imgRef} />
+          </p>
+          <div>
+            <ol className="noticelist">
+              <li>
+                <span>코드 :</span>
+                <input type="text" ref={productcode} />
+              </li>
+              <li>
+                <span>이름 :</span>
+                <input type="text" ref={productname} />
+              </li>
+            </ol>
+          </div>
+        </div>
+        <ol className="btn">
+          <li onClick={handleAddimg}>추가</li>
+          <li
+            onClick={() => {
+              document.querySelector('.managermodal').style.display = 'none';
+            }}
+          >
+            취소
+          </li>
+        </ol>
+      </div>
       <ul>
         {main.map((el, index) => (
           <li key={index} className="rent_product">
             <div className="product_edit_button">
               {/* <p className="modify">수정</p> */}
-              <p className="delete">삭제</p>
+              <p
+                className="delete"
+                onClick={() => handleDelete(el.OBJECT_TYPE)}
+              >
+                삭제
+              </p>
             </div>
 
             <Link to={`/subMain/${el.OBJECT_TYPE}`}>
               <div className="rent_product_info">
                 <img
-                  src="http://localhost:4000/uploads/house-solid.svg"
+                  src={'http://localhost:4000/uploads/' + el.IMG_SRC}
                   alt=""
                   className="rent_laptop_icon"
                 />
@@ -240,7 +406,19 @@ export default function ManagerRent() {
         ))}
         <li>
           <div className="product_add_button">
-            <p className="add">+</p>
+            <p
+              className="add"
+              onClick={() => {
+                const controller = document.querySelector('.managermodal');
+                controller.style.display =
+                  controller.style.display === 'none' ||
+                  controller.style.display === ''
+                    ? 'block'
+                    : 'none';
+              }}
+            >
+              +
+            </p>
           </div>
           <div className="add_product_last"></div>
         </li>
