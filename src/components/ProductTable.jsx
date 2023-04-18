@@ -487,7 +487,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
           {/* 물품 목록 */}
           <div className="allcontroller">
             <div className="leftcontroller">
-              <p>{name}</p>
+              <p>{name} 대여</p>
               <div className="title">
                 <ol>
                   <li>코드</li>
