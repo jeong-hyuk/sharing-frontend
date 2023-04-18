@@ -272,7 +272,6 @@ export default function ManagerNotice() {
         },
       );
       setRender(cur => !cur);
-      console.log(render);
     } catch (error) {
       console.error(error);
       console.log('ManagerNotice 추가 잘못되었다.');
@@ -282,13 +281,11 @@ export default function ManagerNotice() {
   // 공지사항 삭제 axios
   const deleteNotice = async code => {
     try {
-      // const id = code.current.value;
-      const resDeleteNotice = await axios.post(
+      const resDeleteNotice = await axios.delete(
         `http://localhost:4000/main/manager/notice/${code}`,
       );
-      setDeleteN(resDeleteNotice.data.CODE);
       setRender(cur => !cur);
-      console.log(render);
+      console.log(render, '@@@@@@@@@@@@@@@@@@@');
     } catch (error) {
       console.error(error);
       console.log('ManagerNotice 추가 잘못되었다.');

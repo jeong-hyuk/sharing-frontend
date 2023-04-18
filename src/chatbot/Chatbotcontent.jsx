@@ -25,6 +25,7 @@ import img3 from './member/jung.png';
 import img4 from './member/min.png';
 import img5 from './member/inyoung.png';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const Mainstyle = styled.div`
   position: absolute;
@@ -329,14 +330,29 @@ const Mainstyle = styled.div`
 
 export default function Chatbotcontent() {
   const [value, onChange] = useState(new Date());
-  // const userID = useSelector(state => state.user.userID);
-  // const[name,setName] = useState();
+  const userID = useSelector(state => state.user.userID);
+  const [name, setName] = useState();
+  const [render, setRender] = useState();
+  const userName = async () => {
+    try {
+      const setUserName = await axios.get(
+        `http://localhost:4000/chatBot/${userID}`,
+      );
+      setName(setUserName.data);
+      setRender(!render);
+    } catch (error) {
+      console.error(error);
+      console.log('챗봇 잘못되었다.');
+    }
+  };
+
   return (
     <>
       <Mainstyle>
         <div
           className="chat_bot_btn"
           onClick={() => {
+            userName();
             const controller = document.querySelector('.chatbotallcontroller');
             controller.style.display =
               controller.style.display === 'none' ||
@@ -357,7 +373,7 @@ export default function Chatbotcontent() {
             </div>
             <div className="contents">
               <p>
-                Hello 인영,
+                Hello {name},
                 <br />
                 How can we help?
               </p>
