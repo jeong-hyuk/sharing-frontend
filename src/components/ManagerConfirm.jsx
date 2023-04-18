@@ -155,6 +155,8 @@ const Return = styled.div`
 `;
 
 export default function ManagerConfirm() {
+  const appendAccept = () => {};
+
   return (
     <>
       <ManagerSidebar />
@@ -180,7 +182,7 @@ export default function ManagerConfirm() {
                 <p>
                   <button className="confirm_button">승인</button>
                 </p>
-              </li>
+                {/* </li>
               <li>
                 <p>01</p>
                 <p>노트북</p>
@@ -206,7 +208,7 @@ export default function ManagerConfirm() {
                 <p>010-1234-5678</p>
                 <p>
                   <button className="confirm_button">승인</button>
-                </p>
+                </p> */}
               </li>
             </ul>
           </div>
