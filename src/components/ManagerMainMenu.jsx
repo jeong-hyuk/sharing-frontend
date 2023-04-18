@@ -125,7 +125,7 @@ export default function ManagerMainMenu() {
           </Link>
         </li>
         <li>
-          <Link to="/confirm/0001">CONFIRM</Link>
+          <Link to="/confirm">CONFIRM</Link>
         </li>
         <li>
           <Link to="/notice">NOTICE</Link>

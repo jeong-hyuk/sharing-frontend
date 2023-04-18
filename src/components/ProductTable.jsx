@@ -470,6 +470,7 @@ export default function ProductTable({ page, subMainData, handleRender, id }) {
   return (
     <>
       <Desktop>
+        <header />
         <Sidebar />
         <Desktopstyle>
           {/* 모달창 - user일때만 */}
