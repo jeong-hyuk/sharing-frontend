@@ -155,7 +155,9 @@ const Desktopstyle = styled.div`
             .object-delete {
               width: 2vw;
               height: 4vh;
-              background-color: #fff;
+              margin-top: 2vh;
+              margin-right: 1vw;
+              background-color: #eee;
               color: #565a7a;
               border-radius: 5px;
               font-size: 1.4rem;
@@ -164,6 +166,9 @@ const Desktopstyle = styled.div`
               border-style: none;
               /* border: 0.1px solid rgba(86, 90, 122, 0.3);
               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); */
+              :hover {
+                background-color: #fff;
+              }
             }
           }
           border-bottom: none;
@@ -390,18 +395,41 @@ export default function ProductTable({ page, subMainData, handleRender }) {
   const appendObject = async () => {
     const type = subMainData[0].OBJECT_TYPE;
     try {
-      await axios.post(
-        `http://localhost:4000/subMain/manager/producttable/${type}`,
+      const resAddObject = await axios.post(
+        `http://localhost:4000/subMain/manager/producttable/append/${type}`,
         {
           inputObjectCode: inputObjectCode.current.value,
           inputObjectName: inputObjectName.current.value,
           inputObjectStatus: inputObjectStatus.current.value,
         },
       );
-      setRender(cur => !cur);
+      console.log('resAddObject', resAddObject);
+      //setRender(cur => !cur);
+      handleRender();
     } catch (error) {
       console.log(error);
       console.log('object추가 잘못됨');
+    }
+  };
+
+  // 물품 삭제 axios
+
+  const [deleteNew, setDeleteNew] = useState([]);
+
+  const deleteObject = async code => {
+    try {
+      console.log(code);
+      const resDeleteObject = await axios.post(
+        `http://localhost:4000/subMain/manager/producttable/delete/${code}`,
+      );
+      // console.log(resDeleteObject);
+      // setDeleteNew(resDeleteObject.data.CODE);
+      // console.log(deleteNew.data);
+      // setRender(cur => !cur);
+      handleRender();
+    } catch (error) {
+      console.log(error);
+      console.log('object 삭제안돼');
     }
   };
 
@@ -436,9 +464,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
     red.current.parentNode.style.backgroundColor = 'rgba(86, 90, 122, 0.1)';
   }
 
-  useEffect(() => {
-    appendObject();
-  }, [render]);
+  useEffect(() => {}, [render]);
 
   return (
     <>
@@ -446,6 +472,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
         <Sidebar />
         <Desktopstyle>
           {/* 모달창 - user일때만 */}
+
           <div className="productmodal">
             <div className="noticepart">
               <div>
@@ -457,7 +484,10 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                           <p className="object-img">
                             <img
                               src={
-                                'http://localhost:4000/uploads/' + e.OBJECT_IMG
+                                e.OBJECT_IMG !== null
+                                  ? 'http://localhost:4000/uploads/' +
+                                    e.OBJECT_IMG
+                                  : ''
                               }
                             />
                           </p>
@@ -510,12 +540,21 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                           </p>
                         )}
 
-                        <button className="object-delete">X</button>
+                        {userId == 'manager' ? (
+                          <button
+                            className="object-delete"
+                            onClick={() => deleteObject(el.CODE)}
+                          >
+                            X
+                          </button>
+                        ) : (
+                          ''
+                        )}
                       </li>
                     );
                   })}
                 </ol>
-                {userId !== 'manager' ? (
+                {userId == 'manager' ? (
                   <div className="object-input">
                     코드 <input ref={inputObjectCode} type="text" />
                     물품명 <input ref={inputObjectName} type="text" />
@@ -525,7 +564,7 @@ export default function ProductTable({ page, subMainData, handleRender }) {
                   ''
                 )}
               </div>
-              {userId !== 'manager' ? (
+              {userId == 'manager' ? (
                 <button className="product-add" onClick={appendObject}>
                   추가
                 </button>
