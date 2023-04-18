@@ -204,14 +204,16 @@ export default function Header() {
               <p className="">{userId}</p>
             </div>
             <Link to="/myPage" className="user_info_img">
+
               {profile?.length >= 1 && profile[0].PROFILE_IMG !== '' ? (
+
                 <img
                   src={'http://localhost:4000/profile/' + profile}
                   className="user_info_img2"
                 />
               ) : (
                 <img src={companyLogo} alt="프로필" />
-              )}
+              )} */}
             </Link>
           </div>
         </div>

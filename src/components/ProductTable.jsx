@@ -159,7 +159,7 @@ const Desktopstyle = styled.div`
               height: 4vh;
               margin-top: 2vh;
               margin-right: 1vw;
-              background-color: #eee;
+              background-color: transparent;
               color: #565a7a;
               border-radius: 5px;
               font-size: 1.4rem;
@@ -168,9 +168,6 @@ const Desktopstyle = styled.div`
               border-style: none;
               /* border: 0.1px solid rgba(86, 90, 122, 0.3);
               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); */
-              :hover {
-                background-color: #fff;
-              }
             }
           }
           border-bottom: none;

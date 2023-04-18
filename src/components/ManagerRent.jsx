@@ -22,16 +22,17 @@ const Rent = styled.div`
     z-index: 5;
     border-radius: 5px;
     width: 18vw;
-    height: 55vh;
+    height: 45vh;
     left: 22vw;
     top: 10vh;
     background-color: #fff;
     border: 1px solid rgba(86, 90, 122, 0.3);
-    box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px;
+    box-shadow: rgba(0, 0, 0, 0.1) 2px 2px 4px;
     .noticepart {
       position: absolute;
-      width: 100%;
-      height: 80%;
+      width: 15vw;
+      left: 50%;
+      transform: translateX(-60%);
 
       p {
         position: absolute;
@@ -43,36 +44,32 @@ const Rent = styled.div`
         box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px inset;
         input {
           position: absolute;
-          top: 8vh;
-          left: 1vw;
           font-size: 1.2rem;
+          top: 50%;
+          left: 50%;
+          transform: translate(-33%, -50%);
         }
       }
       div {
         position: absolute;
-        width: 15vw;
         top: 27vh;
-        left: 1vw;
+        left: 50%;
+        transform: translateX(-39%);
         ol {
           width: 100%;
           li {
             display: flex;
-            justify-content: space-around;
-            width: 100%;
-            line-height: 8vh;
+            justify-content: center;
+            align-items: center;
             span {
               font-size: 1.3rem;
-              width: 3vw;
-              left: 0;
+              width: 2.5vw;
             }
             input {
-              width: 10vw;
-              right: 10vw;
               font-size: 1.5rem;
-              line-height: 5vh;
-              height: 5vh;
+              line-height: 4vh;
+              height: 4vh;
               border: none;
-              transform: translate(-0.5vw, 1.5vh);
             }
           }
         }
@@ -81,14 +78,15 @@ const Rent = styled.div`
     .btn {
       position: absolute;
       display: flex;
-      justify-content: space-around;
-      width: 18vw;
-      bottom: 5vh;
+      justify-content: space-between;
+      width: 13vw;
+      bottom: 4vh;
+      left: 2.5vw;
       li {
         cursor: pointer;
-        width: 7vw;
-        height: 5vh;
-        line-height: 5vh;
+        width: 5.5vw;
+        height: 4vh;
+        line-height: 4vh;
         text-align: center;
         border-radius: 5px;
         border: 1px solid gray;
@@ -144,7 +142,7 @@ const Rent = styled.div`
           p {
             font-size: 4.5rem;
             height: 50px;
-            line-height: 50px;
+            /* line-height: 50px; */
             border-radius: 50%;
             width: 50px;
             background-color: #fff;
