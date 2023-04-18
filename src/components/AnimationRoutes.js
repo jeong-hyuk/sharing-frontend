@@ -22,7 +22,6 @@ export default function AnimationRoutes() {
   return (
     <>
       <AnimatePresence>
-        <Header />
         {userId === 'manager' ? (
           <Routes>
             <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />

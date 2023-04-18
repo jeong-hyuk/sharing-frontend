@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import ManagerSidebar from './ManagerSidebar';
+import Header from './Header';
 
 const Confirm = styled.div`
   position: relative;
@@ -159,6 +160,7 @@ export default function ManagerConfirm() {
 
   return (
     <>
+      <Header />
       <ManagerSidebar />
       <Confirm>
         <div className="product_confirm">
