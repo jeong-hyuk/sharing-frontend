@@ -11,7 +11,10 @@ import Chatbotcontroller from './Chatbotcontroller';
 import MangerMain from '../pages/ManagerMain';
 import ManagerNotice from './ManagerNotice';
 import ManagerConfirm from './ManagerConfirm';
+
 import Header from './Header';
+import ManagerRent from './ManagerRent';
+
 
 export default function AnimationRoutes() {
   const isLogin = useSelector(state => state.user.isLogin);
@@ -25,11 +28,16 @@ export default function AnimationRoutes() {
           <Routes>
             <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
             <Route path="/subMain/:id" element={<UserRent />} />
+
+
             <Route path="/confirm/:type" element={<ManagerConfirm />} />
+
+
           </Routes>
         ) : (
           <Routes>
             <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
+            <Route path="/subMain/:id" element={<UserRent />} />
             <Route
               path="/register"
               element={isLogin ? <Login /> : <Register />}

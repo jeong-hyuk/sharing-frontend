@@ -1,7 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import ManagerSidebar from './ManagerSidebar';
+
 import Header from './Header';
+import Sidebar from './Sidebar';
+import ManagerSidebar from './ManagerSidebar';
+
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
+
 
 const Confirm = styled.div`
   position: relative;
@@ -160,6 +168,60 @@ const Return = styled.div`
 `;
 
 export default function ManagerConfirm() {
+
+  const { type } = useParams();
+
+  const [confirmData, setConfirmData] = useState([]);
+  const [secConfirmData, setSecConfirmData] = useState([]);
+  const [render, setRender] = useState(false);
+  // 화면이 렌더링 되었을때 백엔드와 통신하는 showConfirm 함수.
+  const showConfirm = async () => {
+    console.log('ㅎㅇㅎㄴ');
+    try {
+      const resShowConfirm = await axios.get(
+        `http://localhost:4000/manager/confirm/${type}`,
+      );
+      setConfirmData(resShowConfirm.data.ARTICLE);
+      setSecConfirmData(resShowConfirm.data.ARTICLE2);
+    } catch (error) {
+      console.error(error);
+      console.log('showConfirm 이 잘못되었다.');
+    }
+  };
+  // 첫 화면.
+  useEffect(() => {
+    showConfirm();
+  }, [type, render]);
+
+  // 승인 버튼
+  const accept = async code => {
+    console.log('승인버튼 클릭!');
+    try {
+      const resAccept = await axios.post(
+        `http://localhost:4000/manager/accept/${code}`,
+      );
+      setRender(!render);
+      console.log(resAccept.data);
+    } catch (error) {
+      console.error(error);
+      console.log('승인 버튼 잘못되었다.');
+    }
+  };
+
+  // 반납 버튼
+  const acceptReturn = async code => {
+    console.log('ㅎㅇ22222222222222');
+    try {
+      const resAccept = await axios.post(
+        `http://localhost:4000/manager/acceptReturn/${code}`,
+      );
+      setRender(!render);
+    } catch (error) {
+      console.error(error);
+      console.log('반납 버튼 잘못되었다.');
+    }
+  };
+
   return (
     <>
       <Header />
@@ -178,42 +240,26 @@ export default function ManagerConfirm() {
           </div>
           <div className="content">
             <ul>
-              <li>
-                <p>01</p>
-                <p>노트북</p>
-                <p>최인영</p>
-                <p>010-1234-5678</p>
-                <p>
-                  <button className="confirm_button">승인</button>
-                </p>
-              </li>
-              <li>
-                <p>01</p>
-                <p>노트북</p>
-                <p>최인영</p>
-                <p>010-1234-5678</p>
-                <p>
-                  <button className="confirm_button">승인</button>
-                </p>
-              </li>
-              <li>
-                <p>01</p>
-                <p>노트북</p>
-                <p>최인영</p>
-                <p>010-1234-5678</p>
-                <p>
-                  <button className="confirm_button">승인</button>
-                </p>
-              </li>
-              <li>
-                <p>01</p>
-                <p>노트북</p>
-                <p>최인영</p>
-                <p>010-1234-5678</p>
-                <p>
-                  <button className="confirm_button">승인</button>
-                </p>
-              </li>
+
+              {confirmData.map((el, idx) => {
+                return (
+                  <li key={idx}>
+                    <p>{el.CODE}</p>
+                    <p>{el.NAME}</p>
+                    <p>{el.USER_NAME}</p>
+                    <p>{el.PHONE_NUMBER}</p>
+                    <p>
+                      <button
+                        onClick={() => accept(el.CODE)}
+                        className="confirm_button"
+                      >
+                        승인
+                      </button>
+                    </p>
+                  </li>
+                );
+              })}
+
             </ul>
           </div>
         </div>
@@ -232,33 +278,24 @@ export default function ManagerConfirm() {
           </div>
           <div className="content">
             <ul>
-              <li>
-                <p>01</p>
-                <p>노트북</p>
-                <p>최인영</p>
-                <p>010-1234-5678</p>
-                <p>
-                  <button className="return_button">반납</button>
-                </p>
-              </li>
-              <li>
-                <p>01</p>
-                <p>노트북</p>
-                <p>최인영</p>
-                <p>010-1234-5678</p>
-                <p>
-                  <button className="return_button">반납</button>
-                </p>
-              </li>
-              <li>
-                <p>01</p>
-                <p>노트북</p>
-                <p>최인영</p>
-                <p>010-1234-5678</p>
-                <p>
-                  <button className="return_button">반납</button>
-                </p>
-              </li>
+              {secConfirmData.map((el, idx) => {
+                return (
+                  <li key={idx}>
+                    <p>{el.CODE}</p>
+                    <p>{el.NAME}</p>
+                    <p>{el.USER_NAME}</p>
+                    <p>{el.PHONE_NUMBER}</p>
+                    <p>
+                      <button
+                        onClick={() => acceptReturn(el.CODE)}
+                        className="return_button"
+                      >
+                        반납
+                      </button>
+                    </p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
