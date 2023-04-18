@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { color, style } from '@mui/system';
 import { useRef } from 'react';
 import e from 'cors';
+import { useLocation } from 'react-router-dom';
 
 const Desktopstyle = styled.div`
   position: relative;
@@ -340,6 +341,7 @@ const Mobilestyle = styled.div`
 `;
 
 export default function ProductTable({ page, subMainData, handleRender, id }) {
+  const location = useLocation();
   const [rent, setRent] = useState(false);
 
   const Desktop = ({ children }) => {
@@ -381,24 +383,46 @@ export default function ProductTable({ page, subMainData, handleRender, id }) {
 
   //user에서 Modal
   const [selectedCode, setSelectedCode] = useState('');
+  const [show, setShow] = useState('none');
   const showModal = code => {
-    const modal = document.querySelector('.productmodal');
-    modal.style.display =
-      modal.style.display === 'none' || modal.style.display === ''
-        ? 'block'
-        : 'none';
+    // modalRef.current.style.display =
+    // modalRef.current.style.display === 'none' ||
+    // modalRef.current.style.display === ''
+    //   ? 'block'
+    //   : 'none';
+
+    if (userId !== 'manager') {
+      if (show === 'none') {
+        setShow('block');
+      } else {
+        setShow('none');
+      }
+    }
+
     setSelectedCode(code);
   };
 
   const inputObjectCode = useRef();
   const inputObjectName = useRef();
+  const modalRef = useRef();
 
   const inputObjectStatus = useRef();
   const [render, setRender] = useState(false);
 
   // 물품 추가 axios
   const appendObject = async () => {
-    const type = subMainData[0].OBJECT_TYPE;
+    let type;
+    console.log(subMainData.length);
+    if (subMainData.length) {
+      type = subMainData[0].OBJECT_TYPE;
+    } else {
+      console.log('####');
+      type = location.pathname.substring(
+        location.pathname.length - 4,
+        location.pathname.length,
+      );
+    }
+
     try {
       const resAddObject = await axios.post(
         `http://localhost:4000/subMain/manager/producttable/append/${type}`,
@@ -478,8 +502,11 @@ export default function ProductTable({ page, subMainData, handleRender, id }) {
         <Sidebar />
         <Desktopstyle>
           {/* 모달창 - user일때만 */}
-
-          <div className="productmodal">
+          <div
+            className="productmodal"
+            ref={modalRef}
+            style={{ display: show }}
+          >
             <div className="noticepart">
               <div>
                 <ol className="noticelist">
@@ -502,9 +529,11 @@ export default function ProductTable({ page, subMainData, handleRender, id }) {
                             <li onClick={() => findRent(i)}>대여</li>
                             <li
                               onClick={() => {
-                                document.querySelector(
-                                  '.productmodal',
-                                ).style.display = 'none';
+                                if (show === 'none') {
+                                  setShow('block');
+                                } else {
+                                  setShow('none');
+                                }
                               }}
                             >
                               취소
@@ -537,7 +566,6 @@ export default function ProductTable({ page, subMainData, handleRender, id }) {
                     return (
                       <li
                         key={idx}
-                        onClick={() => showModal(el.CODE)}
                         style={
                           el.STATUS === 0
                             ? {}
@@ -545,7 +573,7 @@ export default function ProductTable({ page, subMainData, handleRender, id }) {
                         }
                       >
                         <p>{el.CODE}</p>
-                        <p>{el.NAME}</p>
+                        <p onClick={() => showModal(el.CODE)}>{el.NAME}</p>
                         {el.STATUS === 0 ? (
                           <p>대여가능</p>
                         ) : (

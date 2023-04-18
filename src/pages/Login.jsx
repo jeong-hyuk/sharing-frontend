@@ -213,7 +213,7 @@ export default function Login() {
       const data = await resLogin.json();
       const token = data.token;
       window.localStorage.setItem('token', token);
-      alert(await resLogin.json()); // 로그인 성공 하였습니다 라는 값 받아왔음.
+      alert(data.message); // 로그인 성공 하였습니다 라는 값 받아왔음.
       navigate('/');
     } else {
       alert(await resLogin.json());
