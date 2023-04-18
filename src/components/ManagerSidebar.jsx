@@ -83,7 +83,7 @@ const Sidelist = styled.div`
       }
     }
   }
-  li {
+  .select {
     display: flex;
     width: 70%;
     height: 8vh;
@@ -190,13 +190,17 @@ const Sidebar = ({ width = 300 }) => {
         <ul>
           {name.map((el, idx) => {
             return (
-              <li key={idx}>
+              <Link
+                to={`/confirm/${el.OBJECT_TYPE}`}
+                className="select"
+                key={idx}
+              >
                 <img
                   src={`http://localhost:4000/uploads/${el.IMG_SRC}`}
                   className="sideBar_icon_laptop"
                 />
                 <p>{el.OBJECT_NAME}</p>
-              </li>
+              </Link>
             );
           })}
           <Link to="/" className="homeBtn">
