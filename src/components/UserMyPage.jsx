@@ -201,7 +201,6 @@ export default function UserMyPage() {
       console.error(error);
       console.log('기본 이미지 오류');
     }
-    // setMain((main) => [{ ...main[0], PROFILE_IMG: '' }]);
   };
 
   useEffect(() => {

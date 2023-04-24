@@ -23,7 +23,7 @@ const TitlePart = styled(motion.div)`
   top: -5vh;
   right: 10%;
   height: 76vh;
-  box-shadow: 13px 13px 15px rgba(0, 0, 0, 10%);
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 10%);
   h1 {
     position: absolute;
     top: 50%;
@@ -45,7 +45,7 @@ const LoginStyle = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  box-shadow: 5px 5px 13px 15px rgba(0, 0, 0, 10%);
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 10%);
   width: 74vw;
   height: 66vh;
 
