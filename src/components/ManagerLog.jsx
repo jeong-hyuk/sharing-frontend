@@ -62,10 +62,12 @@ const Rent = styled.div`
         div {
           margin: 2vh 1vw 2vh 1vw;
           display: flex;
-          justify-content: space-around;
+          /* justify-content: space-around; */
+          text-align: center;
         }
         p {
           font-size: 1.7rem;
+          width: 25%;
         }
       }
     }
@@ -155,7 +157,7 @@ export default function ManagerLog() {
                       <div>
                         <p>{el.CODE}</p>
                         <p>{el.NAME}</p>
-                        <p>{el.RENT_USER_ID}</p>
+                        {/* <p>{el.RENT_USER_ID}</p> */}
                         <p>{el.START_DATE.slice(0, 10)}</p>
                         <p>{el.END_DATE.slice(0, 10)}</p>
                         {/* <p>

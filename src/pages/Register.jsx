@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { motion } from 'framer-motion';
+import logo from '../img/logo2.png';
 
 const RegisterStyle = styled.div`
   position: absolute;
@@ -20,7 +21,7 @@ const RegisterStyle = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  box-shadow: 5px 5px 13px 15px rgba(0, 0, 0, 10%);
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 10%);
   width: 74vw;
   height: 66vh;
   // 로고 파트
@@ -30,9 +31,15 @@ const RegisterStyle = styled.div`
     left: calc((7.4vw - 10vh) / 2);
     width: 10vh;
     height: 10vh;
-    background-color: #81a8e3;
     opacity: 0.5;
     border-radius: 10px;
+    img {
+      position: relative;
+      z-index: 1000;
+      width: 10vh;
+      height: 10vh;
+      /* background-color: orange; */
+    }
   }
   // 메인 제목 부분
   .title-part {
@@ -44,7 +51,7 @@ const RegisterStyle = styled.div`
     top: -5vh;
     left: 10%;
     height: 76vh;
-    box-shadow: 13px 13px 15px rgba(0, 0, 0, 10%);
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 10%);
     h1 {
       position: absolute;
       top: 50%;
@@ -319,7 +326,9 @@ export default function Register() {
 
   return (
     <RegisterStyle>
-      <p className="logo-part"></p>
+      <p className="logo-part">
+        <img src={logo} alt="로고" />
+      </p>
       <motion.div
         animate={{ translateX: '24.2vw' }}
         transition={{ duration: 0.8 }}

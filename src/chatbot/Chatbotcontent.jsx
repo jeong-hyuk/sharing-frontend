@@ -34,7 +34,7 @@ const Mainstyle = styled.div`
     width: 45px;
     height: 45px;
     position: fixed;
-    bottom: 10vh;
+    bottom: 5vh;
     left: 13vw;
     background-color: #c6e36b;
     border-radius: 50%;
@@ -53,7 +53,7 @@ const Mainstyle = styled.div`
     display: none;
     overflow: hidden;
     position: relative;
-    top: 2vh;
+    top: 6vh;
     left: 13vw;
     width: 20vw;
     height: 70vh;
@@ -81,12 +81,13 @@ const Mainstyle = styled.div`
           top: 2vh;
           width: 50px;
           height: 50px;
+          left: -6vw;
         }
       }
       .contents {
         position: absolute;
         width: 80%;
-        height: 20%;
+        height: 17%;
         background-color: #fff;
         border-radius: 15px;
         z-index: 2;
@@ -95,8 +96,8 @@ const Mainstyle = styled.div`
         p {
           position: absolute;
           top: 2vh;
-          left: 3vw;
-          line-height: 5vh;
+          left: 2vw;
+          line-height: 4vh;
           font-size: 2rem;
           font-weight: 700;
           color: gray;
@@ -104,8 +105,9 @@ const Mainstyle = styled.div`
       }
       .calendar-container {
         position: relative;
-        top: 8vh;
-        left: 0.5vw;
+        top: 5vh;
+        width: 95%;
+        left: 0.6vw;
         .react-calendar {
           width: 320px;
           height: 270px;
@@ -205,7 +207,7 @@ const Mainstyle = styled.div`
             border: 0px;
             vertical-align: top;
             position: relative;
-            left: 0.5vw;
+            left: -0.5vw;
           }
         }
         .react-chatbot-kit-chat-bot-message {
@@ -398,9 +400,9 @@ export default function Chatbotcontent() {
           <div className="main on">
             <div className="header">
               <img src={logo} alt="로고" />
-              <p className="icon">
+              {/* <p className="icon">
                 <FontAwesomeIcon icon={faUser} />
-              </p>
+              </p> */}
             </div>
             <div className="contents">
               <p>

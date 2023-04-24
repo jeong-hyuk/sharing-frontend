@@ -32,7 +32,7 @@ const Confirm = styled.div`
       height: 5vh;
       line-height: 5vh;
       margin-bottom: 2vh;
-      overflow-y: scroll;
+      /* overflow-y: scroll; */
       overflow-x: hidden;
       ol {
         text-align: center;
@@ -51,7 +51,7 @@ const Confirm = styled.div`
       height: 24vh;
       border-radius: 5px;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-      overflow-y: scroll;
+      /* overflow-y: scroll; */
       ul {
         li {
           display: flex;
@@ -112,7 +112,7 @@ const Return = styled.div`
       height: 5vh;
       line-height: 5vh;
       margin-bottom: 2vh;
-      overflow-y: scroll;
+      /* overflow-y: scroll; */
       overflow-x: hidden;
       ol {
         text-align: center;
@@ -131,7 +131,7 @@ const Return = styled.div`
       height: 24vh;
       border-radius: 5px;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-      overflow-y: scroll;
+      /* overflow-y: scroll; */
       ul {
         li {
           display: flex;
