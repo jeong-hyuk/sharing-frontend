@@ -39,6 +39,7 @@ const TitlePart = styled(motion.div)`
     }
   }
 `;
+
 const LoginStyle = styled.div`
   position: absolute;
   top: 50%;
@@ -66,6 +67,7 @@ const LoginStyle = styled.div`
       /* background-color: orange; */
     }
   }
+
   // 메인 제목 부분
   /*  */
 

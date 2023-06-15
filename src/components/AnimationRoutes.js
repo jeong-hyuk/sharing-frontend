@@ -15,7 +15,6 @@ import ManagerConfirm from './ManagerConfirm';
 import Header from './Header';
 import ManagerRent from './ManagerRent';
 
-
 export default function AnimationRoutes() {
   const isLogin = useSelector(state => state.user.isLogin);
   const userId = useSelector(state => state.user.userID);
@@ -28,11 +27,7 @@ export default function AnimationRoutes() {
           <Routes>
             <Route path="/*" element={isLogin ? <UserMain /> : <Login />} />
             <Route path="/subMain/:id" element={<UserRent />} />
-
-
             <Route path="/confirm/:type" element={<ManagerConfirm />} />
-
-
           </Routes>
         ) : (
           <Routes>
@@ -46,7 +41,6 @@ export default function AnimationRoutes() {
               path="/oauth/callback/kakao"
               element={<KakaoRedirectHandler />}
             />
-
             <Route path="/usermain" element={<UserMain />} />
             <Route path="/subMain/:id" element={<UserRent />} />
           </Routes>

@@ -65,7 +65,6 @@ export default function UserMain({ page }) {
             <ManagerMainMenu />
             <Routes>
               <Route path="/" element={<ManagerRent />} />
-
               <Route path="/log" element={<ManagerLog />} />
               <Route path="/notice" element={<UserNotice />} />
             </Routes>

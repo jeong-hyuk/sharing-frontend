@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import rootReducer from './store';
 import { configure } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
-
 const reduxDevTool =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
